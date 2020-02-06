@@ -1,9 +1,11 @@
 import React from 'react';
 import MainComponent from '../main/main.jsx';
 
-const App = () => {
+const App = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const promoMovieData = props;
   return (
-    <MainComponent/>
+    <MainComponent promoMovieData={promoMovieData}/>
   );
 };
 
