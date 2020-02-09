@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SmallMovieCardComponent from '../small-movie-card/small-movie-card.jsx';
 
-const Main = (props) => {
-  const {title, genre, year} = props.promoMovieData;
-  const moviesTitle = props.moviesTitle;
+const Main = ({promoMovieData, moviesTitle}) => {
+  const {title, genre, year} = promoMovieData;
 
   return (<React.Fragment>
     <section className="movie-card">
