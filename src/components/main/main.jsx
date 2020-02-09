@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
+import SmallMovieCardComponent from '../small-movie-card/small-movie-card.jsx';
 
 const Main = (props) => {
   const {title, genre, year} = props.promoMovieData;
@@ -100,7 +100,7 @@ const Main = (props) => {
         </ul>
 
         <div className="catalog__movies-list">
-          {moviesTitle.map((movieTitle, i) => <SmallMovieCard title={movieTitle} key={movieTitle + i} />)}
+          {moviesTitle.map((movieTitle, i) => <SmallMovieCardComponent title={movieTitle} key={movieTitle + i} />)}
         </div>
 
         <div className="catalog__more">
