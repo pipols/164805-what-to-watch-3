@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from "prop-types";
 import MainComponent from '../main/main.jsx';
 
-// eslint-disable-next-line react/prop-types
+const mainTitleClickHandler = () => {};
+
 const App = ({promoMovieData, moviesTitle}) => {
   return (
-    <MainComponent promoMovieData={promoMovieData} moviesTitle={moviesTitle}/>
+    <MainComponent
+      promoMovieData={promoMovieData}
+      moviesTitle={moviesTitle}
+      mainTitleClickHandler={mainTitleClickHandler}
+    />
   );
 };
 

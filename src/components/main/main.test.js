@@ -9,11 +9,13 @@ const promoMovieData = {
 };
 
 const MOVIE_TITLE = [`The Grand Budapest Hotel`];
+const mainTitleClickHandler = () => {};
 
 it(`<Main /> renders correctly`, () => {
-  const tree = renderer
-  .create(<Main promoMovieData={promoMovieData} moviesTitle={MOVIE_TITLE} />)
-  .toJSON();
+  const tree = renderer.create(<Main
+    promoMovieData={promoMovieData}
+    moviesTitle={MOVIE_TITLE}
+    mainTitleClickHandler={mainTitleClickHandler}/>).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
