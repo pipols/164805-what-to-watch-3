@@ -1,8 +1,9 @@
 import React from "react";
 import {mount} from 'enzyme';
 import MainComponent from "./main.jsx";
-import {promoMovieData, MOVIES_TITLE} from "./mock";
+import {e2eMock} from "./mock";
 
+const {promoMovieData, MOVIES_TITLE} = e2eMock;
 const mainTitleClickHandler = jest.fn();
 
 it(`<MainComponent/> --> cards title click`, () => {

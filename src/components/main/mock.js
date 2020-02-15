@@ -1,10 +1,10 @@
-export const promoMovieData = {
+const promoMovieData = {
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   year: 2014
 };
 
-export const MOVIES_TITLE = [
+const MOVIES_TITLE = [
   `Fantastic Beasts: The Crimes of Grindelwald`,
   `Bohemian Rhapsody`,
   `Macbeth`,
@@ -26,3 +26,8 @@ export const MOVIES_TITLE = [
   `Mindhunter`,
   `Midnight Special`
 ];
+
+export const e2eMock = {
+  promoMovieData,
+  MOVIES_TITLE
+};
