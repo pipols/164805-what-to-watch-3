@@ -8,11 +8,11 @@ const promoMovieData = {
   year: 2014
 };
 
-const MOVIE_TITLE = [`The Grand Budapest Hotel`];
+const MOVIE_TITLES = [`The Grand Budapest Hotel`];
 
 it(`<App /> renders correctly`, () => {
   const tree = renderer
-  .create(<App promoMovieData={promoMovieData} moviesTitle={MOVIE_TITLE} />)
+  .create(<App promoMovieData={promoMovieData} moviesTitle={MOVIE_TITLES} />)
   .toJSON();
 
   expect(tree).toMatchSnapshot();

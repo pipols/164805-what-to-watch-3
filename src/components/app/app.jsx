@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import MainComponent from '../main/main.jsx';
+import Main from '../main/main.jsx';
 
-const mainTitleClickHandler = () => {};
+const movieTitleClickHandler = () => {};
 
 const App = ({promoMovieData, moviesTitle}) => {
   return (
-    <MainComponent
+    <Main
       promoMovieData={promoMovieData}
       moviesTitle={moviesTitle}
-      mainTitleClickHandler={mainTitleClickHandler}
+      movieTitleClickHandler={movieTitleClickHandler}
     />
   );
 };
