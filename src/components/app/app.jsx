@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
-import Main from '../main/main.jsx';
+import Main from "../main/main.jsx";
 
-const movieTitleClickHandler = () => {};
+const onMovieTitleClick = () => {};
 
-const App = ({promoMovieData, moviesTitle}) => {
+const App = ({promoMovieData, filmsData}) => {
   return (
     <Main
       promoMovieData={promoMovieData}
-      moviesTitle={moviesTitle}
-      movieTitleClickHandler={movieTitleClickHandler}
+      filmsData={filmsData}
+      onMovieTitleClick={onMovieTitleClick}
     />
   );
 };
@@ -20,7 +20,10 @@ App.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }).isRequired,
-  moviesTitle: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  filmsData: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired
+  })).isRequired
 };
 
 export default App;

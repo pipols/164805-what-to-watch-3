@@ -1,4 +1,4 @@
-export default filmsData = [{
+export const filmsData = [{
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`
 }, {
