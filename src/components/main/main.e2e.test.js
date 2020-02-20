@@ -1,6 +1,6 @@
 import React from "react";
 import {mount} from 'enzyme';
-import Main from "../main.jsx";
+import Main from "./main.jsx";
 
 const promoMovieData = {
   title: `The Grand Budapest Hotel`,

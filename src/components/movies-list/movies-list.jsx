@@ -25,8 +25,8 @@ class MoviesList extends React.PureComponent {
     );
   }
 
-  _onMovieHover(callBack) {
-    this.setState({hoverCard: callBack});
+  _onMovieHover(film) {
+    this.setState({hoverCard: film});
   }
 }
 

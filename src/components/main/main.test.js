@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "../app.jsx";
+import Main from "./main.jsx";
 
 const promoMovieData = {
   title: `The Grand Budapest Hotel`,
@@ -18,13 +18,12 @@ const filmsData = [{
 
 const onMovieTitleClick = () => {};
 
-it(`<App /> renders correctly`, () => {
-  const tree = renderer
-  .create(<App
+it(`<Main /> renders correctly`, () => {
+  const tree = renderer.create(<Main
     promoMovieData={promoMovieData}
     filmsData={filmsData}
-    onMovieTitleClick={onMovieTitleClick}/>)
-  .toJSON();
+    onMovieTitleClick={onMovieTitleClick}
+  />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
