@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import MoviesList from "../movies-list/movies-list.jsx";
 
-const Main = ({promoMovieData, filmsData, onMovieTitleClick}) => {
+const Main = ({promoMovieData, filmsData, onMovieClick}) => {
   const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
@@ -96,7 +96,7 @@ const Main = ({promoMovieData, filmsData, onMovieTitleClick}) => {
             <a href="#" className="catalog__genres-link">Thrillers</a>
           </li>
         </ul>
-        <MoviesList filmsData={filmsData} onMovieTitleClick={onMovieTitleClick}/>
+        <MoviesList filmsData={filmsData} onMovieClick={onMovieClick}/>
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>
@@ -129,7 +129,7 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
   })).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired,
+  onMovieClick: PropTypes.func.isRequired,
 };
 
 export default Main;

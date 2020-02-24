@@ -10,7 +10,7 @@ class MoviesList extends React.PureComponent {
   }
 
   render() {
-    const {filmsData, onMovieTitleClick} = this.props;
+    const {filmsData, onMovieClick} = this.props;
     return (
       <div className="catalog__movies-list">
 
@@ -18,7 +18,7 @@ class MoviesList extends React.PureComponent {
           <SmallMovieCard
             movie={movie}
             key={movie.title + i}
-            onMovieTitleClick={onMovieTitleClick}
+            onMovieClick={onMovieClick}
             onMovieHover={this._onMovieHover}/>
         )}
       </div>
@@ -34,7 +34,7 @@ MoviesList.propTypes = {
   filmsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired})).isRequired,
-  onMovieTitleClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func.isRequired
 };
 
 export default MoviesList;

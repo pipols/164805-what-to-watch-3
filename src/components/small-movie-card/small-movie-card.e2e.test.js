@@ -7,13 +7,13 @@ const movie = {
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`
 };
 
-const onMovieTitleClick = jest.fn();
+const onMovieClick = jest.fn();
 const onMovieHover = jest.fn();
 
 describe(`<SmallMovieCard />`, () => {
   const wrapper = shallow(<SmallMovieCard
     movie={movie}
-    onMovieTitleClick={onMovieTitleClick}
+    onMovieClick={onMovieClick}
     onMovieHover={onMovieHover}
   />);
 

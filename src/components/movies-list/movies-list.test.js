@@ -7,14 +7,14 @@ const filmsData = [{
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`
 }];
 
-const onMovieTitleClick = () => {};
+const onMovieClick = () => {};
 const onMovieHover = () => {};
 
 it(`<MoviesList /> renders correctly`, () => {
   const tree = renderer
     .create(<MoviesList
       filmsData={filmsData}
-      onMovieTitleClick={onMovieTitleClick}
+      onMovieClick={onMovieClick}
       onMovieHover={onMovieHover}/>)
     .toJSON();
 

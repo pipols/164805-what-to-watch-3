@@ -1,18 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Main from "../main/main.jsx";
 import Film from "../Film/Film.jsx";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-
-const onMovieTitleClick = () => {};
+import film from "../../mocks/film";
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      activeCard: null
+    };
+    this.onMovieClick = this.onMovieClick.bind(this);
   }
 
   render() {
-    const {promoMovieData, filmsData, film} = this.props;
+    const {promoMovieData, filmsData} = this.props;
+    // const film = this.state.activeCard;
     return (
       <BrowserRouter>
         <Switch>
@@ -20,7 +24,7 @@ class App extends React.PureComponent {
             <Main
               promoMovieData={promoMovieData}
               filmsData={filmsData}
-              onMovieTitleClick={onMovieTitleClick}
+              onMovieClick={this.onMovieClick}
             />
           </Route>
           <Route exact path="/movie-page">
@@ -29,6 +33,10 @@ class App extends React.PureComponent {
         </Switch>
       </BrowserRouter>
     );
+  }
+
+  onMovieClick(card) {
+    this.setState({activeCard: card});
   }
 }
 
