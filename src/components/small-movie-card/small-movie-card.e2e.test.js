@@ -18,10 +18,11 @@ describe(`<SmallMovieCard />`, () => {
   />);
 
   it(`onMouseOver`, () => {
-    wrapper.simulate(`mouseover`);
+    wrapper.simulate(`mouseenter`);
     expect(onMovieHover).toHaveBeenCalledTimes(1);
     expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
   });
+
   it(`onMouseLeave`, () => {
     wrapper.simulate(`mouseleave`);
     expect(onMovieHover).toHaveBeenCalledTimes(2);

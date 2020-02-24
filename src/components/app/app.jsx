@@ -15,17 +15,11 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {promoMovieData, filmsData} = this.props;
-    // const film = this.state.activeCard;
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Main
-              promoMovieData={promoMovieData}
-              filmsData={filmsData}
-              onMovieClick={this.onMovieClick}
-            />
+            {this._renderApp()}
           </Route>
           <Route exact path="/movie-page">
             <Film film={film}/>
@@ -37,6 +31,23 @@ class App extends React.PureComponent {
 
   onMovieClick(card) {
     this.setState({activeCard: card});
+  }
+
+  _renderApp() {
+    const {promoMovieData, filmsData} = this.props;
+
+    if (this.state.activeCard === null) {
+      return (
+        <Main
+          promoMovieData={promoMovieData}
+          filmsData={filmsData}
+          onMovieClick={this.onMovieClick}
+        />);
+    }
+
+    return (
+      <Film film={film}/>
+    );
   }
 }
 
