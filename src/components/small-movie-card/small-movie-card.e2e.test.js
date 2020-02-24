@@ -17,15 +17,21 @@ describe(`<SmallMovieCard />`, () => {
     onMovieHover={onMovieHover}
   />);
 
-  it(`onMouseOver`, () => {
+  it(`mouseenter`, () => {
     wrapper.simulate(`mouseenter`);
     expect(onMovieHover).toHaveBeenCalledTimes(1);
     expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
   });
 
-  it(`onMouseLeave`, () => {
+  it(`mouseleave`, () => {
     wrapper.simulate(`mouseleave`);
     expect(onMovieHover).toHaveBeenCalledTimes(2);
     expect(onMovieHover.mock.calls[1][0]).toBe(null);
+  });
+
+  it(`onclick`, () => {
+    wrapper.simulate(`click`);
+    expect(onMovieClick).toHaveBeenCalledTimes(1);
+    expect(onMovieClick.mock.calls[0][0]).toMatchObject(movie);
   });
 });
