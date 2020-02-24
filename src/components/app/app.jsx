@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Main from "../main/main.jsx";
-import Film from "../Film/Film.jsx";
+import Film from "../film/film.jsx";
 import film from "../../mocks/film";
 
 class App extends React.PureComponent {
