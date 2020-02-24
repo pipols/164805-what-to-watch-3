@@ -1,5 +1,8 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
+import {createParagraf, createActors} from "../../const/film";
+
+const PREFIX = `img/`;
 
 class Film extends React.PureComponent {
   constructor(props) {
@@ -7,11 +10,25 @@ class Film extends React.PureComponent {
   }
 
   render() {
+    const {
+      poster,
+      cover,
+      title,
+      genre,
+      year,
+      rating,
+      ratingDescription,
+      votes,
+      description,
+      producer,
+      actors
+    } = this.props.film;
+
     return (<React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+            <img src={PREFIX + poster} alt={title}/>
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header movie-card__head">
@@ -30,12 +47,10 @@ class Film extends React.PureComponent {
           </header>
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">
-                The Grand Budapest Hotel
-              </h2>
+              <h2 className="movie-card__title">{title}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{year}</span>
               </p>
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button">
@@ -62,7 +77,7 @@ class Film extends React.PureComponent {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width={218} height={327}/>
+              <img src={PREFIX + cover} alt={title + `poster`} width={218} height={327}/>
             </div>
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
@@ -79,31 +94,27 @@ class Film extends React.PureComponent {
                 </ul>
               </nav>
               <div className="movie-rating">
-                <div className="movie-rating__score">8,9</div>
+                <div className="movie-rating__score">{rating}</div>
                 <p className="movie-rating__meta">
                   <span className="movie-rating__level">
-                    Very good
+                    {ratingDescription}
                   </span>
                   <span className="movie-rating__count">
-                    240 ratings
+                    {votes}
+                    ratings
                   </span>
                 </p>
               </div>
               <div className="movie-card__text">
-                <p>
-                  In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave&aposs friend and protege.
-                </p>
-                <p>
-                  Gustave prides himself on providing first-class service to the hotel&aposs guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave&aposs lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
-                </p>
+                {createParagraf(description)}
                 <p className="movie-card__director">
                   <strong>
-                    Director: Wes Andreson
+                    Director: {producer}
                   </strong>
                 </p>
                 <p className="movie-card__starring">
                   <strong>
-                    Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+                    Starring: {createActors(actors)}
                   </strong>
                 </p>
               </div>
@@ -173,5 +184,21 @@ class Film extends React.PureComponent {
     </React.Fragment>);
   }
 }
+
+Film.propTypes = {
+  film: PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.array.isRequired
+  })
+};
 
 export default Film;

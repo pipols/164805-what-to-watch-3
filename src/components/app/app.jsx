@@ -12,7 +12,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {promoMovieData, filmsData} = this.props;
+    const {promoMovieData, filmsData, film} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -24,7 +24,7 @@ class App extends React.PureComponent {
             />
           </Route>
           <Route exact path="/movie-page">
-            <Film/>
+            <Film film={film}/>
           </Route>
         </Switch>
       </BrowserRouter>
@@ -41,7 +41,8 @@ App.propTypes = {
   filmsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
-  })).isRequired
+  })).isRequired,
+  film: PropTypes.object
 };
 
 export default App;

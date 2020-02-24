@@ -1,9 +1,9 @@
-export const film = {
+const film = {
   poster: `bg-the-grand-budapest-hotel.jpg`,
   cover: `the-grand-budapest-hotel-poster.jpg`,
-  name: `The Grand Budapest Hotel`,
+  title: `The Grand Budapest Hotel`,
   genre: `Drama`,
-  year: `2014`,
+  year: 2014,
   actors: [
     `Bill Murray`,
     `Edward Norton`,
@@ -23,7 +23,7 @@ export const film = {
     Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
   rating: `8,9`,
   ratingDescription: `Very good`,
-  votes: `240`,
+  votes: 240,
   duration: `1h 39m`,
   reviews: [
     {
@@ -35,6 +35,7 @@ export const film = {
   ]
 };
 
+export default film;
 // В шапке страницы приведён следующий набор информации:
 // Большой постер.
 // Обложка фильма.
