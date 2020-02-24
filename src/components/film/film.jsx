@@ -1,7 +1,11 @@
 import React from "react";
 // import PropTypes from "prop-types";
 
-class MoviePage extends React.PureComponent {
+class Film extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (<React.Fragment>
       <section className="movie-card movie-card--full">
@@ -170,4 +174,4 @@ class MoviePage extends React.PureComponent {
   }
 }
 
-export default MoviePage;
+export default Film;

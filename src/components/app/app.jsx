@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
-import MoviePage from "../movie-page/movie-page.jsx";
+import Film from "../Film/Film.jsx";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
 const onMovieTitleClick = () => {};
@@ -24,7 +24,7 @@ class App extends React.PureComponent {
             />
           </Route>
           <Route exact path="/movie-page">
-            <MoviePage/>
+            <Film/>
           </Route>
         </Switch>
       </BrowserRouter>
