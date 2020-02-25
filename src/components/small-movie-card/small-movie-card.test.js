@@ -1,8 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import SmallMovieCard from "../small-movie-card.jsx";
+import SmallMovieCard from "./small-movie-card.jsx";
 
-const onMovieTitleClick = () => {};
+const onMovieClick = () => {};
 const onMovieHover = () => {};
 
 const movie = {
@@ -14,7 +14,7 @@ it(`<SmallMovieCard /> renders correctly`, () => {
   const tree = renderer
   .create(<SmallMovieCard
     movie={movie}
-    onMovieTitleClick={onMovieTitleClick}
+    onMovieClick={onMovieClick}
     onMovieHover={onMovieHover}
   />)
   .toJSON();

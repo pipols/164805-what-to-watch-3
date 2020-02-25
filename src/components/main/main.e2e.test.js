@@ -1,6 +1,6 @@
 import React from "react";
-import {mount} from 'enzyme';
-import Main from "../main.jsx";
+import {mount} from "enzyme";
+import Main from "./main.jsx";
 
 const promoMovieData = {
   title: `The Grand Budapest Hotel`,
@@ -16,18 +16,18 @@ const filmsData = [{
   poster: `bohemian-rhapsody.jpg`
 }];
 
-const onMovieTitleClick = jest.fn();
+const onMovieClick = jest.fn();
 
 it(`<Main /> --> cards title click`, () => {
   const wrapper = mount(
       <Main
         promoMovieData={promoMovieData}
         filmsData={filmsData}
-        onMovieTitleClick={onMovieTitleClick}
+        onMovieClick={onMovieClick}
       />);
 
   const titles = wrapper.find(`.small-movie-card__title`);
 
   titles.forEach((title) => title.simulate(`click`));
-  expect(onMovieTitleClick).toHaveBeenCalledTimes(titles.length);
+  expect(onMovieClick).toHaveBeenCalledTimes(titles.length);
 });

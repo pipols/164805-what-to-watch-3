@@ -6,8 +6,9 @@ exports[`<MoviesList /> renders correctly 1`] = `
 >
   <article
     className="small-movie-card catalog__movies-card"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    onMouseOver={[Function]}
   >
     <div
       className="small-movie-card__image"
@@ -21,7 +22,6 @@ exports[`<MoviesList /> renders correctly 1`] = `
     </div>
     <h3
       className="small-movie-card__title"
-      onClick={[Function]}
     >
       <a
         className="small-movie-card__link"
