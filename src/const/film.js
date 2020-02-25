@@ -1,13 +1,7 @@
-import React from "react";
-
-export const createParagraf = (text) => text
-  .split(`\n`) // ?
-  .map((paragraf) => {
-    return <p key={paragraf}>{paragraf}</p>;
-  });
+const MAX_ACTORS = 4;
 
 export const createActors = (actors) => {
-  return actors.length > 4
-    ? `${actors.slice(3)} and other`
+  return actors.length > MAX_ACTORS
+    ? `${actors.slice(0, MAX_ACTORS)} and other`
     : `${actors}`;
 };

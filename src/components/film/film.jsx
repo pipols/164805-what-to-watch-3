@@ -1,8 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {createParagraf, createActors} from "../../const/film";
+import {createActors} from "../../const/film";
 
 const PREFIX = `img/`;
+
+const createParagraf = (text) => text
+  .split(`\n`)
+  .map((paragraf) => {
+    return <p key={paragraf}>{paragraf}</p>;
+  });
 
 class Film extends React.PureComponent {
   constructor(props) {
