@@ -18,16 +18,20 @@ const filmsData = [{
 
 const onMovieClick = jest.fn();
 
-it(`<Main /> --> cards title click`, () => {
+describe(`<Main />`, () => {
   const wrapper = mount(
       <Main
         promoMovieData={promoMovieData}
         filmsData={filmsData}
         onMovieClick={onMovieClick}
       />);
+  const cards = wrapper.find(`.small-movie-card`);
 
-  const titles = wrapper.find(`.small-movie-card__title`);
+  it(`cards click`, () => {
+    cards.forEach((card) => card.simulate(`click`));
+    expect(onMovieClick).toHaveBeenCalledTimes(cards.length);
+    expect(onMovieClick.mock.calls[0][0]).toMatchObject(filmsData[0]);
+    expect(onMovieClick.mock.calls[1][0]).toMatchObject(filmsData[1]);
+  });
 
-  titles.forEach((title) => title.simulate(`click`));
-  expect(onMovieClick).toHaveBeenCalledTimes(titles.length);
 });
