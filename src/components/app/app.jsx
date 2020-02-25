@@ -61,7 +61,19 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired
   })).isRequired,
-  film: PropTypes.object
+  film: PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.array.isRequired
+  })
 };
 
 export default App;
