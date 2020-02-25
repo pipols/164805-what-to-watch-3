@@ -197,7 +197,7 @@ Film.propTypes = {
     votes: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     producer: PropTypes.string.isRequired,
-    actors: PropTypes.array.isRequired
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired
   })
 };
 
