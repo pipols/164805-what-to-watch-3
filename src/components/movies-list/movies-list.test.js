@@ -8,14 +8,12 @@ const filmsData = [{
 }];
 
 const onMovieClick = () => {};
-const onMovieHover = () => {};
 
 it(`<MoviesList /> renders correctly`, () => {
   const tree = renderer
     .create(<MoviesList
       filmsData={filmsData}
-      onMovieClick={onMovieClick}
-      onMovieHover={onMovieHover}/>)
+      onMovieClick={onMovieClick}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
