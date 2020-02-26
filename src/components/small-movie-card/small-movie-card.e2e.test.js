@@ -4,7 +4,8 @@ import SmallMovieCard from "./small-movie-card.jsx";
 
 const movie = {
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`
+  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `test.ru`
 };
 
 const onMovieClick = jest.fn();
@@ -15,18 +16,25 @@ describe(`<SmallMovieCard />`, () => {
     movie={movie}
     onMovieClick={onMovieClick}
     onMovieHover={onMovieHover}
+    isPlay={true}
   />);
 
   it(`mouseenter`, () => {
     wrapper.simulate(`mouseenter`);
     expect(onMovieHover).toHaveBeenCalledTimes(1);
     expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
+
+    expect(wrapper.exists(`video`)).to.equal(true);
+    expect(wrapper.exists(`img`)).to.equal(false);
   });
 
   it(`mouseleave`, () => {
     wrapper.simulate(`mouseleave`);
     expect(onMovieHover).toHaveBeenCalledTimes(2);
     expect(onMovieHover.mock.calls[1][0]).toBe(null);
+
+    expect(wrapper.exists(`video`)).to.equal(false);
+    expect(wrapper.exists(`img`)).to.equal(true);
   });
 
   it(`onclick`, () => {

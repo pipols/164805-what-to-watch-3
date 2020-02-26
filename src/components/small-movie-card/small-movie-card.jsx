@@ -17,7 +17,6 @@ const SmallMovieCard = ({movie, onMovieClick, onMovieHover, isPlay}) => {
         {isPlay
           ? <VideoPlayer poster={poster} preview={preview}/>
           : <img src={PREFIX + poster} alt="{title}" width="280" height="175"/>}
-
       </div>
 
       <h3 className="small-movie-card__title" >

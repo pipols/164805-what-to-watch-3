@@ -7,7 +7,8 @@ const onMovieHover = () => {};
 
 const movie = {
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`
+  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `test.ru`
 };
 
 it(`<SmallMovieCard /> renders correctly`, () => {
@@ -16,6 +17,7 @@ it(`<SmallMovieCard /> renders correctly`, () => {
     movie={movie}
     onMovieClick={onMovieClick}
     onMovieHover={onMovieHover}
+    isPlay={true}
   />)
   .toJSON();
 
