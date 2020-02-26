@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {createActors} from "../../const/film";
 
 const PREFIX = `img/`;
 
@@ -9,6 +8,15 @@ const createParagraf = (text) => text
   .map((paragraf) => {
     return <p key={paragraf}>{paragraf}</p>;
   });
+
+const MAX_ACTORS = 4;
+
+const createActors = (actors) => {
+  return actors.length > MAX_ACTORS
+    ? `${actors.slice(0, MAX_ACTORS)} and other`
+    : `${actors}`;
+};
+
 
 class Film extends React.PureComponent {
   constructor(props) {
