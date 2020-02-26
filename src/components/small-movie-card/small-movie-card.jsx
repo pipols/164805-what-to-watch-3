@@ -9,7 +9,7 @@ const SmallMovieCard = ({movie, onMovieClick, onMovieHover, isPlay}) => {
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => onMovieHover(movie)}
+      onMouseEnter={() => setTimeout(() => onMovieHover(movie), 1000)}
       onMouseLeave={() => onMovieHover(null)}
       onClick={() => onMovieClick(movie)}
     >
