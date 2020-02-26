@@ -10,6 +10,7 @@ const movie = {
 
 const onMovieClick = jest.fn();
 const onMovieHover = jest.fn();
+jest.useFakeTimers();
 
 describe(`<SmallMovieCard />`, () => {
   const wrapper = shallow(<SmallMovieCard
@@ -21,6 +22,7 @@ describe(`<SmallMovieCard />`, () => {
 
   it(`mouseenter`, () => {
     wrapper.simulate(`mouseenter`);
+    jest.runAllTimers();
     expect(onMovieHover).toHaveBeenCalledTimes(1);
     expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
   });
