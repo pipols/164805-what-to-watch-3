@@ -23,23 +23,28 @@ describe(`<SmallMovieCard />`, () => {
     wrapper.simulate(`mouseenter`);
     expect(onMovieHover).toHaveBeenCalledTimes(1);
     expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
-
-    expect(wrapper.exists(`video`)).to.equal(true);
-    expect(wrapper.exists(`img`)).to.equal(false);
   });
 
   it(`mouseleave`, () => {
     wrapper.simulate(`mouseleave`);
     expect(onMovieHover).toHaveBeenCalledTimes(2);
     expect(onMovieHover.mock.calls[1][0]).toBe(null);
-
-    expect(wrapper.exists(`video`)).to.equal(false);
-    expect(wrapper.exists(`img`)).to.equal(true);
   });
 
   it(`onclick`, () => {
     wrapper.simulate(`click`);
     expect(onMovieClick).toHaveBeenCalledTimes(1);
     expect(onMovieClick.mock.calls[0][0]).toMatchObject(movie);
+  });
+
+  it(`isPlay=(true)`, () => {
+    expect(wrapper.exists(`VideoPlayer`)).toBe(true);
+    expect(wrapper.exists(`img`)).toBe(false);
+  });
+
+  it(`isPlay=(false)`, () => {
+    wrapper.setProps({isPlay: false});
+    expect(wrapper.exists(`VideoPlayer`)).toBe(false);
+    expect(wrapper.exists(`img`)).toBe(true);
   });
 });
