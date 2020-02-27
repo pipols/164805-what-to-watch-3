@@ -4,21 +4,25 @@ import SmallMovieCard from "./small-movie-card.jsx";
 
 const movie = {
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`
+  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
+  preview: `test.ru`
 };
 
 const onMovieClick = jest.fn();
 const onMovieHover = jest.fn();
+jest.useFakeTimers();
 
 describe(`<SmallMovieCard />`, () => {
   const wrapper = shallow(<SmallMovieCard
     movie={movie}
     onMovieClick={onMovieClick}
     onMovieHover={onMovieHover}
+    isPlay={true}
   />);
 
   it(`mouseenter`, () => {
     wrapper.simulate(`mouseenter`);
+    jest.runAllTimers();
     expect(onMovieHover).toHaveBeenCalledTimes(1);
     expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
   });
@@ -33,5 +37,16 @@ describe(`<SmallMovieCard />`, () => {
     wrapper.simulate(`click`);
     expect(onMovieClick).toHaveBeenCalledTimes(1);
     expect(onMovieClick.mock.calls[0][0]).toMatchObject(movie);
+  });
+
+  it(`isPlay=(true)`, () => {
+    expect(wrapper.exists(`VideoPlayer`)).toBe(true);
+    expect(wrapper.exists(`img`)).toBe(false);
+  });
+
+  it(`isPlay=(false)`, () => {
+    wrapper.setProps({isPlay: false});
+    expect(wrapper.exists(`VideoPlayer`)).toBe(false);
+    expect(wrapper.exists(`img`)).toBe(true);
   });
 });

@@ -1,8 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {createParagraf, createActors} from "../../const/film";
 
 const PREFIX = `img/`;
+
+const createParagraf = (text) => text
+  .split(`\n`)
+  .map((paragraf) => {
+    return <p key={paragraf}>{paragraf}</p>;
+  });
+
+const MAX_ACTORS = 4;
+
+const createActors = (actors) => {
+  return actors.length > MAX_ACTORS
+    ? `${actors.slice(0, MAX_ACTORS)} and other`
+    : `${actors}`;
+};
+
 
 class Film extends React.PureComponent {
   constructor(props) {
@@ -197,7 +211,7 @@ Film.propTypes = {
     votes: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     producer: PropTypes.string.isRequired,
-    actors: PropTypes.array.isRequired
+    actors: PropTypes.arrayOf(PropTypes.string).isRequired
   })
 };
 
