@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 
 const PREFIX = `img/`;
-const DELAY = 1000;
-
+// const DELAY = 1000;
+// () => setTimeout(() => onMovieHover(movie), DELAY)
 const SmallMovieCard = ({movie, onMovieClick, onMovieHover, isPlay}) => {
   const {title, poster, preview} = movie;
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => setTimeout(() => onMovieHover(movie), DELAY)}
+      onMouseEnter={() => onMovieHover(movie)}
       onMouseLeave={() => onMovieHover(null)}
       onClick={() => onMovieClick(movie)}
     >

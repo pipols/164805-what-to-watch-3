@@ -5,6 +5,8 @@ import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 class MoviesList extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.hoverCard = null;
+    this.timerId = null;
     this.state = {hoverCard: null};
     this._onMovieHover = this._onMovieHover.bind(this);
   }
@@ -26,8 +28,20 @@ class MoviesList extends React.PureComponent {
     );
   }
 
-  _onMovieHover(film) {
-    this.setState({hoverCard: film});
+  _onMovieHover(card) {
+    this.hoverCard = card;
+    return card
+      ? this._setTimeout()
+      : this._clearTimeout();
+  }
+
+  _setTimeout() {
+    this.timerId = setTimeout(() => this.setState({hoverCard: this.hoverCard}), 1000);
+  }
+
+  _clearTimeout() {
+    clearTimeout(this.timerId);
+    this.setState({hoverCard: null});
   }
 }
 
