@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
+const DELAY = 1000;
+
 class MoviesList extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -36,7 +38,7 @@ class MoviesList extends React.PureComponent {
   }
 
   _setTimeout() {
-    this.timerId = setTimeout(() => this.setState({hoverCard: this.hoverCard}), 1000);
+    this.timerId = setTimeout(() => this.setState({hoverCard: this.hoverCard}), DELAY);
   }
 
   _clearTimeout() {
