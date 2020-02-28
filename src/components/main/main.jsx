@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Logo from "../logo/logo.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
-
+import Footer from "../footer/footer.jsx";
+// список genres циклом
 const Main = ({promoMovieData, filmsData, onMovieClick}) => {
   const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
@@ -13,14 +15,7 @@ const Main = ({promoMovieData, filmsData, onMovieClick}) => {
       <h1 className="visually-hidden">WTW</h1>
 
       <header className="page-header movie-card__head">
-        <div className="logo">
-          <a className="logo__link">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
+        <Logo />
         <div className="user-block">
           <div className="user-block__avatar">
             <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
@@ -101,20 +96,7 @@ const Main = ({promoMovieData, filmsData, onMovieClick}) => {
           <button className="catalog__button" type="button">Show more</button>
         </div>
       </section>
-
-      <footer className="page-footer">
-        <div className="logo">
-          <a className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </a>
-        </div>
-
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   </React.Fragment>);
 };

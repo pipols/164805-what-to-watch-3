@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
 import film from "../../mocks/film";
@@ -14,26 +13,11 @@ class App extends React.PureComponent {
     this.onMovieClick = this.onMovieClick.bind(this);
   }
 
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/movie-page">
-            <Film film={film}/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
   onMovieClick(card) {
     this.setState({activeCard: card});
   }
-
-  _renderApp() {
+  // условный рендер
+  render() {
     const {promoMovieData, filmsData} = this.props;
 
     if (this.state.activeCard === null) {
@@ -46,8 +30,11 @@ class App extends React.PureComponent {
     }
 
     return (
-      <Film film={film}/>
-    );
+      <Film
+        film={film}
+        filmsData={filmsData.slice(0, 4)}
+        onMovieClick={this.onMovieClick}
+      />);
   }
 }
 
