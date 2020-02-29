@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Film from "./film.jsx";
+import Overview from "./overview.jsx";
 
 const film = {
   poster: `bg-the-grand-budapest-hotel.jpg`,
@@ -39,19 +39,14 @@ const film = {
   ]
 };
 
-const filmsData = [{
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`
-}];
-
-const onMovieClick = () => {};
-
-it(`<Film /> renders correctly`, () => {
-  const tree = renderer.create(<Film
-    film={film}
-    filmsData={filmsData}
-    onMovieClick={onMovieClick}
+it(`<Overview /> renders correctly`, () => {
+  const tree = renderer.create(<Overview
+    rating={film.rating}
+    ratingDescription={film.ratingDescription}
+    votes={film.votes}
+    description={film.description}
+    producer={film.producer}
+    actors={film.actors}
   />).toJSON();
 
   expect(tree).toMatchSnapshot();

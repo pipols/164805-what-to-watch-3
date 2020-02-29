@@ -136,10 +136,10 @@ Film.propTypes = {
     rating: PropTypes.string.isRequired,
     ratingDescription: PropTypes.string.isRequired,
     votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     producer: PropTypes.string.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string).isRequired,
-    duration: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
     reviews: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string.isRequired,
       votes: PropTypes.string.isRequired,
@@ -149,7 +149,8 @@ Film.propTypes = {
   }),
   filmsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired})).isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired})).isRequired,
   onMovieClick: PropTypes.func.isRequired
 };
 

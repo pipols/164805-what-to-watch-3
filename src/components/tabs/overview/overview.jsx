@@ -39,7 +39,7 @@ Overview.propTypes = {
   votes: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   producer: PropTypes.string.isRequired,
-  actors: PropTypes.string.isRequired,
+  actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 export default Overview;

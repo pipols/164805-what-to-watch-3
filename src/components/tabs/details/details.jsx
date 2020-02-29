@@ -33,9 +33,9 @@ const Details = ({producer, actors, duration, genre, year}) => {
   return (
     <div className="movie-card__text movie-card__row">
       {structure(data).map((col) => (
-        <div key={col} className="movie-card__text-col">
+        <div key={JSON.stringify(col)} className="movie-card__text-col">
           {col.map((item) => (
-            <p key={item} className="movie-card__details-item">
+            <p key={JSON.stringify(item)} className="movie-card__details-item">
               <strong className="movie-card__details-name">{item.name}</strong>
               <span className="movie-card__details-value">
                 {item.name === `Starring` ? writeActors(item.value) : item.value}
@@ -82,7 +82,7 @@ const Details = ({producer, actors, duration, genre, year}) => {
 
 Details.propTypes = {
   producer: PropTypes.string.isRequired,
-  actors: PropTypes.string.isRequired,
+  actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   duration: PropTypes.string.isRequired,
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired

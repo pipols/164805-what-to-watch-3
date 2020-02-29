@@ -109,7 +109,8 @@ Main.propTypes = {
   }).isRequired,
   filmsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired
   })).isRequired,
   onMovieClick: PropTypes.func.isRequired,
 };

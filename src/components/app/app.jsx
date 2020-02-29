@@ -58,9 +58,16 @@ App.propTypes = {
     rating: PropTypes.string.isRequired,
     ratingDescription: PropTypes.string.isRequired,
     votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     producer: PropTypes.string.isRequired,
-    actors: PropTypes.array.isRequired
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
   })
 };
 
