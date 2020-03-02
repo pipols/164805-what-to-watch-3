@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Details /> renders correctly 1`] = `
+<div
+  className="movie-card__text movie-card__row"
+>
+  <div
+    className="movie-card__text-col"
+  >
+    <p
+      className="movie-card__details-item"
+    >
+      <strong
+        className="movie-card__details-name"
+      >
+        Director
+      </strong>
+      <span
+        className="movie-card__details-value"
+      >
+        Wes Andreson
+      </span>
+    </p>
+    <p
+      className="movie-card__details-item"
+    >
+      <strong
+        className="movie-card__details-name"
+      >
+        Starring
+      </strong>
+      <span
+        className="movie-card__details-value"
+      >
+         key=
+        Bill Murray
+         
+        Bill Murray
+         
+        <br />
+         
+         key=
+        Edward Norton
+         
+        Edward Norton
+         
+        <br />
+         
+         key=
+        Jude Law
+         
+        Jude Law
+         
+        <br />
+         
+         key=
+        Willem Dafoe
+         
+        Willem Dafoe
+         
+        <br />
+         
+         key=
+        Saoirse Ronan
+         
+        Saoirse Ronan
+         
+        <br />
+         
+         key=
+        Tony Revoloru
+         
+        Tony Revoloru
+         
+        <br />
+         
+         key=
+        Tilda Swinton
+         
+        Tilda Swinton
+         
+        <br />
+         
+         key=
+        Tom Wilkinson
+         
+        Tom Wilkinson
+         
+        <br />
+         
+         key=
+        Owen Wilkinson
+         
+        Owen Wilkinson
+         
+        <br />
+         
+         key=
+        Adrien Brody
+         
+        Adrien Brody
+         
+        <br />
+         
+         key=
+        Ralph Fiennes
+         
+        Ralph Fiennes
+         
+        <br />
+         
+         key=
+        Jeff Goldblum
+         
+        Jeff Goldblum
+         
+        <br />
+         
+      </span>
+    </p>
+  </div>
+  <div
+    className="movie-card__text-col"
+  >
+    <p
+      className="movie-card__details-item"
+    >
+      <strong
+        className="movie-card__details-name"
+      >
+        Run time
+      </strong>
+      <span
+        className="movie-card__details-value"
+      >
+        1h 39m
+      </span>
+    </p>
+    <p
+      className="movie-card__details-item"
+    >
+      <strong
+        className="movie-card__details-name"
+      >
+        Genre
+      </strong>
+      <span
+        className="movie-card__details-value"
+      >
+        Drama
+      </span>
+    </p>
+    <p
+      className="movie-card__details-item"
+    >
+      <strong
+        className="movie-card__details-name"
+      >
+        Released
+      </strong>
+      <span
+        className="movie-card__details-value"
+      >
+        2014
+      </span>
+    </p>
+  </div>
+</div>
+`;

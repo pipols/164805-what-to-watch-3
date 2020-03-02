@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
 import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
 import film from "../../mocks/film";
@@ -14,26 +13,11 @@ class App extends React.PureComponent {
     this.onMovieClick = this.onMovieClick.bind(this);
   }
 
-  render() {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/movie-page">
-            <Film film={film}/>
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
   onMovieClick(card) {
     this.setState({activeCard: card});
   }
-
-  _renderApp() {
+  // условный рендер
+  render() {
     const {promoMovieData, filmsData} = this.props;
 
     if (this.state.activeCard === null) {
@@ -46,8 +30,11 @@ class App extends React.PureComponent {
     }
 
     return (
-      <Film film={film}/>
-    );
+      <Film
+        film={film}
+        filmsData={filmsData.slice(0, 4)}
+        onMovieClick={this.onMovieClick}
+      />);
   }
 }
 
@@ -71,9 +58,16 @@ App.propTypes = {
     rating: PropTypes.string.isRequired,
     ratingDescription: PropTypes.string.isRequired,
     votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     producer: PropTypes.string.isRequired,
-    actors: PropTypes.array.isRequired
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
   })
 };
 

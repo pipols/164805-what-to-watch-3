@@ -7,7 +7,6 @@ const DELAY = 1000;
 class MoviesList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.hoverCard = null;
     this.timerId = null;
     this.state = {hoverCard: null};
     this._onMovieHover = this._onMovieHover.bind(this);
@@ -31,14 +30,13 @@ class MoviesList extends React.PureComponent {
   }
 
   _onMovieHover(card) {
-    this.hoverCard = card;
     return card
-      ? this._setTimeout()
+      ? this._setTimeout(card)
       : this._clearTimeout();
   }
 
-  _setTimeout() {
-    this.timerId = setTimeout(() => this.setState({hoverCard: this.hoverCard}), DELAY);
+  _setTimeout(card) {
+    this.timerId = setTimeout(() => this.setState({hoverCard: card}), DELAY);
   }
 
   _clearTimeout() {
@@ -50,7 +48,8 @@ class MoviesList extends React.PureComponent {
 MoviesList.propTypes = {
   filmsData: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired})).isRequired,
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired})).isRequired,
   onMovieClick: PropTypes.func.isRequired
 };
 
