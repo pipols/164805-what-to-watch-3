@@ -32,61 +32,85 @@ exports[`<Details /> renders correctly 1`] = `
       <span
         className="movie-card__details-value"
       >
+         key=
+        Bill Murray
          
         Bill Murray
          
         <br />
          
+         key=
+        Edward Norton
          
         Edward Norton
          
         <br />
          
+         key=
+        Jude Law
          
         Jude Law
          
         <br />
          
+         key=
+        Willem Dafoe
          
         Willem Dafoe
          
         <br />
          
+         key=
+        Saoirse Ronan
          
         Saoirse Ronan
          
         <br />
          
+         key=
+        Tony Revoloru
          
         Tony Revoloru
          
         <br />
          
+         key=
+        Tilda Swinton
          
         Tilda Swinton
          
         <br />
          
+         key=
+        Tom Wilkinson
          
         Tom Wilkinson
          
         <br />
          
+         key=
+        Owen Wilkinson
          
         Owen Wilkinson
          
         <br />
          
+         key=
+        Adrien Brody
          
         Adrien Brody
          
         <br />
          
+         key=
+        Ralph Fiennes
          
         Ralph Fiennes
          
         <br />
          
+         key=
+        Jeff Goldblum
          
         Jeff Goldblum
          

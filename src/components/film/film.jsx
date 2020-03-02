@@ -6,29 +6,25 @@ import Overview from "../tabs/overview/overview.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Logo from "../logo/logo.jsx";
 import Footer from "../footer/footer.jsx";
+import Tabs from "../tabs/tabs.jsx";
 
 const PREFIX = `img/`;
-const NAV_ACTIVE_CLASS = `movie-nav__item--active`;
 
 const TabName = {
-  OVERVIEW: `overview`,
-  DETAILS: `details`,
-  REVIEWS: `reviews`
+  OVERVIEW: `OVERVIEW`,
+  DETAILS: `DETAILS`,
+  REVIEWS: `REVIEWS`
 };
 
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {activeTab: `overview`};
+    this.state = {activeTab: `OVERVIEW`};
     this._onTabClick = this._onTabClick.bind(this);
   }
-  // bind убрать
+
   _onTabClick(tab) {
     this.setState({activeTab: tab});
-  }
-
-  _setActiveClass(currentTab) {
-    return this.state.activeTab === currentTab ? NAV_ACTIVE_CLASS : ``;
   }
 
   render() {
@@ -89,17 +85,7 @@ class Film extends React.PureComponent {
             </div>
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className={`movie-nav__item ${this._setActiveClass(TabName.OVERVIEW)}`}>
-                    <a onClick={() => this._onTabClick(TabName.OVERVIEW)} href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className={`movie-nav__item ${this._setActiveClass(TabName.DETAILS)}`}>
-                    <a onClick={() => this._onTabClick(TabName.DETAILS)} href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className={`movie-nav__item ${this._setActiveClass(TabName.REVIEWS)}`}>
-                    <a onClick={() => this._onTabClick(TabName.REVIEWS)} href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
+                <Tabs onTabClick={this._onTabClick} activeTab={this.state.activeTab} />
               </nav>
 
               {this.state.activeTab === TabName.OVERVIEW && <Overview {...this.props.film} />}
@@ -122,9 +108,6 @@ class Film extends React.PureComponent {
     </React.Fragment>);
   }
 }
-// сделать ссылку активной
-// переделать под router
-// сделать карточки с фильмами
 
 Film.propTypes = {
   film: PropTypes.shape({

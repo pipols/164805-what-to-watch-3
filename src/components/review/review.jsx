@@ -16,8 +16,8 @@ const Review = ({review}) => {
     </div>
   );
 };
-// комментарии распределяются по колонкам(доделать)
-// dateTime(доделать)
+// комментарии распределяются по колонкам(доделать после получения данных с сервера)
+// dateTime(доделать после получения данных с сервера)
 Review.propTypes = {
   review: PropTypes.shape({
     text: PropTypes.string.isRequired,

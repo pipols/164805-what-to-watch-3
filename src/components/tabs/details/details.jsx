@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-// упростить: императивно || декларативно || "пох"
+
 const structure = (data) => [[
   {
     name: `Director`,
@@ -26,16 +26,16 @@ const structure = (data) => [[
   }
 ]];
 
-const writeActors = (actors) => actors.map((name) => <> {name} <br/> </>);
+const writeActors = (actors) => actors.map((name) => <> key={name} {name} <br/> </>);
 
 const Details = ({producer, actors, duration, genre, year}) => {
   const data = {producer, actors, duration, genre, year};
   return (
     <div className="movie-card__text movie-card__row">
-      {structure(data).map((col) => (
-        <div key={JSON.stringify(col)} className="movie-card__text-col">
+      {structure(data).map((col, i) => (
+        <div key={`col` + i} className="movie-card__text-col">
           {col.map((item) => (
-            <p key={JSON.stringify(item)} className="movie-card__details-item">
+            <p key={item.name} className="movie-card__details-item">
               <strong className="movie-card__details-name">{item.name}</strong>
               <span className="movie-card__details-value">
                 {item.name === `Starring` ? writeActors(item.value) : item.value}
