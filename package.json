@@ -8,7 +8,8 @@
     "test": "npm run eslint && npm run test.jest",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open",
-    "test.jest": "jest"
+    "test.jest": "jest",
+    "jest.watch": "jest --watchAll"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",
@@ -36,7 +37,8 @@
     "react-dom": "16.12.0",
     "react-redux": "7.2.0",
     "react-router-dom": "5.1.2",
-    "redux": "4.0.5"
+    "redux": "4.0.5",
+    "redux-mock-store": "^1.5.4"
   },
   "jest": {
     "setupFilesAfterEnv": [

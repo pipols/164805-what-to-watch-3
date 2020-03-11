@@ -7,19 +7,14 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import Logo from "../logo/logo.jsx";
 import Footer from "../footer/footer.jsx";
 import Tabs from "../tabs/tabs.jsx";
+import {TabName} from "../../const/common";
 
 const PREFIX = `img/`;
-
-const TabName = {
-  OVERVIEW: `OVERVIEW`,
-  DETAILS: `DETAILS`,
-  REVIEWS: `REVIEWS`
-};
 
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {activeTab: `OVERVIEW`};
+    this.state = {activeTab: TabName.OVERVIEW};
     this._onTabClick = this._onTabClick.bind(this);
   }
 

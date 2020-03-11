@@ -8,7 +8,8 @@ const onMovieHover = () => {};
 const movie = {
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`
+  preview: `test.ru`,
+  genre: `Comedy`
 };
 
 it(`<SmallMovieCard /> renders correctly`, () => {

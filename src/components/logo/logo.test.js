@@ -4,7 +4,8 @@ import Logo from "./logo.jsx";
 
 it(`<Logo /> renders header`, () => {
   const tree = renderer
-  .create(<Logo />).toJSON();
+  .create(<Logo />)
+  .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
