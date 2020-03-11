@@ -16,7 +16,7 @@ class App extends React.PureComponent {
   onMovieClick(card) {
     this.setState({activeCard: card});
   }
-  // условный рендер
+
   render() {
     const {promoMovieData, filmsData} = this.props;
 

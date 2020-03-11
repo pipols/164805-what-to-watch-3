@@ -1,8 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
+import {connect} from "react-redux";
+import {mapGenresToFilter} from "../../const/genres";
 
 const DELAY = 1000;
+const DEFAULT_FILTER = `All genres`;
+
+const getKeyToMap = (map, value) => [...map].find(([, val]) => val === value)[0];
+
+const getFilmsByFilter = (films, filterValue) => {
+  const genre = getKeyToMap(mapGenresToFilter, filterValue);
+  if (filterValue === DEFAULT_FILTER) {
+    return films;
+  }
+  return films.filter((film) => film.genre === genre);
+};
 
 class MoviesList extends React.PureComponent {
   constructor(props) {
@@ -13,11 +26,13 @@ class MoviesList extends React.PureComponent {
   }
 
   render() {
-    const {filmsData, onMovieClick} = this.props;
+    const {films, genre, onMovieClick} = this.props;
+    const sortedFilms = getFilmsByFilter(films, genre);
+
     return (
       <div className="catalog__movies-list">
 
-        {filmsData.map((movie, i) =>
+        {sortedFilms.map((movie, i) =>
           <SmallMovieCard
             movie={movie}
             key={movie.title + i}
@@ -46,11 +61,18 @@ class MoviesList extends React.PureComponent {
 }
 
 MoviesList.propTypes = {
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
+  films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired})).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  onMovieClick: PropTypes.func.isRequired,
+  genre: PropTypes.string.isRequired
 };
 
-export default MoviesList;
+const mapStateToProps = (state) => ({
+  films: state.films,
+  genre: state.genre
+});
+
+export {MoviesList};
+export default connect(mapStateToProps)(MoviesList);

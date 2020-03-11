@@ -1,11 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const TabName = {
-  OVERVIEW: `OVERVIEW`,
-  DETAILS: `DETAILS`,
-  REVIEWS: `REVIEWS`
-};
+import {TabName} from "../../const/common";
 
 const NAV_ACTIVE_CLASS = `movie-nav__item--active`;
 
