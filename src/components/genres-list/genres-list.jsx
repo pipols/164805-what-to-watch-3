@@ -2,21 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ActionType} from "../../reducer";
-import {mapGenresToFilter} from "../../const/genres";
+import {getFilters} from "../../utils/utils";
 
-const MAX_GENRES = 9;
 const DEFAULT_FILTER = `All genres`;
-// уникальные жанры из фильмов
-const getUniqueGenres = (films) => {
-  const genresList = films.map((film) => film.genre);
-  const uniqueGenres = new Set(genresList);
-  return [...uniqueGenres].slice(0, MAX_GENRES);
-};
 
-const getFilters = (films) => getUniqueGenres(films).map((genre) => mapGenresToFilter.get(genre));
-
-const GenresList = ({films, onFilterClick}) => {
-  const filters = getFilters(films);
+const GenresList = ({onFilterClick, filters}) => {
   filters.unshift(DEFAULT_FILTER);
 
   return (
@@ -38,21 +28,17 @@ const GenresList = ({films, onFilterClick}) => {
 };
 
 GenresList.propTypes = {
-  films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired
-  })).isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onFilterClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films
+  filters: getFilters(state.films)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFilterClick(filter) {
-    dispatch({type: ActionType.SET_GENRE, payload: filter});
+    dispatch({type: ActionType.SET_GENRES_FILTER, payload: filter});
   }
 });
 

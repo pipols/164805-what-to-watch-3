@@ -6,7 +6,7 @@ import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 
 // список genres циклом
-const Main = ({promoMovieData, onMovieClick}) => {
+const Main = ({promoMovieData}) => {
   const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
@@ -62,7 +62,7 @@ const Main = ({promoMovieData, onMovieClick}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <GenresList/>
-        <MoviesList onMovieClick={onMovieClick}/>
+        <MoviesList />
         <div className="catalog__more">
           <button className="catalog__button" type="button">Show more</button>
         </div>
@@ -77,8 +77,7 @@ Main.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  }).isRequired
 };
 
 export default Main;

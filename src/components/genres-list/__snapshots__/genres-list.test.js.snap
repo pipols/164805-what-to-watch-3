@@ -23,7 +23,7 @@ exports[`<GenresList/> renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Comedies
+      All genres, Comedies, Crime
     </a>
   </li>
 </ul>

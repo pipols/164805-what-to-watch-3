@@ -13,23 +13,18 @@ const filmsData = [{
   genre: `Comedy`
 }];
 
-const onMovieClick = () => {};
-const GENRE = `Comedies`;
-
 it(`<MoviesList /> renders correctly`, () => {
   const store = mockStore({
     films: filmsData,
     genre: `All genres`,
+    genresFilter: `All genres`,
+    activeFilm: null
   });
 
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MoviesList
-            films={filmsData}
-            onMovieClick={onMovieClick}
-            genre={GENRE}
-          />
+          <MoviesList films={filmsData} />
         </Provider>)
     .toJSON();
 

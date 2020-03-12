@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {filmsData} from "./mocks/films";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import {reducer} from "./reducer";
@@ -18,7 +17,7 @@ const promoMovieData = {
 
 ReactDOM.render(
     <Provider store={store}>
-      <App promoMovieData={promoMovieData} filmsData={filmsData}/>,
+      <App promoMovieData={promoMovieData}/>,
     </Provider>,
     container
 );

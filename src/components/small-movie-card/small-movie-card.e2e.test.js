@@ -1,23 +1,33 @@
 import React from "react";
 import {shallow} from "enzyme";
-import SmallMovieCard from "./small-movie-card.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {SmallMovieCard} from "./small-movie-card.jsx";
 
 const movie = {
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   preview: `test.ru`
 };
-
-const onMovieClick = jest.fn();
+const mockStore = configureStore([]);
+const setActiveFilm = jest.fn();
 const onMovieHover = jest.fn();
 
 describe(`<SmallMovieCard />`, () => {
-  const wrapper = shallow(<SmallMovieCard
-    movie={movie}
-    onMovieClick={onMovieClick}
-    onMovieHover={onMovieHover}
-    isPlay={true}
-  />);
+  const store = mockStore({
+    activeFilm: null
+  });
+
+  const wrapper = shallow(
+      <Provider store={store} >
+        <SmallMovieCard
+          movie={movie}
+          onMovieHover={onMovieHover}
+          setActiveFilm={setActiveFilm}
+          isPlay={true}
+        />
+      </Provider>
+  );
 
   it(`при наведении на карточку, возвращает обьект с фильмом`, () => {
     wrapper.simulate(`mouseenter`);
@@ -31,13 +41,8 @@ describe(`<SmallMovieCard />`, () => {
     expect(onMovieHover.mock.calls[1][0]).toBe(null);
   });
 
-  it(`клик на карточку, возвращает обьект с фильмом`, () => {
-    wrapper.simulate(`click`);
-    expect(onMovieClick).toHaveBeenCalledTimes(1);
-    expect(onMovieClick.mock.calls[0][0]).toMatchObject(movie);
-  });
-
   it(`пропс isPlay=(true) отоброжает VideoPlayer вместо img`, () => {
+    wrapper.setProps({isPlay: true});
     expect(wrapper.exists(`VideoPlayer`)).toBe(true);
     expect(wrapper.exists(`img`)).toBe(false);
   });

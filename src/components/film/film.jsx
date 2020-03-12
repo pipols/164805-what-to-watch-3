@@ -10,7 +10,7 @@ import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
 
 const PREFIX = `img/`;
-
+// убрать state табов
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -96,7 +96,7 @@ class Film extends React.PureComponent {
           <h2 className="catalog__title">
             More like this
           </h2>
-          <MoviesList filmsData={this.props.filmsData} onMovieClick={this.props.onMovieClick}/>
+          <MoviesList/>
         </section>
         <Footer />
       </div>
@@ -124,12 +124,7 @@ Film.propTypes = {
       userName: PropTypes.string.isRequired,
       reviewDate: PropTypes.string.isRequired
     }))
-  }),
-  filmsData: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired})).isRequired,
-  onMovieClick: PropTypes.func.isRequired
+  })
 };
 
 export default Film;

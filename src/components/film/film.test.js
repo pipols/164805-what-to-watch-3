@@ -48,24 +48,23 @@ const filmsData = [{
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   preview: `test.ru`,
   genre: `Comedy`
+}, {
+  title: `Bohemian Rhapsody`,
+  poster: `bohemian-rhapsody.jpg`,
+  preview: `test.ru`,
+  genre: `Comedy`
 }];
-
-const onMovieClick = () => {};
 
 it(`<Film /> renders correctly`, () => {
   const store = mockStore({
     films: filmsData,
-    genre: `All genres`,
+    genresFilter: `All genres`,
   });
 
   const tree = renderer
   .create(
       <Provider store={store}>
-        <Film
-          film={film}
-          filmsData={filmsData}
-          onMovieClick={onMovieClick}
-        />
+        <Film film={film} />
       </Provider>)
   .toJSON();
 
