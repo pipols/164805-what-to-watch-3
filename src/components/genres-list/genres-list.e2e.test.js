@@ -2,8 +2,9 @@ import React from "react";
 import {shallow} from "enzyme";
 import {GenresList} from "./genres-list.jsx";
 
+const DEFAULT_FILTER = `All genres`;
 const onFilterClick = jest.fn();
-const filters = [`All genres, Comedies, Crime`];
+const filters = [`Comedies`, `Crime`];
 
 it(`<GenresList/> клик по фильтру возвращает название фильтра`, () => {
   const wrapper = shallow(
@@ -19,7 +20,7 @@ it(`<GenresList/> клик по фильтру возвращает назван
   }));
 
   expect(onFilterClick).toHaveBeenCalledTimes(links.length);
-  expect(onFilterClick.mock.calls[0][0]).toBe(filters[0]);
+  expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);
   expect(onFilterClick.mock.calls[1][0]).toBe(filters[1]);
   expect(onFilterClick.mock.calls[2][0]).toBe(filters[2]);
 });

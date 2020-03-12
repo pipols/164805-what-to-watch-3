@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {GenresList} from "./genres-list.jsx";
 
 const onFilterClick = () => {};
-const filters = [`All genres, Comedies, Crime`];
+const filters = [`Comedies`, `Crime`];
 
 it(`<GenresList/> renders`, () => {
   const tree = renderer

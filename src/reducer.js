@@ -25,7 +25,7 @@ const ActionCreator = {
     payload: films
   })
 };
-
+//
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_GENRE:

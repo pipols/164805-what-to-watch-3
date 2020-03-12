@@ -1,7 +1,5 @@
 import React from "react";
 import {shallow} from "enzyme";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 import {SmallMovieCard} from "./small-movie-card.jsx";
 
 const movie = {
@@ -9,24 +7,19 @@ const movie = {
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   preview: `test.ru`
 };
-const mockStore = configureStore([]);
+
 const setActiveFilm = jest.fn();
 const onMovieHover = jest.fn();
 
 describe(`<SmallMovieCard />`, () => {
-  const store = mockStore({
-    activeFilm: null
-  });
 
   const wrapper = shallow(
-      <Provider store={store} >
-        <SmallMovieCard
-          movie={movie}
-          onMovieHover={onMovieHover}
-          setActiveFilm={setActiveFilm}
-          isPlay={true}
-        />
-      </Provider>
+      <SmallMovieCard
+        movie={movie}
+        onMovieHover={onMovieHover}
+        setActiveFilm={setActiveFilm}
+        isPlay={true}
+      />
   );
 
   it(`при наведении на карточку, возвращает обьект с фильмом`, () => {
@@ -39,6 +32,12 @@ describe(`<SmallMovieCard />`, () => {
     wrapper.simulate(`mouseleave`);
     expect(onMovieHover).toHaveBeenCalledTimes(2);
     expect(onMovieHover.mock.calls[1][0]).toBe(null);
+  });
+
+  it(`клик на карточку, возвращает обьект с фильмом`, () => {
+    wrapper.simulate(`click`);
+    expect(setActiveFilm).toHaveBeenCalledTimes(1);
+    expect(setActiveFilm.mock.calls[0][0]).toMatchObject(movie);
   });
 
   it(`пропс isPlay=(true) отоброжает VideoPlayer вместо img`, () => {
