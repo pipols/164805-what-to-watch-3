@@ -42,7 +42,7 @@ describe(`<Main />`, () => {
       </Provider>);
   const cards = wrapper.find(`.small-movie-card`);
 
-  it(`клик по возвращает обьект с фильмом`, () => {
+  it(`клик по карточке возвращает обьект с фильмом`, () => {
     cards.forEach((card) => card.simulate(`click`));
     expect(onMovieClick).toHaveBeenCalledTimes(cards.length);
     expect(onMovieClick.mock.calls[0][0]).toMatchObject(filmsData[0]);
