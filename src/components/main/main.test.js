@@ -24,21 +24,17 @@ const filmsData = [{
   genre: `Comedy`
 }];
 
-const onMovieClick = () => {};
-
 it(`<Main /> renders correctly`, () => {
   const store = mockStore({
     films: filmsData,
     genre: `All genres`,
+    genresFilter: `All genres`,
+    activeFilm: null
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <Main
-          promoMovieData={promoMovieData}
-          filmsData={filmsData}
-          onMovieClick={onMovieClick}
-        />
+        <Main promoMovieData={promoMovieData} />
       </Provider>).toJSON();
 
   expect(tree).toMatchSnapshot();

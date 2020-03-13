@@ -1,8 +1,11 @@
 import React from "react";
 import renderer from "react-test-renderer";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
 import SmallMovieCard from "./small-movie-card.jsx";
 
-const onMovieClick = () => {};
+const mockStore = configureStore([]);
+const setActiveFilm = () => {};
 const onMovieHover = () => {};
 
 const movie = {
@@ -12,15 +15,40 @@ const movie = {
   genre: `Comedy`
 };
 
-it(`<SmallMovieCard /> renders correctly`, () => {
-  const tree = renderer
-  .create(<SmallMovieCard
-    movie={movie}
-    onMovieClick={onMovieClick}
-    onMovieHover={onMovieHover}
-    isPlay={true}
-  />)
-  .toJSON();
+describe(`<SmallMovieCard />`, () => {
+  const store = mockStore({
+    activeFilm: null
+  });
 
-  expect(tree).toMatchSnapshot();
+  it(`рендер с video`, () => {
+    const tree = renderer
+    .create(
+        <Provider store={store}>
+          <SmallMovieCard
+            movie={movie}
+            onMovieHover={onMovieHover}
+            setActiveFilm={setActiveFilm}
+            isPlay={true}
+          />
+        </Provider>)
+    .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`рендер с img`, () => {
+    const tree = renderer
+    .create(
+        <Provider store={store}>
+          <SmallMovieCard
+            movie={movie}
+            onMovieHover={onMovieHover}
+            setActiveFilm={setActiveFilm}
+            isPlay={false}
+          />
+        </Provider>)
+    .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

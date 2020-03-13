@@ -1,17 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
+import {connect} from "react-redux";
+import {ActionType} from "../../reducer";
+import {mapGenresToFilter} from "../../const/genres";
 
 const PREFIX = `img/`;
 
-const SmallMovieCard = ({movie, onMovieClick, onMovieHover, isPlay}) => {
+const SmallMovieCard = ({movie, setActiveFilm, onMovieHover, isPlay}) => {
   const {title, poster, preview} = movie;
   return (
     <article
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => onMovieHover(movie)}
       onMouseLeave={() => onMovieHover(null)}
-      onClick={() => onMovieClick(movie)}
+      onClick={() => setActiveFilm(movie)}
     >
       <div className="small-movie-card__image">
         {isPlay
@@ -31,9 +34,30 @@ SmallMovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired}).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
   onMovieHover: PropTypes.func.isRequired,
-  isPlay: PropTypes.bool.isRequired
+  isPlay: PropTypes.bool.isRequired,
+  setActiveFilm: PropTypes.func.isRequired
 };
 
-export default SmallMovieCard;
+const mapDispatchToProps = (dispatch) => ({
+  setActiveFilm(film) {
+    dispatch({
+      type: ActionType.SET_ACTIVE_FILM,
+      payload: film
+    });
+    dispatch({
+      type: ActionType.SET_GENRES_FILTER,
+      payload: mapGenresToFilter.get(film.genre)
+    });
+  }
+});
+
+// setFilter(film) {
+//   dispatch({
+//     type: ActionType.SET_GENRES_FILTER,
+//     payload: film.genre
+//   });
+// }
+
+export {SmallMovieCard};
+export default connect(null, mapDispatchToProps)(SmallMovieCard);

@@ -12,7 +12,7 @@ exports[`<GenresList/> renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      All genres
+      Comedies
     </a>
   </li>
   <li
@@ -23,7 +23,7 @@ exports[`<GenresList/> renders 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Comedies
+      Crime
     </a>
   </li>
 </ul>

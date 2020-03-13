@@ -2,31 +2,15 @@ import React from "react";
 import {shallow} from "enzyme";
 import {GenresList} from "./genres-list.jsx";
 
-const onFilterClick = jest.fn();
-
 const DEFAULT_FILTER = `All genres`;
-const Filter = {
-  COMEDIES: `Comedies`,
-  DRAMAS: `Dramas`
-};
+const onFilterClick = jest.fn();
+const filters = [DEFAULT_FILTER, `Comedies`, `Crime`];
 
-const films = [{
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`,
-  genre: `Comedy`
-},
-{
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`,
-  genre: `Drama`
-}];
 
-it(`<GenresList/> return click filter`, () => {
+describe(`<GenresList/>`, () => {
   const wrapper = shallow(
       <GenresList
-        films={films}
+        filters={filters}
         onFilterClick={onFilterClick}
       />
   );
@@ -36,8 +20,13 @@ it(`<GenresList/> return click filter`, () => {
     preventDefault: () => {}
   }));
 
-  expect(onFilterClick).toHaveBeenCalledTimes(links.length);
-  expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);
-  expect(onFilterClick.mock.calls[1][0]).toBe(Filter.COMEDIES);
-  expect(onFilterClick.mock.calls[2][0]).toBe(Filter.DRAMAS);
+  it(`первый фильтр всегда All genres`, () => {
+    expect(onFilterClick).toHaveBeenCalledTimes(links.length);
+    expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);
+  });
+
+  it(`клик по фильтру возвращает название фильтра`, () => {
+    expect(onFilterClick.mock.calls[1][0]).toBe(filters[1]);
+    expect(onFilterClick.mock.calls[2][0]).toBe(filters[2]);
+  });
 });

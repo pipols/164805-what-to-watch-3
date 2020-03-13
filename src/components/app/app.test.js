@@ -6,12 +6,6 @@ import App from "./app.jsx";
 
 const mockStore = configureStore([]);
 
-const promoMovieData = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  year: 2014
-};
-
 const filmsData = [{
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
@@ -24,12 +18,18 @@ const filmsData = [{
   genre: `Comedy`
 }];
 
-const onMovieClick = () => {};
+const promoMovieData = {
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  year: 2014
+};
 
 it(`<App /> renders correctly`, () => {
   const store = mockStore({
     films: filmsData,
     genre: `All genres`,
+    genresFilter: `All genres`,
+    activeFilm: null
   });
 
   const tree = renderer
@@ -37,8 +37,7 @@ it(`<App /> renders correctly`, () => {
       <Provider store={store}>
         <App
           promoMovieData={promoMovieData}
-          filmsData={filmsData}
-          onMovieClick={onMovieClick}/>
+        />
       </Provider>)
   .toJSON();
 
