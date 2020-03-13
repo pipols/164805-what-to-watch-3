@@ -4,7 +4,7 @@ import {GenresList} from "./genres-list.jsx";
 
 const DEFAULT_FILTER = `All genres`;
 const onFilterClick = jest.fn();
-const filters = [`Comedies`, `Crime`];
+const filters = [DEFAULT_FILTER, `Comedies`, `Crime`];
 
 
 describe(`<GenresList/>`, () => {
