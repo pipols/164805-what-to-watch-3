@@ -5,7 +5,6 @@ import {ActionType} from "../../reducer";
 import {getFilters} from "../../utils/utils";
 
 const GenresList = ({onFilterClick, filters}) => {
-
   return (
     <ul className="catalog__genres-list">
       {filters.map((filter) =>

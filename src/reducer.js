@@ -1,14 +1,15 @@
-import {extend} from './utils/utils';
-import {filmsData} from './mocks/films';
+import {extend} from "./utils/utils";
+import {filmsData} from "./mocks/films";
+import {CardCount} from "./const/common";
 //
 const initialState = {
   films: filmsData,
-  genre: `All genres`,
+  genre: `All genres`, //
   genresFilter: `All genres`,
   activeFilm: null,
-  shownCardsStack: 8 //
+  shownCardsStack: CardCount.INITIAL
 };
-
+//
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
   GET_FILMS: `GET_FILMS`,
@@ -44,7 +45,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.ADD_CARDS_STACK:
       return extend(state, {
-        shownCardsStack: state.shownCardsStack + 8
+        shownCardsStack: state.shownCardsStack + CardCount.ADD
       });
   }
 

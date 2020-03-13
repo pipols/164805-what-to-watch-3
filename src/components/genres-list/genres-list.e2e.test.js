@@ -6,7 +6,8 @@ const DEFAULT_FILTER = `All genres`;
 const onFilterClick = jest.fn();
 const filters = [`Comedies`, `Crime`];
 
-it(`<GenresList/> клик по фильтру возвращает название фильтра`, () => {
+
+describe(`<GenresList/>`, () => {
   const wrapper = shallow(
       <GenresList
         filters={filters}
@@ -19,8 +20,13 @@ it(`<GenresList/> клик по фильтру возвращает назван
     preventDefault: () => {}
   }));
 
-  expect(onFilterClick).toHaveBeenCalledTimes(links.length);
-  expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);
-  expect(onFilterClick.mock.calls[1][0]).toBe(filters[1]);
-  expect(onFilterClick.mock.calls[2][0]).toBe(filters[2]);
+  it(`первый фильтр всегда All genres`, () => {
+    expect(onFilterClick).toHaveBeenCalledTimes(links.length);
+    expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);
+  });
+
+  it(`клик по фильтру возвращает название фильтра`, () => {
+    expect(onFilterClick.mock.calls[1][0]).toBe(filters[1]);
+    expect(onFilterClick.mock.calls[2][0]).toBe(filters[2]);
+  });
 });

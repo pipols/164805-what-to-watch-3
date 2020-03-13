@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import {connect} from "react-redux";
 import {getFilmsByFilter} from "../../utils/utils";
+import {CardCount} from "../../const/common";
 
 const DELAY = 1000;
 
 class MoviesList extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.timerId = null;
     this.state = {hoverCard: null};
     this._onMovieHover = this._onMovieHover.bind(this);
   }
@@ -55,7 +55,11 @@ MoviesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: getFilmsByFilter(state.films, state.genresFilter).slice(0, state.shownCardsStack)
+  films: state.activeFilm
+    ? getFilmsByFilter(state.films, state.genresFilter)
+      .slice(0, CardCount.SIMILAR)
+    : getFilmsByFilter(state.films, state.genresFilter)
+      .slice(0, state.shownCardsStack)
 });
 
 export {MoviesList};

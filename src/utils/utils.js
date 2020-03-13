@@ -19,7 +19,7 @@ const getUniqueGenres = (films) => {
   return [...uniqueGenres].slice(0, MAX_GENRES);
 };
 
-const getKeyToMap = (map, value) => [...map].find(([, val]) => val === value)[0];
+export const getKeyToMap = (map, value) => [...map].find(([, val]) => val === value)[0];
 
 export const getFilmsByFilter = (films, filterValue) => {
   const genre = getKeyToMap(mapGenresToFilter, filterValue);

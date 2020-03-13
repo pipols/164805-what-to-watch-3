@@ -96,7 +96,7 @@ class Film extends React.PureComponent {
           <h2 className="catalog__title">
             More like this
           </h2>
-          <MoviesList/>
+          <MoviesList />
         </section>
         <Footer />
       </div>

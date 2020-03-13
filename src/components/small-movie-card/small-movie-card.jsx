@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {connect} from "react-redux";
 import {ActionType} from "../../reducer";
+import {mapGenresToFilter} from "../../const/genres";
 
 const PREFIX = `img/`;
 
@@ -44,9 +45,19 @@ const mapDispatchToProps = (dispatch) => ({
       type: ActionType.SET_ACTIVE_FILM,
       payload: film
     });
+    dispatch({
+      type: ActionType.SET_GENRES_FILTER,
+      payload: mapGenresToFilter.get(film.genre)
+    });
   }
 });
 
+// setFilter(film) {
+//   dispatch({
+//     type: ActionType.SET_GENRES_FILTER,
+//     payload: film.genre
+//   });
+// }
 
 export {SmallMovieCard};
 export default connect(null, mapDispatchToProps)(SmallMovieCard);
