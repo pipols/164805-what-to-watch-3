@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import Logo from "../logo/logo.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
+import ButtonShowMore from "../button-show-more/button-show-more.jsx";
 
 // список genres циклом
-const Main = ({promoMovieData}) => {
+const Main = ({promoMovieData, showButton}) => {
   const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
@@ -63,9 +65,7 @@ const Main = ({promoMovieData}) => {
 
         <GenresList/>
         <MoviesList />
-        <div className="catalog__more">
-          <button className="catalog__button" type="button">Show more</button>
-        </div>
+        {showButton && <ButtonShowMore/>}
       </section>
       <Footer />
     </div>
@@ -80,4 +80,9 @@ Main.propTypes = {
   }).isRequired
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  showButton: state.shownCardsStack < state.films.length
+});
+
+export {Main};
+export default connect(mapStateToProps)(Main);

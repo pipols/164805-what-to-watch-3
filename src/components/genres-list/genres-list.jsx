@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 import {ActionType} from "../../reducer";
 import {getFilters} from "../../utils/utils";
 
-const DEFAULT_FILTER = `All genres`;
-
 const GenresList = ({onFilterClick, filters}) => {
-  filters.unshift(DEFAULT_FILTER);
 
   return (
     <ul className="catalog__genres-list">

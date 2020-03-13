@@ -7,7 +7,11 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const getFilters = (films) => getUniqueGenres(films).map((genre) => mapGenresToFilter.get(genre));
+export const getFilters = (films) => {
+  const filters = getUniqueGenres(films).map((genre) => mapGenresToFilter.get(genre));
+  filters.unshift(DEFAULT_FILTER);
+  return filters;
+};
 
 const getUniqueGenres = (films) => {
   const genresList = films.map((film) => film.genre);

@@ -50,11 +50,12 @@ MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired})).isRequired
+    preview: PropTypes.string.isRequired})
+  ).isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: getFilmsByFilter(state.films, state.genresFilter)
+  films: getFilmsByFilter(state.films, state.genresFilter).slice(0, state.shownCardsStack)
 });
 
 export {MoviesList};
