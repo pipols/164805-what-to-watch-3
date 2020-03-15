@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ActionType} from "../../reducer";
-import {getFilters} from "../../utils/utils";
+import {getFilters, getGenreByFilter} from "../../utils/utils";
 
 const GenresList = ({onFilterClick, filters}) => {
   return (
@@ -34,7 +34,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onFilterClick(filter) {
-    dispatch({type: ActionType.SET_GENRES_FILTER, payload: filter});
+    dispatch({
+      type: ActionType.SET_GENRE,
+      payload: getGenreByFilter(filter)});
   }
 });
 

@@ -19,7 +19,7 @@ describe(`<GenresList/>`, () => {
   links.forEach((link) => link.simulate(`click`, {
     preventDefault: () => {}
   }));
-
+  // хрень
   it(`первый фильтр всегда All genres`, () => {
     expect(onFilterClick).toHaveBeenCalledTimes(links.length);
     expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);

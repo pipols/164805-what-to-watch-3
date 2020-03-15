@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import {connect} from "react-redux";
-import {getFilmsByFilter} from "../../utils/utils";
+import {getfilmsByGenre} from "../../utils/utils";
 import {CardCount} from "../../const/common";
 
 const DELAY = 1000;
@@ -56,9 +56,9 @@ MoviesList.propTypes = {
 
 const mapStateToProps = (state) => ({
   films: state.activeFilm
-    ? getFilmsByFilter(state.films, state.genresFilter)
+    ? getfilmsByGenre(state.films, state.genre)
       .slice(0, CardCount.SIMILAR)
-    : getFilmsByFilter(state.films, state.genresFilter)
+    : getfilmsByGenre(state.films, state.genre)
       .slice(0, state.shownCardsStack)
 });
 
