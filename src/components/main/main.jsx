@@ -6,10 +6,11 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import ButtonShowMore from "../button-show-more/button-show-more.jsx";
+import {getfilmsByGenre} from "../../utils/utils";
 
 // список genres циклом
-const Main = ({promoMovieData, showButton}) => {
-  const {title, genre, year} = promoMovieData;
+const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
+  const {title, MovieGenre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -36,7 +37,7 @@ const Main = ({promoMovieData, showButton}) => {
           <div className="movie-card__desc">
             <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
+              <span className="movie-card__genre">{MovieGenre}</span>
               <span className="movie-card__year">{year}</span>
             </p>
 
@@ -64,7 +65,7 @@ const Main = ({promoMovieData, showButton}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <GenresList/>
-        <MoviesList />
+        <MoviesList films={getfilmsByGenre(films, genre).slice(0, shownCardsStack)} />
         {showButton && <ButtonShowMore/>}
       </section>
       <Footer />
@@ -82,7 +83,10 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  showButton: state.shownCardsStack < state.films.length
+  showButton: state.shownCardsStack < state.films.length,
+  films: state.films,
+  genre: state.genre,
+  shownCardsStack: state.shownCardsStack
 });
 
 export {Main};

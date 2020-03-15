@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
-import {connect} from "react-redux";
-import {getfilmsByGenre} from "../../utils/utils";
-import {CardCount} from "../../const/common";
 
 const DELAY = 1000;
 
@@ -48,19 +45,25 @@ class MoviesList extends React.PureComponent {
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
     poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired})
-  ).isRequired
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
+  }))
 };
 
-const mapStateToProps = (state) => ({
-  films: state.activeFilm
-    ? getfilmsByGenre(state.films, state.genre)
-      .slice(0, CardCount.SIMILAR)
-    : getfilmsByGenre(state.films, state.genre)
-      .slice(0, state.shownCardsStack)
-});
-
-export {MoviesList};
-export default connect(mapStateToProps)(MoviesList);
+export default MoviesList;
