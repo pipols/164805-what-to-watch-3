@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {connect} from "react-redux";
-import {ActionType} from "../../reducer";
+import {ActionCreator} from "../../reducer";
 
 const PREFIX = `img/`;
 
@@ -40,14 +40,8 @@ SmallMovieCard.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveFilm(film) {
-    dispatch({
-      type: ActionType.SET_ACTIVE_FILM,
-      payload: film
-    });
-    dispatch({
-      type: ActionType.SET_GENRE,
-      payload: film.genre
-    });
+    dispatch(ActionCreator.setActiveFilm(film));
+    dispatch(ActionCreator.setGenre(film.genre));
   }
 });
 

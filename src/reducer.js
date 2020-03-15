@@ -24,6 +24,13 @@ const ActionCreator = {
   getFilms: (films) => ({
     type: ActionType.GET_FILMS,
     payload: films
+  }),
+  setActiveFilm: (film) => ({
+    type: ActionType.SET_ACTIVE_FILM,
+    payload: film
+  }),
+  addCardsStack: () => ({
+    type: ActionType.ADD_CARDS_STACK
   })
 };
 //

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionType} from "../../reducer";
+import {ActionCreator} from "../../reducer";
 
 const ButtonShowMore = ({onShowMoreClick}) => (
   <div className="catalog__more">
@@ -11,9 +11,7 @@ const ButtonShowMore = ({onShowMoreClick}) => (
 
 const mapDispatchToProps = (dispatch) => ({
   onShowMoreClick() {
-    dispatch({
-      type: ActionType.ADD_CARDS_STACK
-    });
+    dispatch(ActionCreator.addCardsStack());
   }
 });
 
