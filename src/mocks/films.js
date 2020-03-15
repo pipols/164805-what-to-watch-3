@@ -1,4 +1,6 @@
-export const filmsData = [{
+import film from "./film";
+
+const filmsMock = [{
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
   poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
   genre: `Comedy`,
@@ -64,3 +66,5 @@ export const filmsData = [{
   genre: `Documentary`,
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
 }];
+
+export const filmsData = filmsMock.map((mock) => Object.assign({}, film, mock));
