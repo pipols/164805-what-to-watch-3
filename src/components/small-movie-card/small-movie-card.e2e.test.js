@@ -2,10 +2,42 @@ import React from "react";
 import {shallow} from "enzyme";
 import {SmallMovieCard} from "./small-movie-card.jsx";
 
-const movie = {
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`
+const film = {
+  preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+  poster: `bg-the-grand-budapest-hotel.jpg`,
+  cover: `the-grand-budapest-hotel-poster.jpg`,
+  title: `The Grand Budapest Hotel`,
+  genre: `Drama`,
+  year: 2014,
+  actors: [
+    `Bill Murray`,
+    `Edward Norton`,
+    `Jude Law`,
+    `Willem Dafoe`,
+    `Saoirse Ronan`,
+    `Tony Revoloru`,
+    `Tilda Swinton`,
+    `Tom Wilkinson`,
+    `Owen Wilkinson`,
+    `Adrien Brody`,
+    `Ralph Fiennes`,
+    `Jeff Goldblum`
+  ],
+  producer: `Wes Andreson`,
+  description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.\n
+    Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.`,
+  rating: `8,9`,
+  ratingDescription: `Very good`,
+  votes: 240,
+  duration: `1h 39m`,
+  reviews: [
+    {
+      text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+      votes: `8,9`,
+      userName: `Kate Muir`,
+      reviewDate: `December 24, 2016`
+    }
+  ]
 };
 
 const setActiveFilm = jest.fn();
@@ -15,7 +47,7 @@ describe(`<SmallMovieCard />`, () => {
 
   const wrapper = shallow(
       <SmallMovieCard
-        movie={movie}
+        film={film}
         onMovieHover={onMovieHover}
         setActiveFilm={setActiveFilm}
         isPlay={true}
@@ -25,7 +57,7 @@ describe(`<SmallMovieCard />`, () => {
   it(`при наведении на карточку, возвращает обьект с фильмом`, () => {
     wrapper.simulate(`mouseenter`);
     expect(onMovieHover).toHaveBeenCalledTimes(1);
-    expect(onMovieHover.mock.calls[0][0]).toMatchObject(movie);
+    expect(onMovieHover.mock.calls[0][0]).toMatchObject(film);
   });
 
   it(`при удалении с карточки, возвращает null`, () => {
@@ -37,7 +69,7 @@ describe(`<SmallMovieCard />`, () => {
   it(`клик на карточку, возвращает обьект с фильмом`, () => {
     wrapper.simulate(`click`);
     expect(setActiveFilm).toHaveBeenCalledTimes(1);
-    expect(setActiveFilm.mock.calls[0][0]).toMatchObject(movie);
+    expect(setActiveFilm.mock.calls[0][0]).toMatchObject(film);
   });
 
   it(`пропс isPlay=(true) отоброжает VideoPlayer вместо img`, () => {

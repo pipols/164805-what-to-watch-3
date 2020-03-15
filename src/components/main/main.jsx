@@ -9,8 +9,8 @@ import ButtonShowMore from "../button-show-more/button-show-more.jsx";
 import {getfilmsByGenre} from "../../utils/utils";
 
 // список genres циклом
-const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
-  const {title, movieGenre, year} = promoMovieData;
+const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack}) => {
+  const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -37,7 +37,7 @@ const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
           <div className="movie-card__desc">
             <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{movieGenre}</span>
+              <span className="movie-card__genre">{genre}</span>
               <span className="movie-card__year">{year}</span>
             </p>
 
@@ -65,7 +65,7 @@ const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <GenresList/>
-        <MoviesList films={getfilmsByGenre(films, genre).slice(0, shownCardsStack)} />
+        <MoviesList films={getfilmsByGenre(films, currentGenre).slice(0, shownCardsStack)} />
         {showButton && <ButtonShowMore/>}
       </section>
       <Footer />
@@ -76,11 +76,11 @@ const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
 Main.propTypes = {
   promoMovieData: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    movieGenre: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }).isRequired,
   showButton: PropTypes.bool.isRequired,
-  genre: PropTypes.string.isRequired,
+  currentGenre: PropTypes.string.isRequired,
   shownCardsStack: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
     poster: PropTypes.string.isRequired,
@@ -108,7 +108,7 @@ Main.propTypes = {
 const mapStateToProps = (state) => ({
   showButton: state.shownCardsStack < state.films.length,
   films: state.films,
-  genre: state.genre,
+  currentGenre: state.genre,
   shownCardsStack: state.shownCardsStack
 });
 
