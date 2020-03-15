@@ -100,7 +100,7 @@ class Film extends React.PureComponent {
             More like this
           </h2>
           <MoviesList films={
-            getfilmsByGenre(this.props.films, this.props.film.genre)
+            getfilmsByGenre(this.props.films, this.props.currentGenre)
             .slice(0, CardCount.SIMILAR)
           } />
         </section>
@@ -113,6 +113,7 @@ class Film extends React.PureComponent {
 Film.propTypes = {
   film: PropTypes.shape({
     poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
@@ -133,6 +134,7 @@ Film.propTypes = {
   }),
   films: PropTypes.arrayOf(PropTypes.shape({
     poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
@@ -150,11 +152,13 @@ Film.propTypes = {
       userName: PropTypes.string.isRequired,
       reviewDate: PropTypes.string.isRequired
     }))
-  }))
+  })),
+  currentGenre: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films
+  films: state.films,
+  currentGenre: state.genre
 });
 
 export {Film};

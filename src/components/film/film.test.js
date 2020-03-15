@@ -43,28 +43,16 @@ const film = {
   ]
 };
 
-const filmsData = [{
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`,
-  genre: `Comedy`
-}, {
-  title: `Bohemian Rhapsody`,
-  poster: `bohemian-rhapsody.jpg`,
-  preview: `test.ru`,
-  genre: `Comedy`
-}];
-
 it(`<Film /> renders correctly`, () => {
   const store = mockStore({
-    films: filmsData,
+    films: [film, film],
     genresFilter: `All genres`,
   });
 
   const tree = renderer
   .create(
       <Provider store={store}>
-        <Film film={film} />
+        <Film film={film} films={[film, film]} />
       </Provider>)
   .toJSON();
 

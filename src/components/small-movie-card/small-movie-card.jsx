@@ -6,14 +6,14 @@ import {ActionCreator} from "../../reducer";
 
 const PREFIX = `img/`;
 
-const SmallMovieCard = ({movie, setActiveFilm, onMovieHover, isPlay}) => {
-  const {title, poster, preview} = movie;
+const SmallMovieCard = ({film, setActiveFilm, onMovieHover, isPlay}) => {
+  const {title, poster, preview} = film;
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => onMovieHover(movie)}
+      onMouseEnter={() => onMovieHover(film)}
       onMouseLeave={() => onMovieHover(null)}
-      onClick={() => setActiveFilm(movie)}
+      onClick={() => setActiveFilm(film)}
     >
       <div className="small-movie-card__image">
         {isPlay
@@ -22,17 +22,34 @@ const SmallMovieCard = ({movie, setActiveFilm, onMovieHover, isPlay}) => {
       </div>
 
       <h3 className="small-movie-card__title" >
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <a className="small-movie-card__link" href="movie-page.html">{title}{film.genre}</a>
       </h3>
     </article>
   );
 };
 
 SmallMovieCard.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+  film: PropTypes.shape({
     poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired}).isRequired,
+    preview: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
+  }).isRequired,
   onMovieHover: PropTypes.func.isRequired,
   isPlay: PropTypes.bool.isRequired,
   setActiveFilm: PropTypes.func.isRequired

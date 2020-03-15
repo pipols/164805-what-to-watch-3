@@ -10,7 +10,7 @@ import {getfilmsByGenre} from "../../utils/utils";
 
 // список genres циклом
 const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
-  const {title, MovieGenre, year} = promoMovieData;
+  const {title, movieGenre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -37,7 +37,7 @@ const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
           <div className="movie-card__desc">
             <h2 className="movie-card__title">{title}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">{MovieGenre}</span>
+              <span className="movie-card__genre">{movieGenre}</span>
               <span className="movie-card__year">{year}</span>
             </p>
 
@@ -76,10 +76,33 @@ const Main = ({promoMovieData, showButton, films, genre, shownCardsStack}) => {
 Main.propTypes = {
   promoMovieData: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
+    movieGenre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }).isRequired,
-  showButton: PropTypes.bool.isRequired
+  showButton: PropTypes.bool.isRequired,
+  genre: PropTypes.string.isRequired,
+  shownCardsStack: PropTypes.number.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
+  }))
 };
 
 const mapStateToProps = (state) => ({

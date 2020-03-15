@@ -16,12 +16,12 @@ class MoviesList extends React.PureComponent {
 
     return (
       <div className="catalog__movies-list">
-        {films.map((movie, i) =>
+        {films.map((film, i) =>
           <SmallMovieCard
-            movie={movie}
-            key={movie.title + i}
+            film={film}
+            key={film.title + i}
             onMovieHover={this._onMovieHover}
-            isPlay={this.state.hoverCard === movie}/>
+            isPlay={this.state.hoverCard === film}/>
         )}
       </div>
     );
@@ -46,6 +46,7 @@ class MoviesList extends React.PureComponent {
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
     poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,

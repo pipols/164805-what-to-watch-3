@@ -11,7 +11,7 @@ const container = document.querySelector(`#root`);
 
 const promoMovieData = {
   title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
+  movieGenre: `Drama`,
   year: 2014
 };
 
