@@ -2,46 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
-const DELAY = 1000;
-
-class MoviesList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {hoverCard: null};
-    this._onMovieHover = this._onMovieHover.bind(this);
-  }
-
-  render() {
-    const {films} = this.props;
-
-    return (
-      <div className="catalog__movies-list">
-        {films.map((film, i) =>
-          <SmallMovieCard
-            film={film}
-            key={film.title + i}
-            onMovieHover={this._onMovieHover}
-            isPlay={this.state.hoverCard === film} />
-        )}
-      </div>
-    );
-  }
-
-  _onMovieHover(card) {
-    return card
-      ? this._setTimeout(card)
-      : this._clearTimeout();
-  }
-
-  _setTimeout(card) {
-    this.timerId = setTimeout(() => this.setState({hoverCard: card}), DELAY);
-  }
-
-  _clearTimeout() {
-    clearTimeout(this.timerId);
-    this.setState({hoverCard: null});
-  }
-}
+const MoviesList = ({films}) => (
+  <div className="catalog__movies-list">
+    {films.map((film, i) =>
+      <SmallMovieCard
+        film={film}
+        key={film.title + i} />
+    )}
+  </div>
+);
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
