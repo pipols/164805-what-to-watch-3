@@ -41,29 +41,32 @@ const film = {
 };
 
 const setActiveFilm = jest.fn();
-const onMovieHover = jest.fn();
+const handlerItemClick = jest.fn();
+// jest.useFakeTimers();
 
 describe(`<SmallMovieCard />`, () => {
 
   const wrapper = shallow(
       <SmallMovieCard
         film={film}
-        onMovieHover={onMovieHover}
         setActiveFilm={setActiveFilm}
-        isPlay={true}
+        handlerItemClick={handlerItemClick}
+        activeItem={film}
       />
   );
 
   it(`при наведении на карточку, возвращает обьект с фильмом`, () => {
+    jest.useFakeTimers();
     wrapper.simulate(`mouseenter`);
-    expect(onMovieHover).toHaveBeenCalledTimes(1);
-    expect(onMovieHover.mock.calls[0][0]).toMatchObject(film);
+    jest.runAllTimers();
+    expect(handlerItemClick).toHaveBeenCalledTimes(1);
+    expect(handlerItemClick.mock.calls[0][0]).toMatchObject(film);
   });
 
   it(`при удалении с карточки, возвращает null`, () => {
     wrapper.simulate(`mouseleave`);
-    expect(onMovieHover).toHaveBeenCalledTimes(2);
-    expect(onMovieHover.mock.calls[1][0]).toBe(null);
+    expect(handlerItemClick).toHaveBeenCalledTimes(2);
+    expect(handlerItemClick.mock.calls[1][0]).toBe(null);
   });
 
   it(`клик на карточку, возвращает обьект с фильмом`, () => {
@@ -73,13 +76,13 @@ describe(`<SmallMovieCard />`, () => {
   });
 
   it(`пропс isPlay=(true) отоброжает VideoPlayer вместо img`, () => {
-    wrapper.setProps({isPlay: true});
+    wrapper.setProps({activeItem: film});
     expect(wrapper.exists(`VideoPlayer`)).toBe(true);
     expect(wrapper.exists(`img`)).toBe(false);
   });
 
   it(`пропс isPlay=(false) отоброжает img вместо VideoPlayer`, () => {
-    wrapper.setProps({isPlay: false});
+    wrapper.setProps({activeItem: null});
     expect(wrapper.exists(`VideoPlayer`)).toBe(false);
     expect(wrapper.exists(`img`)).toBe(true);
   });

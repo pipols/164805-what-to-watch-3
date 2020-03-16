@@ -21,7 +21,7 @@ class MoviesList extends React.PureComponent {
             film={film}
             key={film.title + i}
             onMovieHover={this._onMovieHover}
-            isPlay={this.state.hoverCard === film}/>
+            isPlay={this.state.hoverCard === film} />
         )}
       </div>
     );

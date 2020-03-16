@@ -25,7 +25,6 @@ exports[`<SmallMovieCard /> рендер с img 1`] = `
       href="movie-page.html"
     >
       The Grand Budapest Hotel
-      Drama
     </a>
   </h3>
 </article>
@@ -58,7 +57,6 @@ exports[`<SmallMovieCard /> рендер с video 1`] = `
       href="movie-page.html"
     >
       The Grand Budapest Hotel
-      Drama
     </a>
   </h3>
 </article>

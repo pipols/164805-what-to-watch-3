@@ -155,7 +155,7 @@ Array [
         className="catalog__genres-list"
       >
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item catalog__genres-item--active"
         >
           <a
             className="catalog__genres-link"
@@ -166,7 +166,7 @@ Array [
           </a>
         </li>
         <li
-          className="catalog__genres-item"
+          className="catalog__genres-item "
         >
           <a
             className="catalog__genres-link"
@@ -204,7 +204,6 @@ Array [
               href="movie-page.html"
             >
               The Grand Budapest Hotel
-              Drama
             </a>
           </h3>
         </article>
@@ -232,7 +231,6 @@ Array [
               href="movie-page.html"
             >
               The Grand Budapest Hotel
-              Drama
             </a>
           </h3>
         </article>

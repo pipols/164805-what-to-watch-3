@@ -1,12 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import SmallMovieCard from "./small-movie-card.jsx";
+import {SmallMovieCard} from "./small-movie-card.jsx";
 
-const mockStore = configureStore([]);
 const setActiveFilm = () => {};
-const onMovieHover = () => {};
+const handlerItemClick = () => {};
 
 const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -47,21 +44,17 @@ const film = {
 };
 
 describe(`<SmallMovieCard />`, () => {
-  const store = mockStore({
-    activeFilm: null
-  });
 
   it(`рендер с video`, () => {
     const tree = renderer
     .create(
-        <Provider store={store}>
-          <SmallMovieCard
-            film={film}
-            onMovieHover={onMovieHover}
-            setActiveFilm={setActiveFilm}
-            isPlay={true}
-          />
-        </Provider>)
+        <SmallMovieCard
+          film={film}
+          setActiveFilm={setActiveFilm}
+          handlerItemClick={handlerItemClick}
+          activeItem={film}
+        />
+    )
     .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -70,14 +63,13 @@ describe(`<SmallMovieCard />`, () => {
   it(`рендер с img`, () => {
     const tree = renderer
     .create(
-        <Provider store={store}>
-          <SmallMovieCard
-            film={film}
-            onMovieHover={onMovieHover}
-            setActiveFilm={setActiveFilm}
-            isPlay={false}
-          />
-        </Provider>)
+        <SmallMovieCard
+          film={film}
+          setActiveFilm={setActiveFilm}
+          handlerItemClick={handlerItemClick}
+          activeItem={null}
+        />
+    )
     .toJSON();
 
     expect(tree).toMatchSnapshot();
