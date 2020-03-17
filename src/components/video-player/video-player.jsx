@@ -3,12 +3,18 @@ import React from "react";
 class VideoPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
+    this.videoRef = React.createRef();
+  }
+
+  componentDidMount() {
+    console.log(this.videoRef.current);
+
   }
 
   render() {
     return (
       <div className="player">
-        <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+        <video ref={this.videoRef} src="#" className="player__video" poster="img/player-poster.jpg"></video>
 
         <button type="button" className="player__exit">Exit</button>
 
@@ -16,7 +22,7 @@ class VideoPlayer extends React.PureComponent {
           <div className="player__controls-row">
             <div className="player__time">
               <progress className="player__progress" value="30" max="100"></progress>
-              <div className="player__toggler" style="left: 30%;">Toggler</div>
+              <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
             </div>
             <div className="player__time-value">1:30:29</div>
           </div>

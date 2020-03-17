@@ -6,7 +6,8 @@ const initialState = {
   films: filmsData,
   genre: `All genres`,
   activeFilm: null,
-  shownCardsStack: CardCount.INITIAL
+  shownCardsStack: CardCount.INITIAL,
+  isActivePlayer: true
 };
 //
 const ActionType = {
