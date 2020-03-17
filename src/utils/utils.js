@@ -1,6 +1,7 @@
 import {mapGenresToFilter} from "../const/genres";
 
 const DEFAULT_FILTER = `All genres`;
+const DEFAULT_GENRE = `All genres`;
 const MAX_GENRES = 9;
 
 export const extend = (a, b) => {
@@ -28,3 +29,11 @@ export const getFilmsByFilter = (films, filterValue) => {
   }
   return films.filter((film) => film.genre === genre);
 };
+
+export const getfilmsByGenre = (films, genre) => {
+  return genre === DEFAULT_GENRE
+    ? films
+    : films.filter((film) => film.genre === genre);
+};
+
+export const getGenreByFilter = (filter) => getKeyToMap(mapGenresToFilter, filter);

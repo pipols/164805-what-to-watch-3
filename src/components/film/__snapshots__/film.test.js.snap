@@ -278,7 +278,7 @@ Array [
             <img
               alt="{title}"
               height="175"
-              src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+              src="img/bg-the-grand-budapest-hotel.jpg"
               width="280"
             />
           </div>
@@ -289,7 +289,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Fantastic Beasts: The Crimes of Grindelwald
+              The Grand Budapest Hotel
             </a>
           </h3>
         </article>
@@ -305,7 +305,7 @@ Array [
             <img
               alt="{title}"
               height="175"
-              src="img/bohemian-rhapsody.jpg"
+              src="img/bg-the-grand-budapest-hotel.jpg"
               width="280"
             />
           </div>
@@ -316,7 +316,7 @@ Array [
               className="small-movie-card__link"
               href="movie-page.html"
             >
-              Bohemian Rhapsody
+              The Grand Budapest Hotel
             </a>
           </h3>
         </article>

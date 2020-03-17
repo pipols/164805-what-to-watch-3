@@ -4,6 +4,7 @@ import {GenresList} from "./genres-list.jsx";
 
 const DEFAULT_FILTER = `All genres`;
 const onFilterClick = jest.fn();
+const handlerItemClick = jest.fn();
 const filters = [DEFAULT_FILTER, `Comedies`, `Crime`];
 
 
@@ -12,6 +13,8 @@ describe(`<GenresList/>`, () => {
       <GenresList
         filters={filters}
         onFilterClick={onFilterClick}
+        handlerItemClick={handlerItemClick}
+        activeItem={filters[0]}
       />
   );
   const links = wrapper.find(`.catalog__genres-link`);
@@ -19,14 +22,19 @@ describe(`<GenresList/>`, () => {
   links.forEach((link) => link.simulate(`click`, {
     preventDefault: () => {}
   }));
-
+  // хрень
   it(`первый фильтр всегда All genres`, () => {
     expect(onFilterClick).toHaveBeenCalledTimes(links.length);
     expect(onFilterClick.mock.calls[0][0]).toBe(DEFAULT_FILTER);
   });
 
-  it(`клик по фильтру возвращает название фильтра`, () => {
+  it(`при клике на фильтр, onFilterClick возврощает название фильтра`, () => {
     expect(onFilterClick.mock.calls[1][0]).toBe(filters[1]);
     expect(onFilterClick.mock.calls[2][0]).toBe(filters[2]);
+  });
+
+  it(`при клике на фильтр, handlerItemClick возврощает название фильтра`, () => {
+    expect(handlerItemClick.mock.calls[0][0]).toBe(filters[0]);
+    expect(handlerItemClick.mock.calls[1][0]).toBe(filters[1]);
   });
 });

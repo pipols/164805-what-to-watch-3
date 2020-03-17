@@ -2,11 +2,12 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
-import Film from "./film.jsx";
+import {Film} from "./film.jsx";
 
 const mockStore = configureStore([]);
 
 const film = {
+  preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
   poster: `bg-the-grand-budapest-hotel.jpg`,
   cover: `the-grand-budapest-hotel-poster.jpg`,
   title: `The Grand Budapest Hotel`,
@@ -43,28 +44,17 @@ const film = {
   ]
 };
 
-const filmsData = [{
-  title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  poster: `fantastic-beasts-the-crimes-of-grindelwald.jpg`,
-  preview: `test.ru`,
-  genre: `Comedy`
-}, {
-  title: `Bohemian Rhapsody`,
-  poster: `bohemian-rhapsody.jpg`,
-  preview: `test.ru`,
-  genre: `Comedy`
-}];
-
 it(`<Film /> renders correctly`, () => {
-  const store = mockStore({
-    films: filmsData,
-    genresFilter: `All genres`,
-  });
+  const store = mockStore({});
 
   const tree = renderer
   .create(
       <Provider store={store}>
-        <Film film={film} />
+        <Film
+          film={film}
+          films={[film, film]}
+          currentGenre={`Drama`}
+        />
       </Provider>)
   .toJSON();
 

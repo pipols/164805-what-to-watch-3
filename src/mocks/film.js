@@ -35,34 +35,24 @@ const film = {
   ]
 };
 
+// const film = {
+//   id: 1,
+//   name: `The Grand Budapest Hotel`,
+//   poster_image: `img/the-grand-budapest-hotel-poster.jpg`,
+//   preview_image: `img/the-grand-budapest-hotel.jpg`,
+//   background_image: `img/the-grand-budapest-hotel-bg.jpg`,
+//   background_color: `#ffffff`,
+//   video_link: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+//   preview_video_link: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+//   description: `In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.`,
+//   rating: 8.9,
+//   scores_count: 240,
+//   director: `Wes Andreson`,
+//   starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`],
+//   run_time: 99,
+//   genre: `Comedy`,
+//   released: 2014,
+//   is_favorite: false
+// }
+
 export default film;
-// В шапке страницы приведён следующий набор информации:
-// Большой постер.
-// Обложка фильма.
-// Название фильма.
-// Жанр.
-// Год выхода на экраны.
-// Кнопка запуска просмотра.
-// Кнопка добавления в список «К просмотру».
-//
-// Overview. Общая информация о фильме:
-// Описание фильма.
-// Оценка. Например, 8.9 (всегда один знак после запятой).
-// Описание оценки (Bad, Normal, Good, Very good, Awesome).
-// Количество голосов.
-// Режиссёр.
-// Список актёров.
-// Details. Расширенная информация:
-// Режиссёр.
-// Актёрский состав.
-// Продолжительность (часы, минуты).
-// Жанр.
-// Год выхода на экраны.
-//
-// Reviews. Список отзывов пользователей.
-//
-// Каждый отзыв содержит:
-// Текст отзыва.
-// Оценка пользователя.
-// Имя пользователя.
-// Дата отзыва в формате: Месяц (полное название) день, год. Например: December 24, 2018.

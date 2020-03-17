@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
 import Details from "../tabs/details/details.jsx";
 import Reviews from "../tabs/reviews/reviews.jsx";
 import Overview from "../tabs/overview/overview.jsx";
@@ -8,6 +9,8 @@ import Logo from "../logo/logo.jsx";
 import Footer from "../footer/footer.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
+import {getfilmsByGenre} from "../../utils/utils";
+import {CardCount} from "../../const/common";
 
 const PREFIX = `img/`;
 // убрать state табов
@@ -96,7 +99,10 @@ class Film extends React.PureComponent {
           <h2 className="catalog__title">
             More like this
           </h2>
-          <MoviesList />
+          <MoviesList films={
+            getfilmsByGenre(this.props.films, this.props.currentGenre)
+            .slice(0, CardCount.SIMILAR)
+          } />
         </section>
         <Footer />
       </div>
@@ -107,6 +113,7 @@ class Film extends React.PureComponent {
 Film.propTypes = {
   film: PropTypes.shape({
     poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
@@ -124,7 +131,35 @@ Film.propTypes = {
       userName: PropTypes.string.isRequired,
       reviewDate: PropTypes.string.isRequired
     }))
-  })
+  }),
+  films: PropTypes.arrayOf(PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
+  })),
+  currentGenre: PropTypes.string.isRequired
 };
 
-export default Film;
+const mapStateToProps = (state) => ({
+  films: state.films,
+  currentGenre: state.genre
+});
+
+export {Film};
+export default connect(mapStateToProps)(Film);

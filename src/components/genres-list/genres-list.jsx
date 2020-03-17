@@ -1,19 +1,27 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {ActionType} from "../../reducer";
-import {getFilters} from "../../utils/utils";
+import {ActionCreator} from "../../reducer";
+import {getFilters, getGenreByFilter} from "../../utils/utils";
+import withActiveItem from "../../hocs/with-active-item.jsx";
 
-const GenresList = ({onFilterClick, filters}) => {
+const SELECTED_GENRE_CLASS = `catalog__genres-item--active`;
+const DEFAULT_FILTER = `All genres`;
+
+const GenresList = ({onFilterClick, filters, handlerItemClick, activeItem}) => {
+  const activeFilter = activeItem || DEFAULT_FILTER;
+  const handlerLinkClick = (evt, filter) => {
+    evt.preventDefault();
+    onFilterClick(filter);
+    handlerItemClick(filter);
+  };
+
   return (
     <ul className="catalog__genres-list">
       {filters.map((filter) =>
-        <li key={filter} className="catalog__genres-item">
+        <li key={filter} className={`catalog__genres-item ${activeFilter === filter ? SELECTED_GENRE_CLASS : ``}`}>
           <a
-            onClick={(evt) => {
-              evt.preventDefault();
-              onFilterClick(filter);
-            }}
+            onClick={(evt) => handlerLinkClick(evt, filter)}
             href="#"
             className="catalog__genres-link">{filter}
           </a>
@@ -25,7 +33,9 @@ const GenresList = ({onFilterClick, filters}) => {
 
 GenresList.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  onFilterClick: PropTypes.func.isRequired
+  onFilterClick: PropTypes.func.isRequired,
+  handlerItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
@@ -34,9 +44,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onFilterClick(filter) {
-    dispatch({type: ActionType.SET_GENRES_FILTER, payload: filter});
+    dispatch(ActionCreator.setGenre(getGenreByFilter(filter)));
   }
 });
 
 export {GenresList};
-export default connect(mapStateToProps, mapDispatchToProps)(GenresList);
+export default connect(mapStateToProps, mapDispatchToProps)(withActiveItem(GenresList));

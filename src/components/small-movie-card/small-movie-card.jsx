@@ -2,19 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {connect} from "react-redux";
-import {ActionType} from "../../reducer";
-import {mapGenresToFilter} from "../../const/genres";
+import {ActionCreator} from "../../reducer";
+import withActiveItem from "../../hocs/with-active-item.jsx";
 
 const PREFIX = `img/`;
+const DELAY = 1000;
+let timerId;
 
-const SmallMovieCard = ({movie, setActiveFilm, onMovieHover, isPlay}) => {
-  const {title, poster, preview} = movie;
+const setTimer = (film, cb) => {
+  timerId = setTimeout(() => cb(film), DELAY);
+};
+
+const clearTimer = (cb) => {
+  clearTimeout(timerId);
+  cb(null);
+};
+
+const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, activeItem}) => {
+  const {title, poster, preview} = film;
+  const isPlay = activeItem === film;
+
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => onMovieHover(movie)}
-      onMouseLeave={() => onMovieHover(null)}
-      onClick={() => setActiveFilm(movie)}
+      onMouseEnter={() => setTimer(film, handlerItemClick)}
+      onMouseLeave={() => clearTimer(handlerItemClick)}
+      onClick={() => setActiveFilm(film)}
     >
       <div className="small-movie-card__image">
         {isPlay
@@ -30,34 +43,58 @@ const SmallMovieCard = ({movie, setActiveFilm, onMovieHover, isPlay}) => {
 };
 
 SmallMovieCard.propTypes = {
-  movie: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+  film: PropTypes.shape({
     poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired}).isRequired,
-  onMovieHover: PropTypes.func.isRequired,
-  isPlay: PropTypes.bool.isRequired,
-  setActiveFilm: PropTypes.func.isRequired
+    preview: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
+  }).isRequired,
+  setActiveFilm: PropTypes.func.isRequired,
+  handlerItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.shape({
+    poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    rating: PropTypes.string.isRequired,
+    ratingDescription: PropTypes.string.isRequired,
+    votes: PropTypes.number.isRequired,
+    duration: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      votes: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      reviewDate: PropTypes.string.isRequired
+    }))
+  })
 };
 
 const mapDispatchToProps = (dispatch) => ({
   setActiveFilm(film) {
-    dispatch({
-      type: ActionType.SET_ACTIVE_FILM,
-      payload: film
-    });
-    dispatch({
-      type: ActionType.SET_GENRES_FILTER,
-      payload: mapGenresToFilter.get(film.genre)
-    });
+    dispatch(ActionCreator.setActiveFilm(film));
+    dispatch(ActionCreator.setGenre(film.genre));
   }
 });
 
-// setFilter(film) {
-//   dispatch({
-//     type: ActionType.SET_GENRES_FILTER,
-//     payload: film.genre
-//   });
-// }
-
 export {SmallMovieCard};
-export default connect(null, mapDispatchToProps)(SmallMovieCard);
+export default connect(null, mapDispatchToProps)(withActiveItem(SmallMovieCard));

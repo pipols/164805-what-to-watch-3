@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
-import film from "../../mocks/film";
 import {connect} from "react-redux";
 
 class App extends React.PureComponent {
@@ -14,8 +13,7 @@ class App extends React.PureComponent {
     return (
       this.props.activeFilm === null
         ? <Main promoMovieData={this.props.promoMovieData} />
-        : <Film film={film} />
-    // : <Film film={this.props.activeFilm} />
+        : <Film film={this.props.activeFilm} />
     );
   }
 }
@@ -28,6 +26,7 @@ App.propTypes = {
   }).isRequired,
   activeFilm: PropTypes.shape({
     poster: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
