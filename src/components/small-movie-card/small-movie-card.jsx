@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import VideoPlayer from "../video-player/video-player.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import withActiveItem from "../../hocs/with-active-item.jsx";
@@ -31,7 +30,7 @@ const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, activeItem}) => 
     >
       <div className="small-movie-card__image">
         {isPlay
-          ? <VideoPlayer poster={poster} preview={preview}/>
+          ? <video src={preview} autoPlay poster={poster} muted width="280" height="175"/>
           : <img src={PREFIX + poster} alt="{title}" width="280" height="175"/>}
       </div>
 
