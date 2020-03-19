@@ -3,27 +3,30 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
 import {connect} from "react-redux";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+// import {BrowserRouter, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
 
 const App = ({activeFilm, isActivePlayer, promoMovieData}) => {
-  const renderApp = () => (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Main promoMovieData={promoMovieData} />
-        </Route>
-        <Route path="/film">
-          <Film film={activeFilm} />
-        </Route>
-      </Switch>
-    </BrowserRouter>);
+  // const renderApp = () => (
+  //   <BrowserRouter>
+  //     <Switch>
+  //       <Route exact path="/">
+  //         <Main promoMovieData={promoMovieData} />
+  //       </Route>
+  //       <Route path="/film">
+  //         <Film film={activeFilm} />
+  //       </Route>
+  //     </Switch>
+  //   </BrowserRouter>);
 
-  return (
-    isActivePlayer
-      ? <VideoPlayer />
-      : renderApp()
-  );
+  if (isActivePlayer) {
+    return <VideoPlayer />;
+  } else if (activeFilm) {
+    return <Film film={activeFilm} />;
+  } else {
+    return <Main promoMovieData={promoMovieData} />;
+  }
+
 };
 
 App.propTypes = {
