@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
-import withActiveItem from "../../hocs/with-active-item.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const PREFIX = `img/`;
 const DELAY = 1000;

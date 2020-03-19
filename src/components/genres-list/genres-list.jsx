@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer";
 import {getFilters, getGenreByFilter} from "../../utils/utils";
-import withActiveItem from "../../hocs/with-active-item.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
 const SELECTED_GENRE_CLASS = `catalog__genres-item--active`;
 const DEFAULT_FILTER = `All genres`;
