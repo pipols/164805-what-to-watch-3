@@ -54,6 +54,7 @@ it(`<Film /> renders correctly`, () => {
           film={film}
           films={[film, film]}
           currentGenre={`Drama`}
+          handlerPlayClick={() => {}}
         />
       </Provider>)
   .toJSON();
