@@ -11,6 +11,7 @@ import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
 import {getfilmsByGenre} from "../../utils/utils";
 import {CardCount} from "../../const/common";
+import {ActionCreator} from "../../reducer";
 
 const PREFIX = `img/`;
 // убрать state табов
@@ -57,7 +58,7 @@ class Film extends React.PureComponent {
                 <span className="movie-card__year">{year}</span>
               </p>
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button onClick={this.props.handlerPlayClick} className="btn btn--play movie-card__button" type="button">
                   <svg viewBox="0 0 19 19" width={19} height={19}>
                     <use xlinkHref="#play-s"/>
                   </svg>
@@ -153,7 +154,8 @@ Film.propTypes = {
       reviewDate: PropTypes.string.isRequired
     }))
   })),
-  currentGenre: PropTypes.string.isRequired
+  currentGenre: PropTypes.string.isRequired,
+  handlerPlayClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -161,5 +163,11 @@ const mapStateToProps = (state) => ({
   currentGenre: state.genre
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handlerPlayClick() {
+    dispatch(ActionCreator.setActivePlayer(true));
+  }
+});
+
 export {Film};
-export default connect(mapStateToProps)(Film);
+export default connect(mapStateToProps, mapDispatchToProps)(Film);

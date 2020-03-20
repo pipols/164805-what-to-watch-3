@@ -1,12 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<VideoPlayer /> renders correctly 1`] = `
-<video
-  autoPlay={true}
-  height="175"
-  muted={true}
-  poster="fantastic-beasts-the-crimes-of-grindelwald.jpg"
-  src="test.ru"
-  width="280"
-/>
+<div
+  className="player"
+>
+  <video
+    className="player__video"
+    onLoadedMetadata={[Function]}
+    onTimeUpdate={[Function]}
+    poster="img/player-poster.jpg"
+    src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+  />
+  <button
+    className="player__exit"
+    onClick={[Function]}
+    type="button"
+  >
+    Exit
+  </button>
+  <div
+    className="player__controls"
+  >
+    <div
+      className="player__controls-row"
+    >
+      <div
+        className="player__time"
+      >
+        <progress
+          className="player__progress"
+          max="100"
+          value={100}
+        />
+        <div
+          className="player__toggler"
+          style={
+            Object {
+              "left": "100%",
+            }
+          }
+        >
+          Toggler
+        </div>
+      </div>
+      <div
+        className="player__time-value"
+      >
+        100
+      </div>
+    </div>
+    <div
+      className="player__controls-row"
+    >
+      <button
+        className="player__play"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="21"
+          viewBox="0 0 14 21"
+          width="14"
+        >
+          <use
+            xlinkHref="#pause"
+          />
+        </svg>
+        <span>
+          Pause
+        </span>
+      </button>
+      <div
+        className="player__name"
+      >
+        The Grand Budapest Hotel
+      </div>
+      <button
+        className="player__full-screen"
+        onClick={[Function]}
+        type="button"
+      >
+        <svg
+          height="27"
+          viewBox="0 0 27 27"
+          width="27"
+        >
+          <use
+            xlinkHref="#full-screen"
+          />
+        </svg>
+        <span>
+          Full screen
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
 `;

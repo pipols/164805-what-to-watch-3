@@ -7,9 +7,10 @@ import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import ButtonShowMore from "../button-show-more/button-show-more.jsx";
 import {getfilmsByGenre} from "../../utils/utils";
+import {ActionCreator} from "../../reducer";
 
 // список genres циклом
-const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack}) => {
+const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack, handlerPlayClick}) => {
   const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
@@ -42,7 +43,7 @@ const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack}
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+              <button onClick={handlerPlayClick} className="btn btn--play movie-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -102,7 +103,8 @@ Main.propTypes = {
       userName: PropTypes.string.isRequired,
       reviewDate: PropTypes.string.isRequired
     }))
-  }))
+  })),
+  handlerPlayClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -112,5 +114,11 @@ const mapStateToProps = (state) => ({
   shownCardsStack: state.shownCardsStack
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handlerPlayClick() {
+    dispatch(ActionCreator.setActivePlayer(true));
+  }
+});
+
 export {Main};
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

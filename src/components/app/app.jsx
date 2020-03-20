@@ -3,20 +3,31 @@ import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
 import {connect} from "react-redux";
+// import {BrowserRouter, Route, Switch} from "react-router-dom";
+import VideoPlayer from "../video-player/video-player.jsx";
 
-class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const App = ({activeFilm, isActivePlayer, promoMovieData}) => {
+  // const renderApp = () => (
+  //   <BrowserRouter>
+  //     <Switch>
+  //       <Route exact path="/">
+  //         <Main promoMovieData={promoMovieData} />
+  //       </Route>
+  //       <Route path="/film">
+  //         <Film film={activeFilm} />
+  //       </Route>
+  //     </Switch>
+  //   </BrowserRouter>);
+
+  if (isActivePlayer) {
+    return <VideoPlayer />;
+  } else if (activeFilm) {
+    return <Film film={activeFilm} />;
+  } else {
+    return <Main promoMovieData={promoMovieData} />;
   }
 
-  render() {
-    return (
-      this.props.activeFilm === null
-        ? <Main promoMovieData={this.props.promoMovieData} />
-        : <Film film={this.props.activeFilm} />
-    );
-  }
-}
+};
 
 App.propTypes = {
   promoMovieData: PropTypes.shape({
@@ -48,7 +59,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeFilm: state.activeFilm
+  activeFilm: state.activeFilm,
+  isActivePlayer: state.isActivePlayer
 });
 
 export {App};

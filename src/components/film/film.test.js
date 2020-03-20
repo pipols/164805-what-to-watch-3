@@ -1,10 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
 import {Film} from "./film.jsx";
-
-const mockStore = configureStore([]);
 
 const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
@@ -44,18 +40,19 @@ const film = {
   ]
 };
 
+jest.mock(`../small-movie-card/small-movie-card.jsx`, () => `SmallMovieCard`);
+
 it(`<Film /> renders correctly`, () => {
-  const store = mockStore({});
 
   const tree = renderer
   .create(
-      <Provider store={store}>
-        <Film
-          film={film}
-          films={[film, film]}
-          currentGenre={`Drama`}
-        />
-      </Provider>)
+      <Film
+        film={film}
+        films={[film, film]}
+        currentGenre={`Drama`}
+        handlerPlayClick={() => {}}
+      />
+  )
   .toJSON();
 
   expect(tree).toMatchSnapshot();

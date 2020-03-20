@@ -52,7 +52,7 @@ describe(`<SmallMovieCard />`, () => {
           film={film}
           setActiveFilm={setActiveFilm}
           handlerItemClick={handlerItemClick}
-          activeItem={film}
+          isPlay={true}
         />
     )
     .toJSON();
@@ -67,7 +67,7 @@ describe(`<SmallMovieCard />`, () => {
           film={film}
           setActiveFilm={setActiveFilm}
           handlerItemClick={handlerItemClick}
-          activeItem={null}
+          isPlay={false}
         />
     )
     .toJSON();

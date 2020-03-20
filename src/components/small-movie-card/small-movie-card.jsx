@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import VideoPlayer from "../video-player/video-player.jsx";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
-import withActiveItem from "../../hocs/with-active-item.jsx";
 
 const PREFIX = `img/`;
 const DELAY = 1000;
@@ -18,9 +16,8 @@ const clearTimer = (cb) => {
   cb(null);
 };
 
-const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, activeItem}) => {
+const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, isPlay}) => {
   const {title, poster, preview} = film;
-  const isPlay = activeItem === film;
 
   return (
     <article
@@ -31,7 +28,7 @@ const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, activeItem}) => 
     >
       <div className="small-movie-card__image">
         {isPlay
-          ? <VideoPlayer poster={poster} preview={preview}/>
+          ? <video src={preview} autoPlay poster={poster} muted width="280" height="175"/>
           : <img src={PREFIX + poster} alt="{title}" width="280" height="175"/>}
       </div>
 
@@ -65,28 +62,8 @@ SmallMovieCard.propTypes = {
     }))
   }).isRequired,
   setActiveFilm: PropTypes.func.isRequired,
-  handlerItemClick: PropTypes.func.isRequired,
-  activeItem: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    producer: PropTypes.string.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
-  })
+  isPlay: PropTypes.bool.isRequired,
+  handlerItemClick: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -97,4 +74,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {SmallMovieCard};
-export default connect(null, mapDispatchToProps)(withActiveItem(SmallMovieCard));
+export default connect(null, mapDispatchToProps)(SmallMovieCard);

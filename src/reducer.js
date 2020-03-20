@@ -6,14 +6,16 @@ const initialState = {
   films: filmsData,
   genre: `All genres`,
   activeFilm: null,
-  shownCardsStack: CardCount.INITIAL
+  shownCardsStack: CardCount.INITIAL,
+  isActivePlayer: false
 };
 //
 const ActionType = {
   SET_GENRE: `SET_GENRE`,
   GET_FILMS: `GET_FILMS`,
   SET_ACTIVE_FILM: `SET_ACTIVE_FILM`,
-  ADD_CARDS_STACK: `ADD_CARDS_STACK`
+  ADD_CARDS_STACK: `ADD_CARDS_STACK`,
+  SET_ACTIVE_PLAYER: `SET_ACTIVE_PLAYER` //
 };
 
 const ActionCreator = {
@@ -31,6 +33,10 @@ const ActionCreator = {
   }),
   addCardsStack: () => ({
     type: ActionType.ADD_CARDS_STACK
+  }),
+  setActivePlayer: (bool) => ({
+    type: ActionType.SET_ACTIVE_PLAYER,
+    payload: bool
   })
 };
 //
@@ -47,6 +53,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.ADD_CARDS_STACK:
       return extend(state, {
         shownCardsStack: state.shownCardsStack + CardCount.ADD
+      });
+    case ActionType.SET_ACTIVE_PLAYER:
+      return extend(state, {
+        isActivePlayer: action.payload
       });
   }
 

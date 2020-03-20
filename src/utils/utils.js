@@ -36,4 +36,12 @@ export const getfilmsByGenre = (films, genre) => {
     : films.filter((film) => film.genre === genre);
 };
 
+export const getFormatedTime = (time) => {
+  const hours = Math.trunc(time / 3600);
+  const minutes = Math.trunc(time / 60 % 60);
+  const seconds = Math.trunc(time % 60);
+
+  return `${hours}:${minutes}:${seconds}`;
+};
+
 export const getGenreByFilter = (filter) => getKeyToMap(mapGenresToFilter, filter);
