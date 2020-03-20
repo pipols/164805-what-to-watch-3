@@ -55,7 +55,10 @@ it(`<MoviesList /> renders correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <MoviesList films={[film, film]} />
+          <MoviesList
+            films={[film, film]}
+            activeItem={film}
+            handlerItemClick={() => {}} />
         </Provider>)
     .toJSON();
 

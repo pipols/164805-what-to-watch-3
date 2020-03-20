@@ -42,7 +42,6 @@ const film = {
 
 const setActiveFilm = jest.fn();
 const handlerItemClick = jest.fn();
-// jest.useFakeTimers();
 
 describe(`<SmallMovieCard />`, () => {
 
@@ -51,7 +50,7 @@ describe(`<SmallMovieCard />`, () => {
         film={film}
         setActiveFilm={setActiveFilm}
         handlerItemClick={handlerItemClick}
-        activeItem={film}
+        isPlay={true}
       />
   );
 
@@ -76,14 +75,14 @@ describe(`<SmallMovieCard />`, () => {
   });
 
   it(`пропс isPlay=(true) отоброжает VideoPlayer вместо img`, () => {
-    wrapper.setProps({activeItem: film});
-    expect(wrapper.exists(`VideoPlayer`)).toBe(true);
+    wrapper.setProps({isPlay: true});
+    expect(wrapper.exists(`video`)).toBe(true);
     expect(wrapper.exists(`img`)).toBe(false);
   });
 
   it(`пропс isPlay=(false) отоброжает img вместо VideoPlayer`, () => {
-    wrapper.setProps({activeItem: null});
-    expect(wrapper.exists(`VideoPlayer`)).toBe(false);
+    wrapper.setProps({isPlay: false});
+    expect(wrapper.exists(`video`)).toBe(false);
     expect(wrapper.exists(`img`)).toBe(true);
   });
 });
