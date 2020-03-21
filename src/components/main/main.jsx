@@ -10,7 +10,7 @@ import {getfilmsByGenre} from "../../utils/utils";
 import {ActionCreator} from "../../reducer";
 
 // список genres циклом
-const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack, handlerPlayClick}) => {
+const Main = ({promoMovieData, isShowButton, films, currentGenre, shownCardsStack, onPlayClick}) => {
   const {title, genre, year} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
@@ -43,7 +43,7 @@ const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack,
             </p>
 
             <div className="movie-card__buttons">
-              <button onClick={handlerPlayClick} className="btn btn--play movie-card__button" type="button">
+              <button onClick={onPlayClick} className="btn btn--play movie-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -67,7 +67,7 @@ const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack,
 
         <GenresList/>
         <MoviesList films={getfilmsByGenre(films, currentGenre).slice(0, shownCardsStack)} />
-        {showButton && <ButtonShowMore/>}
+        {isShowButton && <ButtonShowMore/>}
       </section>
       <Footer />
     </div>
@@ -80,7 +80,7 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired
   }).isRequired,
-  showButton: PropTypes.bool.isRequired,
+  isShowButton: PropTypes.bool.isRequired,
   currentGenre: PropTypes.string.isRequired,
   shownCardsStack: PropTypes.number.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
@@ -104,18 +104,18 @@ Main.propTypes = {
       reviewDate: PropTypes.string.isRequired
     }))
   })),
-  handlerPlayClick: PropTypes.func.isRequired
+  onPlayClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  showButton: state.shownCardsStack < state.films.length,
+  isShowButton: state.shownCardsStack < state.films.length,
   films: state.films,
   currentGenre: state.genre,
   shownCardsStack: state.shownCardsStack
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handlerPlayClick() {
+  onPlayClick() {
     dispatch(ActionCreator.setActivePlayer(true));
   }
 });

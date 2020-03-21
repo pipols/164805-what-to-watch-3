@@ -24,7 +24,7 @@ const withActiveItem = (Component) => (
       return <Component
         {...this.props}
         activeItem={activeItem}
-        handlerItemClick={this._setActiveItem} />;
+        onItemClick={this._setActiveItem} />;
     }
   }
 );

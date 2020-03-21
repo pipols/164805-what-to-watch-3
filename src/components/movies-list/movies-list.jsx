@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-const MoviesList = ({films, handlerItemClick, activeItem}) => (
+const MoviesList = ({films, onItemClick, activeItem}) => (
   <div className="catalog__movies-list">
     {films.map((film, i) =>
       <SmallMovieCard
         film={film}
         key={film.title + i}
-        handlerItemClick={handlerItemClick}
+        onItemClick={onItemClick}
         isPlay={activeItem === film} />
     )}
   </div>
@@ -37,7 +37,7 @@ MoviesList.propTypes = {
       reviewDate: PropTypes.string.isRequired
     }))
   })),
-  handlerItemClick: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.shape({
     poster: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,

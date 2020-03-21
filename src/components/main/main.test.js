@@ -64,7 +64,7 @@ it(`<Main /> renders correctly`, () => {
         <Main
           promoMovieData={promoMovieData}
           shownCardsStack={8}
-          handlerPlayClick={() => {}}
+          onPlayClick={() => {}}
         />
       </Provider>).toJSON();
 
