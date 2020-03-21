@@ -61,4 +61,5 @@ MoviesList.propTypes = {
   }),
 };
 
+export {MoviesList};
 export default withActiveItem(MoviesList);
