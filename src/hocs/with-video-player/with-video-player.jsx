@@ -58,8 +58,8 @@ const withVideoPlayer = (Component) => (
         progress={progress}
         onTimeUpdate={this.onTimeUpdate}
         setDuration={this.setDuration}
-        handlerPlayClick={this.handlerPlayClick}
-        handlerFullscreenClick={this.handlerFullscreenClick}
+        onPlayClick={this.handlerPlayClick}
+        onFullscreenClick={this.handlerFullscreenClick}
         ref={this.video}
       />;
     }

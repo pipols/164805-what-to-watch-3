@@ -5,14 +5,14 @@ import {ActionCreator} from "../../reducer";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 
 const VideoPlayer = (props) => {
-  const {isPlay, onTimeUpdate, setDuration, handlerExitClick, progress, duration, handlerPlayClick, handlerFullscreenClick, forwardedRef} = props;
+  const {isPlay, onTimeUpdate, setDuration, onExitClick, progress, duration, onPlayClick, onFullscreenClick, forwardedRef} = props;
   const {title, preview} = props.film;
 
   return (
     <div className="player">
       <video ref={forwardedRef} onTimeUpdate={onTimeUpdate} onLoadedMetadata={setDuration} src={preview} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button onClick={handlerExitClick} type="button" className="player__exit">Exit</button>
+      <button onClick={onExitClick} type="button" className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -24,7 +24,7 @@ const VideoPlayer = (props) => {
         </div>
 
         <div className="player__controls-row">
-          <button onClick={handlerPlayClick} type="button" className="player__play">
+          <button onClick={onPlayClick} type="button" className="player__play">
             {isPlay || <><svg viewBox="0 0 19 19" width="19" height="19">
               <use xlinkHref="#play-s"></use>
             </svg>
@@ -36,7 +36,7 @@ const VideoPlayer = (props) => {
               <span>Pause</span></>}
           </button>
           <div className="player__name">{title}</div>
-          <button onClick={handlerFullscreenClick} type="button" className="player__full-screen">
+          <button onClick={onFullscreenClick} type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
             </svg>
@@ -52,9 +52,9 @@ VideoPlayer.propTypes = {
   isPlay: PropTypes.bool.isRequired,
   onTimeUpdate: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
-  handlerExitClick: PropTypes.func.isRequired,
-  handlerPlayClick: PropTypes.func.isRequired,
-  handlerFullscreenClick: PropTypes.func.isRequired,
+  onExitClick: PropTypes.func.isRequired,
+  onPlayClick: PropTypes.func.isRequired,
+  onFullscreenClick: PropTypes.func.isRequired,
   forwardedRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({current: PropTypes.any})
@@ -89,7 +89,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handlerExitClick() {
+  onExitClick() {
     dispatch(ActionCreator.setActivePlayer(false));
   }
 });
