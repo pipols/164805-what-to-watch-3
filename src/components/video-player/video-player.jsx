@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
+import {getActiveFilm} from "../../selectors";
 
 const VideoPlayer = (props) => {
   const {isPlay, onTimeUpdate, setDuration, onExitClick, progress, duration, onPlayClick, onFullscreenClick, forwardedRef} = props;
@@ -85,7 +86,7 @@ VideoPlayer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  film: state.activeFilm
+  film: getActiveFilm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,6 +12,7 @@ import {TabName} from "../../const/common";
 import {getfilmsByGenre} from "../../utils/utils";
 import {CardCount} from "../../const/common";
 import {ActionCreator} from "../../reducer";
+import {getFilms, getGenre} from "../../selectors";
 
 const PREFIX = `img/`;
 // убрать state табов
@@ -159,8 +160,8 @@ Film.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  films: state.films,
-  currentGenre: state.genre
+  films: getFilms(state),
+  currentGenre: getGenre(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

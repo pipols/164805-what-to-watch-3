@@ -2,8 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {ActionCreator} from "../../reducer";
-import {getFilters, getGenreByFilter} from "../../utils/utils";
+import {getGenreByFilter} from "../../utils/utils";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import {getFiltersSelector} from "../../selectors";
 
 const SELECTED_GENRE_CLASS = `catalog__genres-item--active`;
 const DEFAULT_FILTER = `All genres`;
@@ -39,7 +40,7 @@ GenresList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filters: getFilters(state.films)
+  filters: getFiltersSelector(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

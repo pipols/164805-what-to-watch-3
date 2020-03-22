@@ -8,6 +8,7 @@ import GenresList from "../genres-list/genres-list.jsx";
 import ButtonShowMore from "../button-show-more/button-show-more.jsx";
 import {getfilmsByGenre} from "../../utils/utils";
 import {ActionCreator} from "../../reducer";
+import {getIsShowButtonSelector, getFilms, getGenre, getShownCardsStack} from "../../selectors";
 
 // список genres циклом
 const Main = ({promoMovieData, isShowButton, films, currentGenre, shownCardsStack, onPlayClick}) => {
@@ -108,10 +109,10 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  isShowButton: state.shownCardsStack < state.films.length,
-  films: state.films,
-  currentGenre: state.genre,
-  shownCardsStack: state.shownCardsStack
+  isShowButton: getIsShowButtonSelector(state),
+  films: getFilms(state),
+  currentGenre: getGenre(state),
+  shownCardsStack: getShownCardsStack(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

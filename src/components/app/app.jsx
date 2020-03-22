@@ -5,6 +5,7 @@ import Film from "../film/film.jsx";
 import {connect} from "react-redux";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
+import {getActiveFilm, getIsActivePlayer} from "../../selectors";
 
 const App = ({activeFilm, isActivePlayer, promoMovieData}) => {
   // const renderApp = () => (
@@ -59,8 +60,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeFilm: state.activeFilm,
-  isActivePlayer: state.isActivePlayer
+  activeFilm: getActiveFilm(state),
+  isActivePlayer: getIsActivePlayer(state)
 });
 
 export {App};
