@@ -33,10 +33,6 @@ class Film extends React.PureComponent {
     this.props.onLoadComments(id);
   }
 
-  componentWillUnmount() {
-    this.props.onResetComments(); //
-  }
-
   componentDidUpdate(prevProps) {
     const newId = prevProps.film.id;
     const prevId = this.props.film.id;
@@ -102,7 +98,7 @@ class Film extends React.PureComponent {
               </nav>
 
               {this.state.activeTab === TabName.OVERVIEW && <Overview {...this.props.film} />}
-              {this.state.activeTab === TabName.DETAILS && <Details {...this.props.film} />}
+              {this.state.activeTab === TabName.DETAILS && <Details film={this.props.film} />}
               {this.state.activeTab === TabName.REVIEWS && <Reviews />}
 
             </div>
@@ -167,7 +163,6 @@ Film.propTypes = {
   currentGenre: PropTypes.string.isRequired,
   onPlayClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
-  onResetComments: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -182,9 +177,6 @@ const mapDispatchToProps = (dispatch) => ({
   onLoadComments(id) {
     dispatch(DataOperation.loadComments(id));
   },
-  onResetComments() {
-    dispatch(ActionCreator.resetComments());
-  }
 });
 
 export {Film};

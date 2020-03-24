@@ -11,7 +11,14 @@ const VideoPlayer = (props) => {
 
   return (
     <div className="player">
-      <video ref={forwardedRef} onTimeUpdate={onTimeUpdate} onLoadedMetadata={setDuration} src={videoLink} className="player__video" poster="img/player-poster.jpg"></video>
+      <video
+        ref={forwardedRef}
+        onTimeUpdate={onTimeUpdate}
+        onLoadedMetadata={setDuration}
+        src={videoLink}
+        className="player__video"
+        poster="img/player-poster.jpg">
+      </video>
 
       <button onClick={onExitClick} type="button" className="player__exit">Exit</button>
 

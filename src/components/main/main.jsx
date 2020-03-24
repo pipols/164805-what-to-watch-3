@@ -102,7 +102,8 @@ Main.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   })),
-  onPlayClick: PropTypes.func.isRequired
+  onPlayClick: PropTypes.func.isRequired,
+  setActiveFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -114,7 +115,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onPlayClick() {
     dispatch(ActionCreator.setActivePlayer(true));
-  }
+  },
+  // setActiveFilm(film) {
+  //   dispatch(ActionCreator.setActiveFilm(film));
+  // },
 });
 
 export {Main};

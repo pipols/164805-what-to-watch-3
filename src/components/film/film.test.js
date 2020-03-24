@@ -47,7 +47,6 @@ it(`<Film /> renders correctly`, () => {
         currentGenre={`Drama`}
         onPlayClick={() => {}}
         onLoadComments={() => {}}
-        onResetComments={() => {}}
       />
   )
   .toJSON();
