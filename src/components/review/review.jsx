@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import reformatDate from "../../utils/date";
 
 const Review = ({review}) => {
   const {comment, user, rating, date} = review;
@@ -9,7 +10,7 @@ const Review = ({review}) => {
         <p className="review__text">{comment}</p>
         <footer className="review__details">
           <cite className="review__author">{user.name}</cite>
-          <time className="review__date" dateTime={date}>{date}</time>
+          <time className="review__date" dateTime={date}>{reformatDate(date)}</time>
         </footer>
       </blockquote>
       <div className="review__rating">{rating}</div>
