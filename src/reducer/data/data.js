@@ -36,7 +36,6 @@ const DataOperation = {
   loadFilms: () => (dispatch, getState, api) => {
     return api.get(`/films`)
       .then(({data}) => {
-        console.log(data);
         const films = adapterFilms(data);
         dispatch(ActionCreator.loadFilms(films));
       });

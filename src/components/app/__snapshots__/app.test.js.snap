@@ -8,10 +8,7 @@ Array [
     <div
       className="movie-card__bg"
     >
-      <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
-      />
+      <img />
     </div>
     <h1
       className="visually-hidden"
@@ -70,9 +67,7 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
             width="218"
           />
         </div>
@@ -81,22 +76,16 @@ Array [
         >
           <h2
             className="movie-card__title"
-          >
-            The Grand Budapest Hotel
-          </h2>
+          />
           <p
             className="movie-card__meta"
           >
             <span
               className="movie-card__genre"
-            >
-              Drama
-            </span>
+            />
             <span
               className="movie-card__year"
-            >
-              2014
-            </span>
+            />
           </p>
           <div
             className="movie-card__buttons"
@@ -166,76 +155,10 @@ Array [
             All genres
           </a>
         </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
       </ul>
       <div
         className="catalog__movies-list"
-      >
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="{title}"
-              height="175"
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              The Grand Budapest Hotel
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-          >
-            <img
-              alt="{title}"
-              height="175"
-              src="img/bg-the-grand-budapest-hotel.jpg"
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              The Grand Budapest Hotel
-            </a>
-          </h3>
-        </article>
-      </div>
+      />
     </section>
     <footer
       className="page-footer"

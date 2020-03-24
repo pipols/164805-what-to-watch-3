@@ -50,11 +50,17 @@ const film = {
 
 it(`<Main /> renders correctly`, () => {
   const store = mockStore({
-    films: [film, film],
-    genre: `All genres`,
-    genresFilter: `All genres`,
-    activeFilm: null,
-    shownCardsStack: 8
+    [NameSpace.DATA]: {
+      films: [],
+      promoMovie: {},
+      comments: []
+    },
+    [NameSpace.STATE]: {
+      genre: `All genres`,
+      activeFilm: null,
+      shownCardsStack: 8,
+      isActivePlayer: false,
+    }
   });
 
   const tree = renderer.create(
