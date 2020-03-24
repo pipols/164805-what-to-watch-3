@@ -24,7 +24,7 @@ exports[`<Review /> renders correctly 1`] = `
         className="review__date"
         dateTime="2020-03-07T12:35:45.538Z"
       >
-        2020-03-07T12:35:45.538Z
+        March 7, 2020
       </time>
     </footer>
   </blockquote>
