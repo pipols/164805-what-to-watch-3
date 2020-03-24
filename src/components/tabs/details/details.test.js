@@ -36,13 +36,6 @@ const film = {
 };
 
 it(`<Details /> renders correctly`, () => {
-  const tree = renderer.create(<Details
-    producer={film.producer}
-    actors={film.actors}
-    duration={film.duration}
-    genre={film.genre}
-    year={film.year}
-  />).toJSON();
-
+  const tree = renderer.create(<Details film={film} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
