@@ -50,6 +50,7 @@ App.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
+  isActivePlayer: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
