@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/state/state";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
-import {getActiveFilm} from "../../selectors";
+import {getActiveFilm} from "../../reducer/state/selector";
 
 const VideoPlayer = (props) => {
   const {isPlay, onTimeUpdate, setDuration, onExitClick, progress, duration, onPlayClick, onFullscreenClick, forwardedRef} = props;
-  const {title, preview} = props.film;
+  const {title, videoLink} = props.film;
 
   return (
     <div className="player">
-      <video ref={forwardedRef} onTimeUpdate={onTimeUpdate} onLoadedMetadata={setDuration} src={preview} className="player__video" poster="img/player-poster.jpg"></video>
+      <video ref={forwardedRef} onTimeUpdate={onTimeUpdate} onLoadedMetadata={setDuration} src={videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
       <button onClick={onExitClick} type="button" className="player__exit">Exit</button>
 
@@ -63,26 +63,24 @@ VideoPlayer.propTypes = {
   progress: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
   film: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
-  }).isRequired
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = (state) => ({

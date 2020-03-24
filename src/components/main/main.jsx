@@ -6,17 +6,16 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import ButtonShowMore from "../button-show-more/button-show-more.jsx";
-import {getfilmsByGenre} from "../../utils/utils";
-import {ActionCreator} from "../../reducer";
-import {getIsShowButtonSelector, getFilms, getGenre, getShownCardsStack} from "../../selectors";
+import {ActionCreator} from "../../reducer/state/state";
+import {getIsShowButtonSelector, getShownFilmsSelector} from "../../reducer/state/selector";
+import {getPromoMovie} from "../../reducer/data/selector";
 
-// список genres циклом
-const Main = ({promoMovieData, isShowButton, films, currentGenre, shownCardsStack, onPlayClick}) => {
-  const {title, genre, year} = promoMovieData;
+const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
+  const {title, genre, year, backgroundImage, posterImage} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+        <img src={backgroundImage} alt={title} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -33,7 +32,7 @@ const Main = ({promoMovieData, isShowButton, films, currentGenre, shownCardsStac
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+            <img src={posterImage} alt={title} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
@@ -67,7 +66,7 @@ const Main = ({promoMovieData, isShowButton, films, currentGenre, shownCardsStac
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <GenresList/>
-        <MoviesList films={getfilmsByGenre(films, currentGenre).slice(0, shownCardsStack)} />
+        <MoviesList films={films} />
         {isShowButton && <ButtonShowMore/>}
       </section>
       <Footer />
@@ -79,40 +78,37 @@ Main.propTypes = {
   promoMovieData: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired
-  }).isRequired,
-  isShowButton: PropTypes.bool.isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  shownCardsStack: PropTypes.number.isRequired,
-  films: PropTypes.arrayOf(PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired
+  }),
+  isShowButton: PropTypes.bool.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   })),
   onPlayClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   isShowButton: getIsShowButtonSelector(state),
-  films: getFilms(state),
-  currentGenre: getGenre(state),
-  shownCardsStack: getShownCardsStack(state)
+  films: getShownFilmsSelector(state),
+  promoMovieData: getPromoMovie(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

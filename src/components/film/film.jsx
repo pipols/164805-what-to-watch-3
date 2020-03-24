@@ -11,10 +11,11 @@ import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
 import {getfilmsByGenre} from "../../utils/utils";
 import {CardCount} from "../../const/common";
-import {ActionCreator} from "../../reducer";
-import {getFilms, getGenre} from "../../selectors";
+import {ActionCreator} from "../../reducer/state/state";
+import {getFilms} from "../../reducer/data/selector";
+import {getGenre} from "../../reducer/state/selector";
+import {DataOperation} from "../../reducer/data/data";
 
-const PREFIX = `img/`;
 // убрать state табов
 class Film extends React.PureComponent {
   constructor(props) {
@@ -27,20 +28,32 @@ class Film extends React.PureComponent {
     this.setState({activeTab: tab});
   }
 
+  componentDidMount() {
+    const id = this.props.film.id;
+    this.props.onLoadComments(id);
+  }
+
+  componentWillUnmount() {
+    this.props.onResetComments(); //
+  }
+
+  componentDidUpdate(prevProps) {
+    const newId = prevProps.film.id;
+    const prevId = this.props.film.id;
+
+    if (prevId !== newId) {
+      this.props.onLoadComments(newId);
+    }
+  }
+
   render() {
-    const {
-      poster,
-      cover,
-      title,
-      genre,
-      year
-    } = this.props.film;
+    const {poster, cover, title, genre, year} = this.props.film;
 
     return (<React.Fragment>
       <section className="movie-card movie-card--full">
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src={PREFIX + poster} alt={title}/>
+            <img src={poster} alt={title}/>
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header movie-card__head">
@@ -81,7 +94,7 @@ class Film extends React.PureComponent {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src={PREFIX + cover} alt={title + `poster`} width={218} height={327}/>
+              <img src={cover} alt={title + `poster`} width={218} height={327}/>
             </div>
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
@@ -90,7 +103,7 @@ class Film extends React.PureComponent {
 
               {this.state.activeTab === TabName.OVERVIEW && <Overview {...this.props.film} />}
               {this.state.activeTab === TabName.DETAILS && <Details {...this.props.film} />}
-              {this.state.activeTab === TabName.REVIEWS && <Reviews {...this.props.film} />}
+              {this.state.activeTab === TabName.REVIEWS && <Reviews />}
 
             </div>
           </div>
@@ -114,49 +127,47 @@ class Film extends React.PureComponent {
 
 Film.propTypes = {
   film: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }),
   films: PropTypes.arrayOf(PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   })),
   currentGenre: PropTypes.string.isRequired,
-  onPlayClick: PropTypes.func.isRequired
+  onPlayClick: PropTypes.func.isRequired,
+  onLoadComments: PropTypes.func.isRequired,
+  onResetComments: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -167,6 +178,12 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onPlayClick() {
     dispatch(ActionCreator.setActivePlayer(true));
+  },
+  onLoadComments(id) {
+    dispatch(DataOperation.loadComments(id));
+  },
+  onResetComments() {
+    dispatch(ActionCreator.resetComments());
   }
 });
 

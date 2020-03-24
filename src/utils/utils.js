@@ -1,4 +1,7 @@
 import {mapGenresToFilter} from "../const/genres";
+import _ from 'lodash';
+
+export const objectKeysToCamelCase = (obj) => _.mapKeys(obj, (v, k) => _.camelCase(k));
 
 const DEFAULT_FILTER = `All genres`;
 const DEFAULT_GENRE = `All genres`;

@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/state/state";
 
-const PREFIX = `img/`;
 const DELAY = 1000;
 let timerId;
 
@@ -16,20 +15,20 @@ const clearTimer = (cb) => {
   cb(null);
 };
 
-const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, isPlay}) => {
+const SmallMovieCard = ({film, setActiveFilm, onItemClick, isPlay}) => {
   const {title, poster, preview} = film;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => setTimer(film, handlerItemClick)}
-      onMouseLeave={() => clearTimer(handlerItemClick)}
+      onMouseEnter={() => setTimer(film, onItemClick)}
+      onMouseLeave={() => clearTimer(onItemClick)}
       onClick={() => setActiveFilm(film)}
     >
       <div className="small-movie-card__image">
         {isPlay
-          ? <video src={preview} autoPlay poster={poster} muted width="280" height="175"/>
-          : <img src={PREFIX + poster} alt="{title}" width="280" height="175"/>}
+          ? <video src={preview} autoPlay muted width="280" height="175"/>
+          : <img src={poster} alt={title} width="280" height="175"/>}
       </div>
 
       <h3 className="small-movie-card__title" >
@@ -41,29 +40,27 @@ const SmallMovieCard = ({film, setActiveFilm, handlerItemClick, isPlay}) => {
 
 SmallMovieCard.propTypes = {
   film: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
-  }).isRequired,
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }),
   setActiveFilm: PropTypes.func.isRequired,
   isPlay: PropTypes.bool.isRequired,
-  handlerItemClick: PropTypes.func.isRequired
+  onItemClick: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({

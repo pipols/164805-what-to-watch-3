@@ -83,7 +83,7 @@ const Details = ({producer, actors, duration, genre, year}) => {
 Details.propTypes = {
   producer: PropTypes.string.isRequired,
   actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  duration: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
   genre: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired
 };

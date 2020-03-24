@@ -14,13 +14,14 @@ const writeActors = (actors) => {
     ? `${actors.slice(0, MAX_ACTORS)} and other`
     : `${actors}`;
 };
-
-const Overview = ({rating, ratingDescription, votes, description, producer, actors}) => (
+//  доделать
+// https://up.htmlacademy.ru/react/3/project/what-to-watch#rating
+const Overview = ({rating, votes, description, producer, actors}) => (
   <React.Fragment>
     <div className="movie-rating">
       <div className="movie-rating__score">{rating}</div>
       <p className="movie-rating__meta">
-        <span className="movie-rating__level">{ratingDescription}</span>
+        <span className="movie-rating__level">{}</span>
         <span className="movie-rating__count">{votes} ratings</span>
       </p>
     </div>
@@ -34,8 +35,7 @@ const Overview = ({rating, ratingDescription, votes, description, producer, acto
 );
 
 Overview.propTypes = {
-  rating: PropTypes.string.isRequired,
-  ratingDescription: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
   votes: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   producer: PropTypes.string.isRequired,

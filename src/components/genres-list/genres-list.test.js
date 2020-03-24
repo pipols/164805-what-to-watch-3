@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import {GenresList} from "./genres-list.jsx";
 
 const onFilterClick = () => {};
-const handlerItemClick = () => {};
+const onItemClick = () => {};
 const filters = [`Comedies`, `Crime`];
 
 it(`<GenresList/> renders`, () => {
@@ -11,7 +11,7 @@ it(`<GenresList/> renders`, () => {
     .create(<GenresList
       filters={filters}
       onFilterClick={onFilterClick}
-      handlerItemClick={handlerItemClick}
+      onItemClick={onItemClick}
       activeItem={filters[0]}
     />)
     .toJSON();
