@@ -1,10 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {Provider} from "react-redux";
-import configureStore from "redux-mock-store";
-import MoviesList from "./movies-list.jsx";
-
-const mockStore = configureStore([]);
+import {MoviesList} from "./movies-list.jsx";
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -39,22 +35,15 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
-it(`<MoviesList /> renders correctly`, () => {
-  const store = mockStore({
-    films: [film, film],
-    genre: `All genres`,
-    genresFilter: `All genres`,
-    activeFilm: null
-  });
+jest.mock(`../small-movie-card/small-movie-card.jsx`, () => `SmallMovieCard`);
 
+it(`<MoviesList /> renders correctly`, () => {
   const tree = renderer
     .create(
-        <Provider store={store}>
-          <MoviesList
-            films={[film, film]}
-            activeItem={film}
-            handlerItemClick={() => {}} />
-        </Provider>)
+        <MoviesList
+          films={[film, film]}
+          activeItem={film}
+          onItemClick={() => {}} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
