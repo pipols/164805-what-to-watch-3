@@ -22,13 +22,9 @@ class Film extends React.PureComponent {
     super(props);
   }
 
-  _onTabClick(tab) {
-    this.setState({activeTab: tab});
-  }
-
   componentDidMount() {
     const id = this.props.film.id;
-    this.props.onLoadComments(id);
+    this.props.onCommentsMount(id);
   }
 
   componentDidUpdate(prevProps) {
@@ -36,7 +32,7 @@ class Film extends React.PureComponent {
     const prevId = this.props.film.id;
 
     if (prevId !== newId) {
-      this.props.onLoadComments(newId);
+      this.props.onCommentsMount(newId);
     }
   }
 
@@ -161,7 +157,7 @@ Film.propTypes = {
   })),
   currentGenre: PropTypes.string.isRequired,
   onPlayClick: PropTypes.func.isRequired,
-  onLoadComments: PropTypes.func.isRequired,
+  onCommentsMount: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
 };
@@ -175,7 +171,7 @@ const mapDispatchToProps = (dispatch) => ({
   onPlayClick() {
     dispatch(ActionCreator.setActivePlayer(true));
   },
-  onLoadComments(id) {
+  onCommentsMount(id) {
     dispatch(DataOperation.loadComments(id));
   },
 });

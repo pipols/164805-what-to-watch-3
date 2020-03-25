@@ -46,7 +46,7 @@ it(`<Film /> renders correctly`, () => {
         films={[film, film]}
         currentGenre={`Drama`}
         onPlayClick={() => {}}
-        onLoadComments={() => {}}
+        onCommentsMount={() => {}}
         onItemClick={() => {}}
         activeItem={`str`}
       />
