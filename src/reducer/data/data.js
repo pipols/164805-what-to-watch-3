@@ -4,14 +4,16 @@ import {adapterFilms, adapterPromo} from "../../utils/adapter";
 const initialState = {
   films: [],
   promoMovie: {},
-  comments: []
+  comments: [],
+  isPagePreloader: true
 };
 
 const ActionType = {
   LOAD_PROMO_MOVIE: `LOAD_PROMO_MOVIE`,
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
-  RESET_COMMENTS: `RESET_COMMENTS`
+  RESET_COMMENTS: `RESET_COMMENTS`,
+  PAGE_PRELOADER: `PAGE_PRELOADER`
 };
 
 const ActionCreator = {
@@ -29,7 +31,11 @@ const ActionCreator = {
   }),
   resetComments: () => ({
     type: ActionType.RESET_COMMENTS
-  })
+  }),
+  pagePreloader: (bool) => ({
+    type: ActionType.PAGE_PRELOADER,
+    payload: bool
+  }),
 };
 
 const DataOperation = {
@@ -45,6 +51,7 @@ const DataOperation = {
       .then(({data}) => {
         const film = adapterPromo(data);
         dispatch(ActionCreator.loadPromoMovie(film));
+        dispatch(ActionCreator.pagePreloader(false));
       });
   },
   loadComments: (id) => (dispatch, getState, api) => {
@@ -72,6 +79,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.RESET_COMMENTS:
       return extend(state, {
         comments: []
+      });
+    case ActionType.PAGE_PRELOADER:
+      return extend(state, {
+        isPagePreloader: action.payload
       });
   }
 

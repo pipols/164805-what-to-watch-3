@@ -6,8 +6,9 @@ import {connect} from "react-redux";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {getActiveFilm, getIsActivePlayer} from "../../reducer/state/selector";
+import {getPreloaderStatus} from "../../reducer/data/selector";
 
-const App = ({activeFilm, isActivePlayer}) => {
+const App = ({activeFilm, isActivePlayer, isPagePreloader}) => {
   // const renderApp = () => (
   //   <BrowserRouter>
   //     <Switch>
@@ -20,7 +21,9 @@ const App = ({activeFilm, isActivePlayer}) => {
   //     </Switch>
   //   </BrowserRouter>);
 
-  if (isActivePlayer) {
+  if (isPagePreloader) {
+    return <p style={{fontSize: `40px`}}>Loading...</p>;
+  } else if (isActivePlayer) {
     return <VideoPlayer />;
   } else if (activeFilm) {
     return <Film film={activeFilm} />;
@@ -50,12 +53,14 @@ App.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
-  isActivePlayer: PropTypes.bool.isRequired
+  isActivePlayer: PropTypes.bool.isRequired,
+  isPagePreloader: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   activeFilm: getActiveFilm(state),
-  isActivePlayer: getIsActivePlayer(state)
+  isActivePlayer: getIsActivePlayer(state),
+  isPagePreloader: getPreloaderStatus(state),
 });
 
 export {App};

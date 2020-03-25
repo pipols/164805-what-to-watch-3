@@ -14,7 +14,7 @@ const ActionType = {
   SET_ACTIVE_FILM: `SET_ACTIVE_FILM`,
   ADD_CARDS_STACK: `ADD_CARDS_STACK`,
   SET_ACTIVE_PLAYER: `SET_ACTIVE_PLAYER`,
-  RESET_STACK: `RESET_STACK`
+  RESET_STACK: `RESET_STACK`,
 };
 
 const ActionCreator = {
@@ -39,7 +39,7 @@ const ActionCreator = {
   }),
   resetStack: () => ({
     type: ActionType.RESET_STACK
-  })
+  }),
 };
 
 //
