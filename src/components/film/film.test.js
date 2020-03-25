@@ -47,6 +47,8 @@ it(`<Film /> renders correctly`, () => {
         currentGenre={`Drama`}
         onPlayClick={() => {}}
         onLoadComments={() => {}}
+        onItemClick={() => {}}
+        activeItem={`str`}
       />
   )
   .toJSON();

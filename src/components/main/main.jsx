@@ -103,7 +103,7 @@ Main.propTypes = {
     preview: PropTypes.string.isRequired,
   })),
   onPlayClick: PropTypes.func.isRequired,
-  setActiveFilm: PropTypes.func.isRequired
+  // setActiveFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

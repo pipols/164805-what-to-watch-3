@@ -15,13 +15,11 @@ import {ActionCreator} from "../../reducer/state/state";
 import {getFilms} from "../../reducer/data/selector";
 import {getGenre} from "../../reducer/state/selector";
 import {DataOperation} from "../../reducer/data/data";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 
-// убрать state табов
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = {activeTab: TabName.OVERVIEW};
-    this._onTabClick = this._onTabClick.bind(this);
   }
 
   _onTabClick(tab) {
@@ -44,6 +42,7 @@ class Film extends React.PureComponent {
 
   render() {
     const {poster, cover, title, genre, year} = this.props.film;
+    const activeItem = this.props.activeItem || TabName.OVERVIEW;
 
     return (<React.Fragment>
       <section className="movie-card movie-card--full">
@@ -94,12 +93,12 @@ class Film extends React.PureComponent {
             </div>
             <div className="movie-card__desc">
               <nav className="movie-nav movie-card__nav">
-                <Tabs onTabClick={this._onTabClick} activeTab={this.state.activeTab} />
+                <Tabs onItemClick={this.props.onItemClick} activeItem={activeItem} />
               </nav>
 
-              {this.state.activeTab === TabName.OVERVIEW && <Overview {...this.props.film} />}
-              {this.state.activeTab === TabName.DETAILS && <Details film={this.props.film} />}
-              {this.state.activeTab === TabName.REVIEWS && <Reviews />}
+              {activeItem === TabName.OVERVIEW && <Overview {...this.props.film} />}
+              {activeItem === TabName.DETAILS && <Details film={this.props.film} />}
+              {activeItem === TabName.REVIEWS && <Reviews />}
 
             </div>
           </div>
@@ -163,6 +162,8 @@ Film.propTypes = {
   currentGenre: PropTypes.string.isRequired,
   onPlayClick: PropTypes.func.isRequired,
   onLoadComments: PropTypes.func.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  activeItem: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -180,4 +181,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {Film};
-export default connect(mapStateToProps, mapDispatchToProps)(Film);
+export default connect(mapStateToProps, mapDispatchToProps)(withActiveItem(Film));
