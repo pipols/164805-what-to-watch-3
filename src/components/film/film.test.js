@@ -36,6 +36,7 @@ const film = {
 };
 
 jest.mock(`../small-movie-card/small-movie-card.jsx`, () => `SmallMovieCard`);
+jest.mock(`../header/header.jsx`, () => `Header`);
 
 it(`<Film /> renders correctly`, () => {
 

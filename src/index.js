@@ -8,8 +8,26 @@ import {DataOperation} from "./reducer/data/data";
 import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import createAPI from "./api";
+import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
+import {Error} from "./const/common";
+import Swal from "sweetalert2";
 
-const api = createAPI();
+const onResponse = (response) => {
+  switch (response.status) {
+    case Error.UNAUTHORIZED:
+      return store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+    // case Error.NOT_FOUND:
+    //   return
+  }
+
+  return Swal.fire({
+    icon: `error`,
+    title: `Oops... ${response.status}`,
+    text: response.data.error
+  });
+};
+
+const api = createAPI(onResponse);
 
 const store = createStore(
     reducer,

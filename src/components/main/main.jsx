@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Logo from "../logo/logo.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
@@ -9,6 +8,7 @@ import ButtonShowMore from "../button-show-more/button-show-more.jsx";
 import {ActionCreator} from "../../reducer/state/state";
 import {getIsShowButtonSelector, getShownFilmsSelector} from "../../reducer/state/selector";
 import {getPromoMovie} from "../../reducer/data/selector";
+import Header from "../header/header.jsx";
 
 const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
   const {title, genre, year, backgroundImage, posterImage} = promoMovieData;
@@ -20,14 +20,7 @@ const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <header className="page-header movie-card__head">
-        <Logo />
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -66,6 +59,7 @@ const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <GenresList/>
+
         <MoviesList films={films} />
         {isShowButton && <ButtonShowMore/>}
       </section>

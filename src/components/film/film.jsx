@@ -5,7 +5,6 @@ import Details from "../tabs/details/details.jsx";
 import Reviews from "../tabs/reviews/reviews.jsx";
 import Overview from "../tabs/overview/overview.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
-import Logo from "../logo/logo.jsx";
 import Footer from "../footer/footer.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
@@ -16,6 +15,7 @@ import {getFilms} from "../../reducer/data/selector";
 import {getGenre} from "../../reducer/state/selector";
 import {DataOperation} from "../../reducer/data/data";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
+import Header from "../header/header.jsx";
 
 class Film extends React.PureComponent {
   constructor(props) {
@@ -47,14 +47,9 @@ class Film extends React.PureComponent {
             <img src={poster} alt={title}/>
           </div>
           <h1 className="visually-hidden">WTW</h1>
-          <header className="page-header movie-card__head">
-            <Logo />
-            <div className="user-block">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width={63} height={63}/>
-              </div>
-            </div>
-          </header>
+
+          <Header />
+
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
               <h2 className="movie-card__title">{title}</h2>

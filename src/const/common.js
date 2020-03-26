@@ -9,3 +9,8 @@ export const CardCount = {
   INITIAL: 8,
   SIMILAR: 4
 };
+
+export const Error = {
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404
+};

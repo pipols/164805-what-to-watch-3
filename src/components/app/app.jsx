@@ -5,10 +5,10 @@ import Film from "../film/film.jsx";
 import {connect} from "react-redux";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
-import {getActiveFilm, getIsActivePlayer} from "../../reducer/state/selector";
-import {getPreloaderStatus} from "../../reducer/data/selector";
+import {getActiveFilm, getIsActivePlayer, getPreloaderStatus} from "../../reducer/state/selector";
 
 const App = ({activeFilm, isActivePlayer, isPagePreloader}) => {
+
   // const renderApp = () => (
   //   <BrowserRouter>
   //     <Switch>
@@ -20,7 +20,7 @@ const App = ({activeFilm, isActivePlayer, isPagePreloader}) => {
   //       </Route>
   //     </Switch>
   //   </BrowserRouter>);
-
+  //
   if (isPagePreloader) {
     return <p style={{fontSize: `40px`}}>Loading...</p>;
   } else if (isActivePlayer) {

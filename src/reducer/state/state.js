@@ -6,6 +6,7 @@ const initialState = {
   activeFilm: null,
   shownCardsStack: CardCount.INITIAL,
   isActivePlayer: false,
+  isPagePreloader: true,
 };
 
 const ActionType = {
@@ -15,6 +16,7 @@ const ActionType = {
   ADD_CARDS_STACK: `ADD_CARDS_STACK`,
   SET_ACTIVE_PLAYER: `SET_ACTIVE_PLAYER`,
   RESET_STACK: `RESET_STACK`,
+  PAGE_PRELOADER: `PAGE_PRELOADER`,
 };
 
 const ActionCreator = {
@@ -40,6 +42,10 @@ const ActionCreator = {
   resetStack: () => ({
     type: ActionType.RESET_STACK
   }),
+  pagePreloader: (bool) => ({
+    type: ActionType.PAGE_PRELOADER,
+    payload: bool
+  }),
 };
 
 //
@@ -64,6 +70,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.RESET_STACK:
       return extend(state, {
         shownCardsStack: CardCount.INITIAL
+      });
+    case ActionType.PAGE_PRELOADER:
+      return extend(state, {
+        isPagePreloader: action.payload
       });
   }
 
