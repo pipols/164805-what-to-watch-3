@@ -12,7 +12,7 @@ import {getfilmsByGenre} from "../../utils/utils";
 import {CardCount} from "../../const/common";
 import {ActionCreator} from "../../reducer/state/state";
 import {getFilms} from "../../reducer/data/selector";
-import {getGenre} from "../../reducer/state/selector";
+import {getGenre, getFilm} from "../../reducer/state/selector";
 import {DataOperation} from "../../reducer/data/data";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import Header from "../header/header.jsx";
@@ -20,23 +20,34 @@ import Header from "../header/header.jsx";
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
+    // this.id = this.props.match.params.id;
   }
 
   componentDidMount() {
-    const id = this.props.film.id;
-    this.props.onCommentsMount(id);
+    console.log(`componentDidMount`);
+    console.log(this.props.match.params.id);
+    // this.props.onFilmIdSet(parseInt(this.id));
+    // this.props.onCommentsMount(this.id);
   }
 
-  componentDidUpdate(prevProps) {
-    const newId = prevProps.film.id;
-    const prevId = this.props.film.id;
-
-    if (prevId !== newId) {
-      this.props.onCommentsMount(newId);
-    }
+  componentDidUpdate() {
+    console.log(`componentDidUpdate`);
+    // this.props.onFilmIdSet(this.id);
+    // this.props.onCommentsMount(this.id);
+    // const newId = prevProps.match.params.id;
+    // const prevId = this.props.match.params.id;
+    //
+    // if (prevId !== newId) {
+    //   this.props.onFilmIdSet(newId);
+    //   this.props.onCommentsMount(newId);
+    // }
   }
 
   render() {
+    console.log(`render film`);
+    console.log(this.props);
+    console.log(this.props.match.params.id);
+
     const {poster, cover, title, genre, year} = this.props.film;
     const activeItem = this.props.activeItem || TabName.OVERVIEW;
 
@@ -150,16 +161,21 @@ Film.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   })),
+  id: PropTypes.number,
   currentGenre: PropTypes.string.isRequired,
+
   onPlayClick: PropTypes.func.isRequired,
   onCommentsMount: PropTypes.func.isRequired,
+  onFilmIdSet: PropTypes.func.isRequired,
+
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   films: getFilms(state),
-  currentGenre: getGenre(state)
+  currentGenre: getGenre(state),
+  film: getFilm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -169,6 +185,10 @@ const mapDispatchToProps = (dispatch) => ({
   onCommentsMount(id) {
     dispatch(DataOperation.loadComments(id));
   },
+  onFilmIdSet(id) {
+    console.log(`onFilmIdSet`, id);
+    dispatch(ActionCreator.setId(id));
+  }
 });
 
 export {Film};

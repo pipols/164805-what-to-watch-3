@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state";
+import history from "../../history";
 
 const DELAY = 1000;
 let timerId;
@@ -67,6 +68,7 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveFilm(film) {
     dispatch(ActionCreator.setActiveFilm(film));
     dispatch(ActionCreator.setGenre(film.genre));
+    history.push(`/film/${film.id}`);
   }
 });
 
