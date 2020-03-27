@@ -8,5 +8,8 @@ export const mapGenresToFilter = new Map([
   [`Kids & Family`, `Kids & Family`],
   [`Romance`, `Romance`],
   [`Sci-Fi`, `Sci-Fi`],
-  [`Thriller`, `Thrillers`]
+  [`Thriller`, `Thrillers`],
+  [`Adventure`, `Adventures`],
+  [`Action`, `Actions`],
+  [`Fantasy`, `Fantasy`]
 ]);

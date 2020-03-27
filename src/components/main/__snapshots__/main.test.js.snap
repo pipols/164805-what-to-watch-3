@@ -10,7 +10,7 @@ Array [
     >
       <img
         alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        src="bg-the-grand-budapest-hotel.jpg"
       />
     </div>
     <h1
@@ -18,48 +18,7 @@ Array [
     >
       WTW
     </h1>
-    <header
-      className="page-header movie-card__head"
-    >
-      <div
-        className="logo"
-      >
-        <a
-          className="logo__link "
-          href="main.html"
-        >
-          <span
-            className="logo__letter logo__letter--1"
-          >
-            W
-          </span>
-          <span
-            className="logo__letter logo__letter--2"
-          >
-            T
-          </span>
-          <span
-            className="logo__letter logo__letter--3"
-          >
-            W
-          </span>
-        </a>
-      </div>
-      <div
-        className="user-block"
-      >
-        <div
-          className="user-block__avatar"
-        >
-          <img
-            alt="User avatar"
-            height="63"
-            src="img/avatar.jpg"
-            width="63"
-          />
-        </div>
-      </div>
-    </header>
+    <Header />
     <div
       className="movie-card__wrap"
     >
@@ -70,9 +29,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="The Grand Budapest Hotel"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="bg-the-grand-budapest-hotel.jpg"
             width="218"
           />
         </div>
@@ -166,17 +125,6 @@ Array [
             All genres
           </a>
         </li>
-        <li
-          className="catalog__genres-item "
-        >
-          <a
-            className="catalog__genres-link"
-            href="#"
-            onClick={[Function]}
-          >
-            Dramas
-          </a>
-        </li>
       </ul>
       <div
         className="catalog__movies-list"
@@ -191,9 +139,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{title}"
+              alt="The Grand Budapest Hotel"
               height="175"
-              src="img/bg-the-grand-budapest-hotel.jpg"
+              src="bg-the-grand-budapest-hotel.jpg"
               width="280"
             />
           </div>
@@ -218,9 +166,9 @@ Array [
             className="small-movie-card__image"
           >
             <img
-              alt="{title}"
+              alt="The Grand Budapest Hotel"
               height="175"
-              src="img/bg-the-grand-budapest-hotel.jpg"
+              src="bg-the-grand-budapest-hotel.jpg"
               width="280"
             />
           </div>
@@ -235,6 +183,17 @@ Array [
             </a>
           </h3>
         </article>
+      </div>
+      <div
+        className="catalog__more"
+      >
+        <button
+          className="catalog__button"
+          onClick={[Function]}
+          type="button"
+        >
+          Show more
+        </button>
       </div>
     </section>
     <footer

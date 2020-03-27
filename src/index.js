@@ -1,23 +1,49 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer";
+import reducer from "./reducer/reducer";
+import {DataOperation} from "./reducer/data/data";
+import thunk from "redux-thunk";
+import {composeWithDevTools} from "redux-devtools-extension";
+import createAPI from "./api";
+import {ActionCreator, AuthorizationStatus} from "./reducer/user/user";
+import {Error} from "./const/common";
+import Swal from "sweetalert2";
 
-export const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f);
+const onResponse = (response) => {
+  switch (response.status) {
+    case Error.UNAUTHORIZED:
+      return store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+    // case Error.NOT_FOUND:
+    //   return
+  }
+
+  return Swal.fire({
+    icon: `error`,
+    title: `Oops... ${response.status}`,
+    text: response.data.error
+  });
+};
+
+const api = createAPI(onResponse);
+
+const store = createStore(
+    reducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
+);
+
+store.dispatch(DataOperation.loadPromoMovie());
+store.dispatch(DataOperation.loadFilms());
 
 const container = document.querySelector(`#root`);
 
-const promoMovieData = {
-  title: `The Grand Budapest Hotel`,
-  genre: `Drama`,
-  year: 2014
-};
-
 ReactDOM.render(
     <Provider store={store}>
-      <App promoMovieData={promoMovieData}/>,
+      <App />
     </Provider>,
     container
 );

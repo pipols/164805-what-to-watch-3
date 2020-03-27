@@ -3,10 +3,14 @@ import renderer from "react-test-renderer";
 import Review from "./review.jsx";
 
 const review = {
-  text: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
-  votes: `8,9`,
-  userName: `Kate Muir`,
-  reviewDate: `December 24, 2016`
+  id: 1,
+  comment: `Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.`,
+  rating: 8.2,
+  user: {
+    id: 1,
+    name: `user name`
+  },
+  date: `2020-03-07T12:35:45.538Z`
 };
 
 it(`<Review /> renders correctly`, () => {

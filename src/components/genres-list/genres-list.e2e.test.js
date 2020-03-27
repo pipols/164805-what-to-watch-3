@@ -4,7 +4,7 @@ import {GenresList} from "./genres-list.jsx";
 
 const DEFAULT_FILTER = `All genres`;
 const onFilterClick = jest.fn();
-const handlerItemClick = jest.fn();
+const onItemClick = jest.fn();
 const filters = [DEFAULT_FILTER, `Comedies`, `Crime`];
 
 
@@ -13,7 +13,7 @@ describe(`<GenresList/>`, () => {
       <GenresList
         filters={filters}
         onFilterClick={onFilterClick}
-        handlerItemClick={handlerItemClick}
+        onItemClick={onItemClick}
         activeItem={filters[0]}
       />
   );
@@ -34,7 +34,7 @@ describe(`<GenresList/>`, () => {
   });
 
   it(`при клике на фильтр, handlerItemClick возврощает название фильтра`, () => {
-    expect(handlerItemClick.mock.calls[0][0]).toBe(filters[0]);
-    expect(handlerItemClick.mock.calls[1][0]).toBe(filters[1]);
+    expect(onItemClick.mock.calls[0][0]).toBe(filters[0]);
+    expect(onItemClick.mock.calls[1][0]).toBe(filters[1]);
   });
 });

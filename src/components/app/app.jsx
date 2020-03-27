@@ -5,8 +5,10 @@ import Film from "../film/film.jsx";
 import {connect} from "react-redux";
 // import {BrowserRouter, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
+import {getActiveFilm, getIsActivePlayer, getPreloaderStatus} from "../../reducer/state/selector";
 
-const App = ({activeFilm, isActivePlayer, promoMovieData}) => {
+const App = ({activeFilm, isActivePlayer, isPagePreloader}) => {
+
   // const renderApp = () => (
   //   <BrowserRouter>
   //     <Switch>
@@ -18,49 +20,47 @@ const App = ({activeFilm, isActivePlayer, promoMovieData}) => {
   //       </Route>
   //     </Switch>
   //   </BrowserRouter>);
-
-  if (isActivePlayer) {
+  //
+  if (isPagePreloader) {
+    return <p style={{fontSize: `40px`}}>Loading...</p>;
+  } else if (isActivePlayer) {
     return <VideoPlayer />;
   } else if (activeFilm) {
     return <Film film={activeFilm} />;
   } else {
-    return <Main promoMovieData={promoMovieData} />;
+    return <Main />;
   }
 
 };
 
 App.propTypes = {
-  promoMovieData: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired
-  }).isRequired,
   activeFilm: PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
-  })
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }),
+  isActivePlayer: PropTypes.bool.isRequired,
+  isPagePreloader: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeFilm: state.activeFilm,
-  isActivePlayer: state.isActivePlayer
+  activeFilm: getActiveFilm(state),
+  isActivePlayer: getIsActivePlayer(state),
+  isPagePreloader: getPreloaderStatus(state),
 });
 
 export {App};

@@ -26,13 +26,12 @@ const structure = (data) => [[
   }
 ]];
 
-const writeActors = (actors) => actors.map((name) => <> key={name} {name} <br/> </>);
+const writeActors = (actors) => actors.map((name) => <React.Fragment key={name}> {name} <br/> </ React.Fragment>);
 
-const Details = ({producer, actors, duration, genre, year}) => {
-  const data = {producer, actors, duration, genre, year};
+const Details = ({film}) => {
   return (
     <div className="movie-card__text movie-card__row">
-      {structure(data).map((col, i) => (
+      {structure(film).map((col, i) => (
         <div key={`col` + i} className="movie-card__text-col">
           {col.map((item) => (
             <p key={item.name} className="movie-card__details-item">
@@ -47,45 +46,27 @@ const Details = ({producer, actors, duration, genre, year}) => {
     </div>
   );
 };
-// //////////////////////////////////////////////////
-// const Details = ({producer, actors, duration, genre, year}) => (
-//   <div className="movie-card__text movie-card__row">
-//     <div className="movie-card__text-col">
-//       <p className="movie-card__details-item">
-//         <strong className="movie-card__details-name">Director</strong>
-//         <span className="movie-card__details-value">{producer}</span>
-//       </p>
-//       <p className="movie-card__details-item">
-//         <strong className="movie-card__details-name">Starring</strong>
-//         <span className="movie-card__details-value">
-//           {actors.map((name) => <> {name} <br/> </>)}
-//         </span>
-//       </p>
-//     </div>
-//
-//     <div className="movie-card__text-col">
-//       <p className="movie-card__details-item">
-//         <strong className="movie-card__details-name">Run Time</strong>
-//         <span className="movie-card__details-value">{duration}</span>
-//       </p>
-//       <p className="movie-card__details-item">
-//         <strong className="movie-card__details-name">Genre</strong>
-//         <span className="movie-card__details-value">{genre}</span>
-//       </p>
-//       <p className="movie-card__details-item">
-//         <strong className="movie-card__details-name">Released</strong>
-//         <span className="movie-card__details-value">{year}</span>
-//       </p>
-//     </div>
-//   </div>
-// );
 
 Details.propTypes = {
-  producer: PropTypes.string.isRequired,
-  actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  duration: PropTypes.string.isRequired,
-  genre: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired
+  film: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
+  }),
 };
 
 export default Details;

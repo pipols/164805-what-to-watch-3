@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/state/state";
 
 const ButtonShowMore = ({onShowMoreClick}) => (
   <div className="catalog__more">

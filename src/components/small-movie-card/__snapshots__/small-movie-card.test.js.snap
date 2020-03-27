@@ -11,9 +11,9 @@ exports[`<SmallMovieCard /> рендер с img 1`] = `
     className="small-movie-card__image"
   >
     <img
-      alt="{title}"
+      alt="The Grand Budapest Hotel"
       height="175"
-      src="img/bg-the-grand-budapest-hotel.jpg"
+      src="bg-the-grand-budapest-hotel.jpg"
       width="280"
     />
   </div>
@@ -44,7 +44,6 @@ exports[`<SmallMovieCard /> рендер с video 1`] = `
       autoPlay={true}
       height="175"
       muted={true}
-      poster="bg-the-grand-budapest-hotel.jpg"
       src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
       width="280"
     />

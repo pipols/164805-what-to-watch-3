@@ -13,7 +13,7 @@ Array [
       >
         <img
           alt="The Grand Budapest Hotel"
-          src="img/bg-the-grand-budapest-hotel.jpg"
+          src="bg-the-grand-budapest-hotel.jpg"
         />
       </div>
       <h1
@@ -21,48 +21,7 @@ Array [
       >
         WTW
       </h1>
-      <header
-        className="page-header movie-card__head"
-      >
-        <div
-          className="logo"
-        >
-          <a
-            className="logo__link "
-            href="main.html"
-          >
-            <span
-              className="logo__letter logo__letter--1"
-            >
-              W
-            </span>
-            <span
-              className="logo__letter logo__letter--2"
-            >
-              T
-            </span>
-            <span
-              className="logo__letter logo__letter--3"
-            >
-              W
-            </span>
-          </a>
-        </div>
-        <div
-          className="user-block"
-        >
-          <div
-            className="user-block__avatar"
-          >
-            <img
-              alt="User avatar"
-              height={63}
-              src="img/avatar.jpg"
-              width={63}
-            />
-          </div>
-        </div>
-      </header>
+      <Header />
       <div
         className="movie-card__wrap"
       >
@@ -148,7 +107,7 @@ Array [
           <img
             alt="The Grand Budapest Hotelposter"
             height={327}
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="the-grand-budapest-hotel-poster.jpg"
             width={218}
           />
         </div>
@@ -162,7 +121,7 @@ Array [
               className="movie-nav__list"
             >
               <li
-                className="movie-nav__item movie-nav__item--active"
+                className="movie-nav__item "
               >
                 <a
                   className="movie-nav__link"
@@ -196,59 +155,6 @@ Array [
               </li>
             </ul>
           </nav>
-          <div
-            className="movie-rating"
-          >
-            <div
-              className="movie-rating__score"
-            >
-              8,9
-            </div>
-            <p
-              className="movie-rating__meta"
-            >
-              <span
-                className="movie-rating__level"
-              >
-                Very good
-              </span>
-              <span
-                className="movie-rating__count"
-              >
-                240
-                 ratings
-              </span>
-            </p>
-          </div>
-          <div
-            className="movie-card__text"
-          >
-            <p>
-              In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
-            </p>
-            <p>
-              
-            </p>
-            <p>
-                  Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
-            </p>
-            <p
-              className="movie-card__director"
-            >
-              <strong>
-                Director: 
-                Wes Andreson
-              </strong>
-            </p>
-            <p
-              className="movie-card__starring"
-            >
-              <strong>
-                Starring: 
-                Bill Murray,Edward Norton,Jude Law,Willem Dafoe and other
-              </strong>
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -284,32 +190,26 @@ Array [
                 "Ralph Fiennes",
                 "Jeff Goldblum",
               ],
+              "backgroundColor": "#fff",
               "cover": "the-grand-budapest-hotel-poster.jpg",
-              "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
-
-    Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.",
-              "duration": "1h 39m",
+              "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H.",
+              "duration": 120,
               "genre": "Drama",
+              "id": 1,
+              "isFavorite": true,
               "poster": "bg-the-grand-budapest-hotel.jpg",
               "preview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+              "previewImage": "the-grand-budapest-hotel-poster.jpg",
               "producer": "Wes Andreson",
-              "rating": "8,9",
-              "ratingDescription": "Very good",
-              "reviews": Array [
-                Object {
-                  "reviewDate": "December 24, 2016",
-                  "text": "Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.",
-                  "userName": "Kate Muir",
-                  "votes": "8,9",
-                },
-              ],
+              "rating": 8.9,
               "title": "The Grand Budapest Hotel",
+              "videoLink": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
               "votes": 240,
               "year": 2014,
             }
           }
-          handlerItemClick={[Function]}
           isPlay={false}
+          onItemClick={[Function]}
         />
         <SmallMovieCard
           film={
@@ -328,32 +228,26 @@ Array [
                 "Ralph Fiennes",
                 "Jeff Goldblum",
               ],
+              "backgroundColor": "#fff",
               "cover": "the-grand-budapest-hotel-poster.jpg",
-              "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave's friend and protege.
-
-    Gustave prides himself on providing first-class service to the hotel's guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave's lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.",
-              "duration": "1h 39m",
+              "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H.",
+              "duration": 120,
               "genre": "Drama",
+              "id": 1,
+              "isFavorite": true,
               "poster": "bg-the-grand-budapest-hotel.jpg",
               "preview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+              "previewImage": "the-grand-budapest-hotel-poster.jpg",
               "producer": "Wes Andreson",
-              "rating": "8,9",
-              "ratingDescription": "Very good",
-              "reviews": Array [
-                Object {
-                  "reviewDate": "December 24, 2016",
-                  "text": "Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.",
-                  "userName": "Kate Muir",
-                  "votes": "8,9",
-                },
-              ],
+              "rating": 8.9,
               "title": "The Grand Budapest Hotel",
+              "videoLink": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
               "votes": 240,
               "year": 2014,
             }
           }
-          handlerItemClick={[Function]}
           isPlay={false}
+          onItemClick={[Function]}
         />
       </div>
     </section>

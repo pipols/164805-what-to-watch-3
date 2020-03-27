@@ -1,38 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import Logo from "../logo/logo.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import Footer from "../footer/footer.jsx";
 import GenresList from "../genres-list/genres-list.jsx";
 import ButtonShowMore from "../button-show-more/button-show-more.jsx";
-import {getfilmsByGenre} from "../../utils/utils";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/state/state";
+import {getIsShowButtonSelector, getShownFilmsSelector} from "../../reducer/state/selector";
+import {getPromoMovie} from "../../reducer/data/selector";
+import Header from "../header/header.jsx";
 
-// список genres циклом
-const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack, handlerPlayClick}) => {
-  const {title, genre, year} = promoMovieData;
+const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
+  const {title, genre, year, backgroundImage, posterImage} = promoMovieData;
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
+        <img src={backgroundImage} alt={title} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <header className="page-header movie-card__head">
-        <Logo />
-        <div className="user-block">
-          <div className="user-block__avatar">
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+            <img src={posterImage} alt={title} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
@@ -43,7 +36,7 @@ const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack,
             </p>
 
             <div className="movie-card__buttons">
-              <button onClick={handlerPlayClick} className="btn btn--play movie-card__button" type="button">
+              <button onClick={onPlayClick} className="btn btn--play movie-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -66,8 +59,9 @@ const Main = ({promoMovieData, showButton, films, currentGenre, shownCardsStack,
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <GenresList/>
-        <MoviesList films={getfilmsByGenre(films, currentGenre).slice(0, shownCardsStack)} />
-        {showButton && <ButtonShowMore/>}
+
+        <MoviesList films={films} />
+        {isShowButton && <ButtonShowMore/>}
       </section>
       <Footer />
     </div>
@@ -78,46 +72,47 @@ Main.propTypes = {
   promoMovieData: PropTypes.shape({
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired
-  }).isRequired,
-  showButton: PropTypes.bool.isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  shownCardsStack: PropTypes.number.isRequired,
-  films: PropTypes.arrayOf(PropTypes.shape({
-    poster: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    rating: PropTypes.string.isRequired,
-    ratingDescription: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired,
-    duration: PropTypes.string.isRequired,
+    backgroundImage: PropTypes.string.isRequired,
+    posterImage: PropTypes.string.isRequired
+  }),
+  isShowButton: PropTypes.bool.isRequired,
+  films: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
     producer: PropTypes.string.isRequired,
     actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      votes: PropTypes.string.isRequired,
-      userName: PropTypes.string.isRequired,
-      reviewDate: PropTypes.string.isRequired
-    }))
+    duration: PropTypes.number.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   })),
-  handlerPlayClick: PropTypes.func.isRequired
+  onPlayClick: PropTypes.func.isRequired,
+  // setActiveFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  showButton: state.shownCardsStack < state.films.length,
-  films: state.films,
-  currentGenre: state.genre,
-  shownCardsStack: state.shownCardsStack
+  isShowButton: getIsShowButtonSelector(state),
+  films: getShownFilmsSelector(state),
+  promoMovieData: getPromoMovie(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handlerPlayClick() {
+  onPlayClick() {
     dispatch(ActionCreator.setActivePlayer(true));
-  }
+  },
+  // setActiveFilm(film) {
+  //   dispatch(ActionCreator.setActiveFilm(film));
+  // },
 });
 
 export {Main};
