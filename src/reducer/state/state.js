@@ -7,6 +7,7 @@ const initialState = {
   shownCardsStack: CardCount.INITIAL,
   isActivePlayer: false,
   isPagePreloader: true,
+  id: null
 };
 
 const ActionType = {
@@ -17,6 +18,7 @@ const ActionType = {
   SET_ACTIVE_PLAYER: `SET_ACTIVE_PLAYER`,
   RESET_STACK: `RESET_STACK`,
   PAGE_PRELOADER: `PAGE_PRELOADER`,
+  SET_ID: `SET_ID`
 };
 
 const ActionCreator = {
@@ -46,6 +48,10 @@ const ActionCreator = {
     type: ActionType.PAGE_PRELOADER,
     payload: bool
   }),
+  setId: (id) => ({
+    type: ActionType.SET_ID,
+    payload: id
+  })
 };
 
 //
@@ -74,6 +80,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.PAGE_PRELOADER:
       return extend(state, {
         isPagePreloader: action.payload
+      });
+    case ActionType.SET_ID:
+      return extend(state, {
+        id: action.payload
       });
   }
 

@@ -9,6 +9,7 @@ import {ActionCreator} from "../../reducer/state/state";
 import {getIsShowButtonSelector, getShownFilmsSelector} from "../../reducer/state/selector";
 import {getPromoMovie} from "../../reducer/data/selector";
 import Header from "../header/header.jsx";
+import {ClassName} from "../../const/common";
 
 const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
   const {title, genre, year, backgroundImage, posterImage} = promoMovieData;
@@ -20,7 +21,7 @@ const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
 
       <h1 className="visually-hidden">WTW</h1>
 
-      <Header />
+      <Header className={ClassName.HEADER_MOVIE_CARD} />
 
       <div className="movie-card__wrap">
         <div className="movie-card__info">
@@ -63,7 +64,9 @@ const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
         <MoviesList films={films} />
         {isShowButton && <ButtonShowMore/>}
       </section>
+
       <Footer />
+
     </div>
   </React.Fragment>);
 };
