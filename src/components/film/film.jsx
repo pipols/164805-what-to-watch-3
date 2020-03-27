@@ -20,34 +20,13 @@ import Header from "../header/header.jsx";
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
-    // this.id = this.props.match.params.id;
   }
 
   componentDidMount() {
-    console.log(`componentDidMount`);
-    console.log(this.props.match.params.id);
-    // this.props.onFilmIdSet(parseInt(this.id));
-    // this.props.onCommentsMount(this.id);
-  }
-
-  componentDidUpdate() {
-    console.log(`componentDidUpdate`);
-    // this.props.onFilmIdSet(this.id);
-    // this.props.onCommentsMount(this.id);
-    // const newId = prevProps.match.params.id;
-    // const prevId = this.props.match.params.id;
-    //
-    // if (prevId !== newId) {
-    //   this.props.onFilmIdSet(newId);
-    //   this.props.onCommentsMount(newId);
-    // }
+    this.props.onFilmIdSet(this.props.match.params.id);
   }
 
   render() {
-    console.log(`render film`);
-    console.log(this.props);
-    console.log(this.props.match.params.id);
-
     const {poster, cover, title, genre, year} = this.props.film;
     const activeItem = this.props.activeItem || TabName.OVERVIEW;
 
@@ -186,8 +165,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(DataOperation.loadComments(id));
   },
   onFilmIdSet(id) {
-    console.log(`onFilmIdSet`, id);
-    dispatch(ActionCreator.setId(id));
+    dispatch(ActionCreator.setId(parseInt(id, 10)));
   }
 });
 

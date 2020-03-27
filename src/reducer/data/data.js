@@ -47,6 +47,7 @@ const DataOperation = {
         const film = adapterPromo(data);
         dispatch(ActionCreator.loadPromoMovie(film));
         dispatch(ActionCreatorState.pagePreloader(false));
+        dispatch(ActionCreatorState.setId(film.id));
       });
   },
   loadComments: (id) => (dispatch, getState, api) => {
