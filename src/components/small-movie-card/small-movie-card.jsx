@@ -73,4 +73,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {SmallMovieCard};
-export default connect(null, mapDispatchToProps)(SmallMovieCard);
+export default connect(null, mapDispatchToProps)(React.memo(SmallMovieCard));

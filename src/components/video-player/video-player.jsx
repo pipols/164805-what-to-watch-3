@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
-import {getActiveFilm} from "../../reducer/state/selector";
+import {getFilm} from "../../reducer/state/selector";
 
 const VideoPlayer = (props) => {
-  const {isPlay, onTimeUpdate, setDuration, onExitClick, progress, duration, onPlayClick, onFullscreenClick, forwardedRef} = props;
+  const {id, onFilmIdSet, isPlay, onTimeUpdate, setDuration, onExitClick, progress, duration, onPlayClick, onFullscreenClick, forwardedRef} = props;
   const {title, videoLink} = props.film;
+  onFilmIdSet(id);
 
   return (
     <div className="player">
@@ -88,19 +89,24 @@ VideoPlayer.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
+  onFilmIdSet: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  film: getActiveFilm(state)
+  film: getFilm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onExitClick() {
     dispatch(ActionCreator.setActivePlayer(false));
+  },
+  onFilmIdSet(id) {
+    dispatch(ActionCreator.setId(parseInt(id, 10)));
   }
 });
 
 const VideoPlayerWrap = React.forwardRef((props, ref) => <VideoPlayer {...props} forwardedRef={ref} />);
 
 export {VideoPlayer};
-export default connect(mapStateToProps, mapDispatchToProps)(withVideoPlayer(VideoPlayerWrap));
+export default connect(mapStateToProps, mapDispatchToProps)(withVideoPlayer(React.memo(VideoPlayerWrap)));

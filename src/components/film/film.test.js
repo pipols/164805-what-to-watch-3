@@ -1,6 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {Film} from "./film.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space";
+
+const mockStore = configureStore([]);
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -38,19 +45,30 @@ const film = {
 jest.mock(`../small-movie-card/small-movie-card.jsx`, () => `SmallMovieCard`);
 jest.mock(`../header/header.jsx`, () => `Header`);
 
+const store = mockStore({
+  [NameSpace.STATE]: {
+    id: 1
+  }
+});
+
 it(`<Film /> renders correctly`, () => {
 
   const tree = renderer
   .create(
-      <Film
-        film={film}
-        films={[film, film]}
-        currentGenre={`Drama`}
-        onPlayClick={() => {}}
-        onCommentsMount={() => {}}
-        onItemClick={() => {}}
-        activeItem={`str`}
-      />
+      <Provider store={store} >
+        <Router history={history} >
+          <Film
+            film={film}
+            films={[film, film]}
+            currentGenre={`Drama`}
+            onCommentsMount={() => {}}
+            onItemClick={() => {}}
+            activeItem={`str`}
+            onFilmIdSet={() => {}}
+            match={{params: {id: 1}}}
+          />
+        </Router>
+      </Provider>
   )
   .toJSON();
 

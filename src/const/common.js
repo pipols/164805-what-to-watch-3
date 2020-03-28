@@ -29,3 +29,8 @@ export const AppRoute = {
   ADD_REVIEW: `/films/:id/review`,
   PLAYER: `/player/:id`,
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};

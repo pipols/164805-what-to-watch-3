@@ -20,4 +20,4 @@ ButtonShowMore.propTypes = {
 };
 
 export {ButtonShowMore};
-export default connect(null, mapDispatchToProps)(ButtonShowMore);
+export default connect(null, mapDispatchToProps)(React.memo(ButtonShowMore));

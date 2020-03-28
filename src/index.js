@@ -18,6 +18,7 @@ const onResponse = (response) => {
       return store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
     // case Error.NOT_FOUND:
     //   return
+
   }
 
   return Swal.fire({

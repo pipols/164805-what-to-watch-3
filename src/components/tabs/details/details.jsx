@@ -69,4 +69,4 @@ Details.propTypes = {
   }),
 };
 
-export default Details;
+export default React.memo(Details);

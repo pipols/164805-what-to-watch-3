@@ -30,4 +30,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {Reviews};
-export default connect(mapStateToProps)(Reviews);
+export default connect(mapStateToProps)(React.memo(Reviews));

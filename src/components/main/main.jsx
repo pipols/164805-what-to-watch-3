@@ -10,9 +10,12 @@ import {getIsShowButtonSelector, getShownFilmsSelector} from "../../reducer/stat
 import {getPromoMovie} from "../../reducer/data/selector";
 import Header from "../header/header.jsx";
 import {ClassName} from "../../const/common";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
-const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
-  const {title, genre, year, backgroundImage, posterImage} = promoMovieData;
+const Main = ({promoMovieData, isShowButton, films, onFilmIdSet}) => {
+  const {title, genre, year, backgroundImage, posterImage, id} = promoMovieData;
+  onFilmIdSet(id);
+
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
@@ -36,20 +39,8 @@ const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
               <span className="movie-card__year">{year}</span>
             </p>
 
-            <div className="movie-card__buttons">
-              <button onClick={onPlayClick} className="btn btn--play movie-card__button" type="button">
-                <svg viewBox="0 0 19 19" width="19" height="19">
-                  <use xlinkHref="#play-s"></use>
-                </svg>
-                <span>Play</span>
-              </button>
-              <button className="btn btn--list movie-card__button" type="button">
-                <svg viewBox="0 0 19 20" width="19" height="20">
-                  <use xlinkHref="#add"></use>
-                </svg>
-                <span>My list</span>
-              </button>
-            </div>
+            <MovieCardButtons isMainPage />
+
           </div>
         </div>
       </div>
@@ -73,6 +64,7 @@ const Main = ({promoMovieData, isShowButton, films, onPlayClick}) => {
 
 Main.propTypes = {
   promoMovieData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
@@ -99,7 +91,7 @@ Main.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   })),
-  onPlayClick: PropTypes.func.isRequired,
+  onFilmIdSet: PropTypes.func.isRequired,
   // setActiveFilm: PropTypes.func.isRequired
 };
 
@@ -110,13 +102,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayClick() {
-    dispatch(ActionCreator.setActivePlayer(true));
-  },
+  onFilmIdSet(id) {
+    dispatch(ActionCreator.setId(parseInt(id, 10)));
+  }
   // setActiveFilm(film) {
   //   dispatch(ActionCreator.setActiveFilm(film));
   // },
 });
 
 export {Main};
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Main));

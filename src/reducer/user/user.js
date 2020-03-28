@@ -1,9 +1,5 @@
 import {extend} from "../../utils/utils";
-
-const AuthorizationStatus = {
-  AUTH: `AUTH`,
-  NO_AUTH: `NO_AUTH`,
-};
+import {AuthorizationStatus} from "../../const/common";
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,

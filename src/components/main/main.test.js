@@ -4,10 +4,13 @@ import {Provider} from "react-redux";
 import renderer from "react-test-renderer";
 import {Main} from "./main.jsx";
 import NameSpace from "../../reducer/name-space";
+import {Router} from "react-router-dom";
+import history from "../../history";
 
 const mockStore = configureStore([]);
 
 const promoMovieData = {
+  id: 1,
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
   year: 2014,
@@ -49,6 +52,7 @@ const film = {
 };
 
 jest.mock(`../header/header.jsx`, () => `Header`);
+jest.mock(`../film/film.jsx`, () => `Film`);
 
 it(`<Main /> renders correctly`, () => {
   const store = mockStore({
@@ -62,17 +66,20 @@ it(`<Main /> renders correctly`, () => {
       activeFilm: null,
       shownCardsStack: 8,
       isActivePlayer: false,
+      id: 1
     }
   });
 
   const tree = renderer.create(
       <Provider store={store}>
-        <Main
-          promoMovieData={promoMovieData}
-          isShowButton={true}
-          onPlayClick={() => {}}
-          films={[film, film]}
-        />
+        <Router history={history} >
+          <Main
+            promoMovieData={promoMovieData}
+            isShowButton={true}
+            films={[film, film]}
+            onFilmIdSet={() => {}}
+          />
+        </Router>
       </Provider>).toJSON();
 
   expect(tree).toMatchSnapshot();

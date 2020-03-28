@@ -48,6 +48,8 @@ it(`<VideoPlayer /> renders correctly`, () => {
     onFullscreenClick={() => {}}
     forwardedRef={() => {}}
     film={film}
+    onFilmIdSet={() => {}}
+    id={1}
   />)
   .toJSON();
 

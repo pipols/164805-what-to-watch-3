@@ -16,17 +16,20 @@ import {getGenre, getFilm} from "../../reducer/state/selector";
 import {DataOperation} from "../../reducer/data/data";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import Header from "../header/header.jsx";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
 class Film extends React.PureComponent {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.props.onFilmIdSet(this.props.match.params.id);
+    this.props.onCommentsMount(this.props.match.params.id);
   }
 
   render() {
+    this.props.onFilmIdSet(this.props.match.params.id);
     const {poster, cover, title, genre, year} = this.props.film;
     const activeItem = this.props.activeItem || TabName.OVERVIEW;
 
@@ -47,23 +50,9 @@ class Film extends React.PureComponent {
                 <span className="movie-card__genre">{genre}</span>
                 <span className="movie-card__year">{year}</span>
               </p>
-              <div className="movie-card__buttons">
-                <button onClick={this.props.onPlayClick} className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s"/>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">
-                  Add review
-                </a>
-              </div>
+
+              <MovieCardButtons />
+
             </div>
           </div>
         </div>
@@ -143,12 +132,16 @@ Film.propTypes = {
   id: PropTypes.number,
   currentGenre: PropTypes.string.isRequired,
 
-  onPlayClick: PropTypes.func.isRequired,
   onCommentsMount: PropTypes.func.isRequired,
   onFilmIdSet: PropTypes.func.isRequired,
 
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number
+    })
+  }),
 };
 
 const mapStateToProps = (state) => ({
@@ -158,9 +151,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayClick() {
-    dispatch(ActionCreator.setActivePlayer(true));
-  },
   onCommentsMount(id) {
     dispatch(DataOperation.loadComments(id));
   },

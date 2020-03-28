@@ -42,4 +42,4 @@ Overview.propTypes = {
   actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
-export default Overview;
+export default React.memo(Overview);

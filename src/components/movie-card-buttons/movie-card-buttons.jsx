@@ -27,11 +27,10 @@ const MovieCardButtons = ({id, isMainPage}) => (
 
   </div>
 );
-// Player (/player/:id)
-// /mylist
+
 MovieCardButtons.propTypes = {
   id: PropTypes.number.isRequired,
-  isMainPage: PropTypes.bool.isRequired
+  isMainPage: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
@@ -39,4 +38,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {MovieCardButtons};
-export default connect(mapStateToProps)(MovieCardButtons);
+export default connect(mapStateToProps)(React.memo(MovieCardButtons));
