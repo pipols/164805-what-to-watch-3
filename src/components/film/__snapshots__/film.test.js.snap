@@ -21,7 +21,9 @@ Array [
       >
         WTW
       </h1>
-      <Header />
+      <Header
+        className="movie-card__head"
+      />
       <div
         className="movie-card__wrap"
       >
