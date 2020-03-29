@@ -68,7 +68,7 @@ VideoPlayer.propTypes = {
     PropTypes.shape({current: PropTypes.any})
   ]),
   progress: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
+  duration: PropTypes.string.isRequired,
   film: PropTypes.shape({
     title: PropTypes.string.isRequired,
     cover: PropTypes.string.isRequired,

@@ -41,15 +41,12 @@ it(`<VideoPlayer /> renders correctly`, () => {
     isPlay={true}
     onTimeUpdate={() => {}}
     setDuration={() => {}}
-    onExitClick={() => {}}
     progress={100}
     duration={100}
     onPlayClick={() => {}}
     onFullscreenClick={() => {}}
     forwardedRef={() => {}}
     film={film}
-    onFilmIdSet={() => {}}
-    id={1}
   />)
   .toJSON();
 

@@ -64,8 +64,6 @@ it(`<Film /> renders correctly`, () => {
             onCommentsMount={() => {}}
             onItemClick={() => {}}
             activeItem={`str`}
-            onFilmIdSet={() => {}}
-            match={{params: {id: 1}}}
           />
         </Router>
       </Provider>

@@ -9,7 +9,7 @@ import Footer from "../footer/footer.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
 import {getfilmsByGenre} from "../../utils/utils";
-import {CardCount} from "../../const/common";
+import {CardCount, ClassName} from "../../const/common";
 import {getFilms} from "../../reducer/data/selector";
 import {getGenre, getFilm} from "../../reducer/state/selector";
 import {DataOperation} from "../../reducer/data/data";
@@ -35,7 +35,7 @@ class Film extends React.PureComponent {
             </div>
             <h1 className="visually-hidden">WTW</h1>
 
-            <Header />
+            <Header className={ClassName.HEADER_MOVIE_CARD} />
 
             <div className="movie-card__wrap">
               <div className="movie-card__desc">
