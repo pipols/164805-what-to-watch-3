@@ -1,13 +1,11 @@
 import React from "react";
-import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {getId} from "../../reducer/state/selector";
 
-const MovieCardButtons = ({id, isMainPage}) => (
+const MovieCardButtons = ({filmId, isFavorite, isMainPage}) => (
   <div className="movie-card__buttons">
 
-    <Link to={`/player/${id}`} className="btn btn--play movie-card__button" type="button">
+    <Link to={`/player/${filmId}`} className="btn btn--play movie-card__button" type="button">
       <svg viewBox="0 0 19 19" width={19} height={19}>
         <use xlinkHref="#play-s"/>
       </svg>
@@ -15,13 +13,21 @@ const MovieCardButtons = ({id, isMainPage}) => (
     </Link>
 
     <Link to="/mylist" className="btn btn--list movie-card__button" type="button">
-      <svg viewBox="0 0 19 20" width={19} height={20}>
-        <use xlinkHref="#add"/>
-      </svg>
+
+      {isFavorite
+        && <svg viewBox="0 0 18 14" width={18} height={14}>
+          <use xlinkHref="#in-list"></use>
+        </svg>}
+
+      {isFavorite
+        || <svg viewBox="0 0 19 20" width={19} height={20}>
+          <use xlinkHref="#add"/>
+        </svg>}
+
       <span>My list</span>
     </Link>
 
-    {isMainPage || <Link to={`/films/${id}/review`} className="btn movie-card__button">
+    {isMainPage || <Link to={`/films/${filmId}/review`} className="btn movie-card__button">
       Add review
     </Link>}
 
@@ -29,13 +35,10 @@ const MovieCardButtons = ({id, isMainPage}) => (
 );
 
 MovieCardButtons.propTypes = {
-  id: PropTypes.number.isRequired,
+  filmId: PropTypes.number.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
   isMainPage: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
-  id: getId(state)
-});
-
 export {MovieCardButtons};
-export default connect(mapStateToProps)(React.memo(MovieCardButtons));
+export default React.memo(MovieCardButtons);

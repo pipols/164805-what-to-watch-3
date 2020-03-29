@@ -13,7 +13,7 @@ import {ClassName} from "../../const/common";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
 const Main = ({promoMovieData, isShowButton, films, onFilmIdSet}) => {
-  const {title, genre, year, backgroundImage, posterImage, id} = promoMovieData;
+  const {title, genre, year, backgroundImage, posterImage, id, isFavorite} = promoMovieData;
   onFilmIdSet(id);
 
   return (<React.Fragment>
@@ -39,7 +39,7 @@ const Main = ({promoMovieData, isShowButton, films, onFilmIdSet}) => {
               <span className="movie-card__year">{year}</span>
             </p>
 
-            <MovieCardButtons isMainPage />
+            <MovieCardButtons isMainPage filmId={id} isFavorite={isFavorite} />
 
           </div>
         </div>
@@ -69,7 +69,8 @@ Main.propTypes = {
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
     backgroundImage: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired
+    posterImage: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
   }),
   isShowButton: PropTypes.bool.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({

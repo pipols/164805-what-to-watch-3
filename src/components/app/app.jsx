@@ -11,6 +11,7 @@ import history from "../../history";
 import {ActionCreator} from "../../reducer/state/state";
 import Preloader from "../preloader/preloader.jsx";
 import AddReview from "../add-review/add-review.jsx";
+import MyList from "../my-list/my-list.jsx";
 
 // Main (/), Sign In (/login), MyList (/mylist), Film (/films/:id), Add review (/films/:id/review), Player (/player/:id).
 const App = ({isPagePreloader, onFilmIdSet}) => {
@@ -44,6 +45,9 @@ const App = ({isPagePreloader, onFilmIdSet}) => {
           <SignIn />
         </Route>
 
+        <Route path="/mylist">
+          <MyList />
+        </Route>
 
       </Switch>
     </Router>

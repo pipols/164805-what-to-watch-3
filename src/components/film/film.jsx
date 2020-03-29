@@ -25,7 +25,7 @@ class Film extends React.PureComponent {
 
   component() {
     const activeItem = this.props.activeItem || TabName.OVERVIEW;
-    const {poster, cover, title, genre, year} = this.props.film;
+    const {poster, cover, title, genre, year, id, isFavorite} = this.props.film;
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -45,7 +45,7 @@ class Film extends React.PureComponent {
                   <span className="movie-card__year">{year}</span>
                 </p>
 
-                <MovieCardButtons />
+                <MovieCardButtons filmId={id} isFavorite={isFavorite} />
 
               </div>
             </div>

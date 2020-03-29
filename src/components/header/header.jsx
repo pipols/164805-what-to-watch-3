@@ -36,7 +36,7 @@ Header.propTypes = {
     name: PropTypes.string,
     avatarUrl: PropTypes.string,
   }),
-  children: PropTypes.element.isRequired
+  children: PropTypes.element
 };
 
 const mapStateToProps = (state) => ({
