@@ -1,27 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/state/state";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player.jsx";
 import {getFilm} from "../../reducer/state/selector";
+import Preloader from "../preloader/preloader.jsx";
+import history from '../../history';
 
 const VideoPlayer = (props) => {
-  const {id, onFilmIdSet, isPlay, onTimeUpdate, setDuration, onExitClick, progress, duration, onPlayClick, onFullscreenClick, forwardedRef} = props;
-  const {title, videoLink} = props.film;
-  onFilmIdSet(id);
+  const {isPlay, onTimeUpdate, setDuration, progress, duration, onPlayClick, onFullscreenClick, forwardedRef, film} = props;
 
-  return (
-    <div className="player">
+  return props.film
+    ? <div className="player">
       <video
         ref={forwardedRef}
         onTimeUpdate={onTimeUpdate}
         onLoadedMetadata={setDuration}
-        src={videoLink}
+        src={film.videoLink}
         className="player__video"
-        poster="img/player-poster.jpg">
+        poster={film.previewImage}>
       </video>
 
-      <button onClick={onExitClick} type="button" className="player__exit">Exit</button>
+      <button onClick={() => history.goBack()} type="button" className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -44,7 +43,7 @@ const VideoPlayer = (props) => {
             </svg>
               <span>Pause</span></>}
           </button>
-          <div className="player__name">{title}</div>
+          <div className="player__name">{film.title}</div>
           <button onClick={onFullscreenClick} type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
@@ -54,14 +53,14 @@ const VideoPlayer = (props) => {
         </div>
       </div>
     </div>
-  );
+
+    : <Preloader />;
 };
 
 VideoPlayer.propTypes = {
   isPlay: PropTypes.bool.isRequired,
   onTimeUpdate: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
-  onExitClick: PropTypes.func.isRequired,
   onPlayClick: PropTypes.func.isRequired,
   onFullscreenClick: PropTypes.func.isRequired,
   forwardedRef: PropTypes.oneOfType([
@@ -89,24 +88,13 @@ VideoPlayer.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
-  onFilmIdSet: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   film: getFilm(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onExitClick() {
-    dispatch(ActionCreator.setActivePlayer(false));
-  },
-  onFilmIdSet(id) {
-    dispatch(ActionCreator.setId(parseInt(id, 10)));
-  }
-});
-
 const VideoPlayerWrap = React.forwardRef((props, ref) => <VideoPlayer {...props} forwardedRef={ref} />);
 
 export {VideoPlayer};
-export default connect(mapStateToProps, mapDispatchToProps)(withVideoPlayer(React.memo(VideoPlayerWrap)));
+export default connect(mapStateToProps)(withVideoPlayer(React.memo(VideoPlayerWrap)));
