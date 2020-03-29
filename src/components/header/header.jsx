@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getUserStatus, getUserData} from "../../reducer/user/selector";
 import {AuthorizationStatus} from "../../const/common";
+import history from "../../history";
 
 
 const Header = ({authorizationStatus, className, user, children}) => {
@@ -18,7 +19,7 @@ const Header = ({authorizationStatus, className, user, children}) => {
       <div className="user-block">
 
         {isAuth && <div className="user-block__avatar">
-          <img src={user.avatarUrl} alt="User avatar" width={63} height={63}/>
+          <img onClick={() => history.push(`/mylist`)} src={user.avatarUrl} alt="User avatar" width={63} height={63}/>
         </div>}
 
         {isAuth || <Link to="/login" className="user-block__link">Sign in</Link>}
