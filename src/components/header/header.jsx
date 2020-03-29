@@ -7,11 +7,14 @@ import {getUserStatus, getUserData} from "../../reducer/user/selector";
 import {AuthorizationStatus} from "../../const/common";
 
 
-const Header = ({authorizationStatus, className, user}) => {
+const Header = ({authorizationStatus, className, user, children}) => {
   const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
   return (
-    <header className={`page-header ${className}`}>
+    <header className={`page-header ${className || ``}`}>
       <Logo />
+
+      {children ? children : null}
+
       <div className="user-block">
 
         {isAuth && <div className="user-block__avatar">
@@ -32,7 +35,8 @@ Header.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     avatarUrl: PropTypes.string,
-  })
+  }),
+  children: PropTypes.element.isRequired
 };
 
 const mapStateToProps = (state) => ({

@@ -7,7 +7,8 @@ const initialState = {
   shownCardsStack: CardCount.INITIAL,
   isActivePlayer: false,
   isPagePreloader: true,
-  id: null
+  id: null,
+  isFormDisabled: false
 };
 
 const ActionType = {
@@ -18,7 +19,8 @@ const ActionType = {
   SET_ACTIVE_PLAYER: `SET_ACTIVE_PLAYER`,
   RESET_STACK: `RESET_STACK`,
   PAGE_PRELOADER: `PAGE_PRELOADER`,
-  SET_ID: `SET_ID`
+  SET_ID: `SET_ID`,
+  SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`
 };
 
 const ActionCreator = {
@@ -51,6 +53,10 @@ const ActionCreator = {
   setId: (id) => ({
     type: ActionType.SET_ID,
     payload: id
+  }),
+  setFormDisabledStatus: (bool) => ({
+    type: ActionType.SET_FORM_DISABLED_STATUS,
+    payload: bool
   })
 };
 
@@ -84,6 +90,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_ID:
       return extend(state, {
         id: action.payload
+      });
+    case ActionType.SET_FORM_DISABLED_STATUS:
+      return extend(state, {
+        isFormDisabled: action.payload
       });
   }
 

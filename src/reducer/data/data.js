@@ -1,6 +1,7 @@
 import {extend} from "../../utils/utils";
 import {adapterFilms, adapterPromo} from "../../utils/adapter";
 import {ActionCreator as ActionCreatorState} from "../state/state";
+import history from "../../history";
 
 const initialState = {
   films: [],
@@ -53,6 +54,19 @@ const DataOperation = {
     return api.get(`/comments/${id}`)
       .then(({data}) => {
         dispatch(ActionCreator.loadComments(data));
+      });
+  },
+  postComments: (id, comment) => (dispatch, getState, api) => {
+    return api.post(`/comments/${id}`, {
+      rating: comment.rating,
+      comment: comment.comment
+    })
+      .then(() => {
+        dispatch(ActionCreatorState.setFormDisabledStatus(false));
+        history.push(`/film/${id}`);
+      })
+      .catch(() => {
+        dispatch(ActionCreatorState.setFormDisabledStatus(false));
       });
   }
 };

@@ -21,7 +21,7 @@ class SignIn extends React.PureComponent {
 
     this.state = {
       email: null,
-      emailValid: true
+      isEmailValid: true
     };
   }
 
@@ -29,7 +29,7 @@ class SignIn extends React.PureComponent {
     this.setState(
         {
           email: evt.target.value,
-          emailValid: this.emailInput.current.validity.valid
+          isEmailValid: this.emailInput.current.validity.valid
         });
   }
 
@@ -52,7 +52,7 @@ class SignIn extends React.PureComponent {
         <div className="sign-in user-page__content">
           <form action="#" onSubmit={this.handleSubmit} className="sign-in__form">
 
-            {this.state.emailValid
+            {this.state.isEmailValid
               || <div className="sign-in__message">
                 <p>Please enter a valid email address</p>
               </div>}
@@ -63,7 +63,7 @@ class SignIn extends React.PureComponent {
               </div>}
 
             <div className="sign-in__fields">
-              <div className={`sign-in__field ${this.state.emailValid ? `` : `sign-in__field--error`} `}>
+              <div className={`sign-in__field ${this.state.isEmailValid ? `` : `sign-in__field--error`} `}>
                 <input
                   className="sign-in__input"
                   ref={this.emailInput}

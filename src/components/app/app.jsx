@@ -10,6 +10,7 @@ import {getPreloaderStatus} from "../../reducer/state/selector";
 import history from "../../history";
 import {ActionCreator} from "../../reducer/state/state";
 import Preloader from "../preloader/preloader.jsx";
+import AddReview from "../add-review/add-review.jsx";
 
 // Main (/), Sign In (/login), MyList (/mylist), Film (/films/:id), Add review (/films/:id/review), Player (/player/:id).
 const App = ({isPagePreloader, onFilmIdSet}) => {
@@ -32,6 +33,11 @@ const App = ({isPagePreloader, onFilmIdSet}) => {
         <Route path="/player/:id?" exact render={({match}) => {
           onFilmIdSet(match.params.id);
           return <VideoPlayer />;
+        }}/>
+
+        <Route path="/films/:id?/review" exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <AddReview />;
         }}/>
 
         <Route path="/login">
