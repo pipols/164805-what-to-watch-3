@@ -12,7 +12,8 @@ export const CardCount = {
 
 export const Error = {
   UNAUTHORIZED: 401,
-  NOT_FOUND: 404
+  NOT_FOUND: 404,
+  BAD_REQUEST: 400
 };
 
 export const ClassName = {
@@ -33,4 +34,5 @@ export const AppRoute = {
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+  BAD_REQUEST: `BAD_REQUEST`
 };

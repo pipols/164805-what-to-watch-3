@@ -4,35 +4,39 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {getUserStatus, getUserData} from "../../reducer/user/selector";
+import {AuthorizationStatus} from "../../const/common";
 
-const Header = ({isAuth, className, user}) => (
-  <header className={`page-header ${className}`}>
-    <Logo />
-    <div className="user-block">
 
-      {isAuth && <div className="user-block__avatar">
-        <img src={user.avatarUrl} alt="User avatar" width={63} height={63}/>
-      </div>}
+const Header = ({authorizationStatus, className, user}) => {
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+  return (
+    <header className={`page-header ${className}`}>
+      <Logo />
+      <div className="user-block">
 
-      {isAuth || <Link to="/login" className="user-block__link">Sign in</Link>}
+        {isAuth && <div className="user-block__avatar">
+          <img src={user.avatarUrl} alt="User avatar" width={63} height={63}/>
+        </div>}
 
-    </div>
-  </header>
-);
+        {isAuth || <Link to="/login" className="user-block__link">Sign in</Link>}
+
+      </div>
+    </header>);
+};
 
 Header.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   user: PropTypes.shape({
     id: PropTypes.number,
-    email: PropTypes.stringd,
+    email: PropTypes.string,
     name: PropTypes.string,
     avatarUrl: PropTypes.string,
   })
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: getUserStatus(state),
+  authorizationStatus: getUserStatus(state),
   user: getUserData(state)
 });
 
