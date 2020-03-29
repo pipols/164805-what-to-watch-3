@@ -8,10 +8,12 @@ import {Router, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {getPreloaderStatus} from "../../reducer/state/selector";
 import history from "../../history";
+import {ActionCreator} from "../../reducer/state/state";
+import Preloader from "../preloader/preloader.jsx";
 
 // Main (/), Sign In (/login), MyList (/mylist), Film (/films/:id), Add review (/films/:id/review), Player (/player/:id).
-const App = ({isPagePreloader}) => {
-  const renderMainPage = () => isPagePreloader ? <p style={{fontSize: `40px`}}>Loading...</p> : <Main />;
+const App = ({isPagePreloader, onFilmIdSet}) => {
+  const renderMainPage = () => isPagePreloader ? <Preloader /> : <Main />;
 
   return (
     <Router history={history}>
@@ -22,8 +24,15 @@ const App = ({isPagePreloader}) => {
           {renderMainPage()}
         </Route>
 
-        <Route path="/film/:id?" exact component={Film} />
-        <Route path="/player/:id?" exact component={VideoPlayer} />
+        <Route path="/film/:id?" exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <Film />;
+        }}/>
+
+        <Route path="/player/:id?" exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <VideoPlayer />;
+        }}/>
 
         <Route path="/login">
           <SignIn />
@@ -33,26 +42,22 @@ const App = ({isPagePreloader}) => {
       </Switch>
     </Router>
   );
-
-  // if (isPagePreloader) {
-  //   return <p style={{fontSize: `40px`}}>Loading...</p>;
-  // } else if (isActivePlayer) {
-  //   return <VideoPlayer />;
-  // } else if (activeFilm) {
-  //   return <Film film={activeFilm} />;
-  // } else {
-  //   return <Main />;
-  // }
-
 };
 
 App.propTypes = {
   isPagePreloader: PropTypes.bool.isRequired,
+  onFilmIdSet: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   isPagePreloader: getPreloaderStatus(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onFilmIdSet(id) {
+    dispatch(ActionCreator.setId(parseInt(id, 10)));
+  }
+});
+
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
