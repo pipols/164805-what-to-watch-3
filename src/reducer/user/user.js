@@ -1,4 +1,4 @@
-import {extend} from "../../utils/utils";
+import {extend, objectKeysToCamelCase} from "../../utils/utils";
 import {AuthorizationStatus} from "../../const/common";
 
 const initialState = {
@@ -59,7 +59,7 @@ const Operation = {
     })
       .then(({data}) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(ActionCreator.setUserData(data));
+        dispatch(ActionCreator.setUserData(objectKeysToCamelCase(data)));
       });
   },
 };
