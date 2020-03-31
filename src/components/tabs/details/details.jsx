@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getFilm} from "../../../reducer/state/selector";
 
 const structure = (data) => [[
   {
@@ -69,4 +71,9 @@ Details.propTypes = {
   }),
 };
 
-export default React.memo(Details);
+const mapStateToProps = (state) => ({
+  film: getFilm(state)
+});
+
+export {Details};
+export default connect(mapStateToProps)(React.memo(Details));
