@@ -62,4 +62,6 @@ export const getFilmRating = (rating) => {
   return null;
 };
 
+export const getTime = (num) => `${Math.trunc(num / 60)}h ${num % 60}m`; //
+
 export const getGenreByFilter = (filter) => getKeyToMap(mapGenresToFilter, filter);
