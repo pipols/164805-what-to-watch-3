@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {getFilm} from "../../../reducer/state/selector";
+import {getFilmRating} from "../../../utils/utils";
 
 const createParagraf = (text) => text
   .split(`\n`)
@@ -16,14 +17,13 @@ const writeActors = (actors) => {
     ? `${actors.slice(0, MAX_ACTORS)} and other`
     : `${actors}`;
 };
-//  доделать
-// https://up.htmlacademy.ru/react/3/project/what-to-watch#rating
+
 const Overview = ({film: {rating, votes, description, producer, actors}}) => (
   <React.Fragment>
     <div className="movie-rating">
       <div className="movie-rating__score">{rating}</div>
       <p className="movie-rating__meta">
-        <span className="movie-rating__level">{}</span>
+        <span className="movie-rating__level">{getFilmRating(rating)}</span>
         <span className="movie-rating__count">{votes} ratings</span>
       </p>
     </div>
