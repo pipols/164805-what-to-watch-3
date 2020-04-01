@@ -51,7 +51,7 @@ const store = mockStore({
   }
 });
 
-it(`<Details /> renders correctly`, () => {
+it(`<Overview /> renders correctly`, () => {
   const tree = renderer
   .create(
       <Provider store={store}>
