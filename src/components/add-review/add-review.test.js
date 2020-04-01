@@ -1,11 +1,13 @@
 import React from "react";
-import configureStore from "redux-mock-store";
-import {Provider} from "react-redux";
 import renderer from "react-test-renderer";
-import {Main} from "./main.jsx";
+import {AddReview} from "./add-review.jsx";
+import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import history from "../../history";
+import {AuthorizationStatus} from "../../const/common";
+
 
 const mockStore = configureStore([]);
 
@@ -43,36 +45,33 @@ const film = {
 };
 
 jest.mock(`../header/header.jsx`, () => `Header`);
-jest.mock(`../film/film.jsx`, () => `Film`);
 
-it(`<Main /> renders correctly`, () => {
-  const store = mockStore({
-    [NameSpace.DATA]: {
-      films: [],
-      promoMovie: {},
-      comments: []
-    },
-    [NameSpace.STATE]: {
-      genre: `All genres`,
-      activeFilm: null,
-      shownCardsStack: 8,
-      isActivePlayer: false,
-      id: 1
-    }
-  });
 
-  const tree = renderer.create(
-      <Provider store={store}>
+const store = mockStore({
+  [NameSpace.STATE]: {
+    id: 1
+  },
+  [NameSpace.DATA]: {
+    films: [film]
+  },
+  [NameSpace.USER]: {
+    authorizationStatus: AuthorizationStatus.AUTH
+  }
+});
+
+it(`<AddReview /> renders correctly`, () => {
+  const tree = renderer
+  .create(
+      <Provider store={store} >
         <Router history={history} >
-          <Main
-            promoMovieData={film}
-            isShowButton={true}
-            films={[film, film]}
-            onFilmIdSet={() => {}}
+          <AddReview
             film={film}
+            onReviewSubmit={() => {}}
+            isFormDisabled={true}
           />
         </Router>
-      </Provider>).toJSON();
+      </Provider>
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

@@ -5,21 +5,22 @@ import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import MoviesList from "../movies-list/movies-list.jsx";
 import {connect} from "react-redux";
-import {getIsFavorite} from "../../reducer/data/selector";
+import {getFavoriteFilms} from "../../reducer/data/selector";
+import Preloader from "../preloader/preloader.jsx";
 
-const MyList = (props) => {
-  return (
-    <div className="user-page">
+const MyList = ({films}) => {
+  return films
+    ? <div className="user-page">
       <Header className={ClassName.HEADER_USER_PAGE} />
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MoviesList films={props.films} />
+        <MoviesList films={films} />
       </section>
 
       <Footer />
     </div>
-  );
+    : <Preloader />;
 };
 
 MyList.propTypes = {
@@ -42,10 +43,11 @@ MyList.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   })),
+  onLoadFavoriteFilms: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  films: getIsFavorite(state)
+  films: getFavoriteFilms(state)
 });
 
 export {MyList};

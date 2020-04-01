@@ -16,7 +16,7 @@ const clearTimer = (cb) => {
   cb(null);
 };
 
-const SmallMovieCard = ({film, setActiveFilm, onItemClick, isPlay}) => {
+const SmallMovieCard = ({film, setActiveGenre, onItemClick, isPlay}) => {
   const {title, poster, preview} = film;
 
   return (
@@ -24,7 +24,7 @@ const SmallMovieCard = ({film, setActiveFilm, onItemClick, isPlay}) => {
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => setTimer(film, onItemClick)}
       onMouseLeave={() => clearTimer(onItemClick)}
-      onClick={() => setActiveFilm(film)}
+      onClick={() => setActiveGenre(film)}
     >
       <div className="small-movie-card__image">
         {isPlay
@@ -59,14 +59,13 @@ SmallMovieCard.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
-  setActiveFilm: PropTypes.func.isRequired,
+  setActiveGenre: PropTypes.func.isRequired,
   isPlay: PropTypes.bool.isRequired,
   onItemClick: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveFilm(film) {
-    dispatch(ActionCreator.setActiveFilm(film));
+  setActiveGenre(film) {
     dispatch(ActionCreator.setGenre(film.genre));
     history.push(`/film/${film.id}`);
   }

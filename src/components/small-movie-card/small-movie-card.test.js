@@ -42,7 +42,7 @@ describe(`<SmallMovieCard />`, () => {
     .create(
         <SmallMovieCard
           film={film}
-          setActiveFilm={() => {}}
+          setActiveGenre={() => {}}
           onItemClick={() => {}}
           isPlay={true}
         />
@@ -57,7 +57,7 @@ describe(`<SmallMovieCard />`, () => {
     .create(
         <SmallMovieCard
           film={film}
-          setActiveFilm={() => {}}
+          setActiveGenre={() => {}}
           onItemClick={() => {}}
           isPlay={false}
         />

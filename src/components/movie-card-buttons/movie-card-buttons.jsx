@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {DataOperation} from "../../reducer/data/data";
 
-const MovieCardButtons = ({filmId, isFavorite, isMainPage}) => (
+const MovieCardButtons = ({filmId, isFavorite, isMainPage, onPostFavorite}) => (
   <div className="movie-card__buttons">
 
     <Link to={`/player/${filmId}`} className="btn btn--play movie-card__button" type="button">
@@ -12,7 +14,7 @@ const MovieCardButtons = ({filmId, isFavorite, isMainPage}) => (
       <span>Play</span>
     </Link>
 
-    <Link to="/mylist" className="btn btn--list movie-card__button" type="button">
+    <a onClick={() => onPostFavorite(filmId, isFavorite)} className="btn btn--list movie-card__button" type="button">
 
       {isFavorite
         && <svg viewBox="0 0 18 14" width={18} height={14}>
@@ -25,7 +27,7 @@ const MovieCardButtons = ({filmId, isFavorite, isMainPage}) => (
         </svg>}
 
       <span>My list</span>
-    </Link>
+    </a>
 
     {isMainPage || <Link to={`/films/${filmId}/review`} className="btn movie-card__button">
       Add review
@@ -37,8 +39,15 @@ const MovieCardButtons = ({filmId, isFavorite, isMainPage}) => (
 MovieCardButtons.propTypes = {
   filmId: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
-  isMainPage: PropTypes.bool
+  isMainPage: PropTypes.bool,
+  onPostFavorite: PropTypes.func.isRequired
 };
 
+const mapDispatchoProps = (dispatch) => ({
+  onPostFavorite(id, status) {
+    dispatch(DataOperation.postFavorite(id, +!status));
+  }
+});
+
 export {MovieCardButtons};
-export default React.memo(MovieCardButtons);
+export default connect(null, mapDispatchoProps)(React.memo(MovieCardButtons));

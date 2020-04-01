@@ -1,12 +1,14 @@
 import {extend} from "../../utils/utils";
-import {adapterFilms, adapterPromo} from "../../utils/adapter";
+import {adapterFilms, adapterFilm} from "../../utils/adapter";
 import {ActionCreator as ActionCreatorState} from "../state/state";
 import history from "../../history";
+import NameSpace from "../name-space";
 
 const initialState = {
   films: [],
   promoMovie: {},
   comments: [],
+  favoriteFilms: []
 };
 
 const ActionType = {
@@ -14,6 +16,9 @@ const ActionType = {
   LOAD_FILMS: `LOAD_FILMS`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   RESET_COMMENTS: `RESET_COMMENTS`,
+  MERGE_FILM: `MERGE_FILM`,
+  MERGE_PROMO_FILM: `MERGE_PROMO_FILM`,
+  LOAD_FAVORITE_FILMS: `LOAD_FAVORITE_FILMS`,
 };
 
 const ActionCreator = {
@@ -32,6 +37,18 @@ const ActionCreator = {
   resetComments: () => ({
     type: ActionType.RESET_COMMENTS
   }),
+  mergeFilm: (film) => ({
+    type: ActionType.MERGE_FILM,
+    payload: film
+  }),
+  mergePromoFilm: (film) => ({
+    type: ActionType.MERGE_PROMO_FILM,
+    payload: film
+  }),
+  loadFavoriteFilms: (films) => ({
+    type: ActionType.LOAD_FAVORITE_FILMS,
+    payload: films
+  })
 };
 
 const DataOperation = {
@@ -45,7 +62,7 @@ const DataOperation = {
   loadPromoMovie: () => (dispatch, getState, api) => {
     return api.get(`/films/promo`)
       .then(({data}) => {
-        const film = adapterPromo(data);
+        const film = adapterFilm(data);
         dispatch(ActionCreator.loadPromoMovie(film));
         dispatch(ActionCreatorState.pagePreloader(false));
       });
@@ -68,6 +85,24 @@ const DataOperation = {
       .catch(() => {
         dispatch(ActionCreatorState.setFormDisabledStatus(false));
       });
+  },
+  postFavorite: (id, status) => (dispatch, getState, api) => {
+    return api.post(`favorite/${id}/${status}`)
+      .then(({data}) => {
+        const film = adapterFilm(data);
+        const store = getState();
+        if (store[NameSpace.DATA].promoMovie.id === id) {
+          dispatch(ActionCreator.mergePromoFilm(film));
+        }
+        dispatch(ActionCreator.mergeFilm(film));
+      });
+  },
+  loadFavoriteFilms: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then(({data}) => {
+        const films = adapterFilms(data);
+        dispatch(ActionCreator.loadFavoriteFilms(films));
+      });
   }
 };
 
@@ -88,6 +123,18 @@ const reducer = (state = initialState, action) => {
     case ActionType.RESET_COMMENTS:
       return extend(state, {
         comments: []
+      });
+    case ActionType.MERGE_FILM:
+      return extend(state, {
+        films: state.films.map((film) => film.id === action.payload.id ? action.payload : film)
+      });
+    case ActionType.MERGE_PROMO_FILM:
+      return extend(state, {
+        promoMovie: action.payload
+      });
+    case ActionType.LOAD_FAVORITE_FILMS:
+      return extend(state, {
+        favoriteFilms: action.payload
       });
   }
 

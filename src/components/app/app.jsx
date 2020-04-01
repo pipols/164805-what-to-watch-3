@@ -12,9 +12,11 @@ import {ActionCreator} from "../../reducer/state/state";
 import Preloader from "../preloader/preloader.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import MyList from "../my-list/my-list.jsx";
+import {DataOperation} from "../../reducer/data/data";
+import PrivateRoute from "../private-route/private-route.jsx";
 
-// Main (/), Sign In (/login), MyList (/mylist), Film (/films/:id), Add review (/films/:id/review), Player (/player/:id).
-const App = ({isPagePreloader, onFilmIdSet}) => {
+
+const App = ({isPagePreloader, onFilmIdSet, onLoadFavoriteFilms}) => {
   const renderMainPage = () => isPagePreloader ? <Preloader /> : <Main />;
 
   return (
@@ -36,7 +38,7 @@ const App = ({isPagePreloader, onFilmIdSet}) => {
           return <VideoPlayer />;
         }}/>
 
-        <Route path="/films/:id?/review" exact render={({match}) => {
+        <PrivateRoute path="/films/:id/review" exact render={(match) => {
           onFilmIdSet(match.params.id);
           return <AddReview />;
         }}/>
@@ -45,9 +47,10 @@ const App = ({isPagePreloader, onFilmIdSet}) => {
           <SignIn />
         </Route>
 
-        <Route path="/mylist">
-          <MyList />
-        </Route>
+        <PrivateRoute path="/mylist" exact render={() => {
+          onLoadFavoriteFilms();
+          return <MyList />;
+        }} />
 
       </Switch>
     </Router>
@@ -56,7 +59,8 @@ const App = ({isPagePreloader, onFilmIdSet}) => {
 
 App.propTypes = {
   isPagePreloader: PropTypes.bool.isRequired,
-  onFilmIdSet: PropTypes.func.isRequired
+  onFilmIdSet: PropTypes.func.isRequired,
+  onLoadFavoriteFilms: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -66,8 +70,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onFilmIdSet(id) {
     dispatch(ActionCreator.setId(parseInt(id, 10)));
+  },
+  onLoadFavoriteFilms() {
+    dispatch(DataOperation.loadFavoriteFilms());
   }
 });
 
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(App));

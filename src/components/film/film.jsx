@@ -26,6 +26,7 @@ class Film extends React.PureComponent {
   component() {
     const activeItem = this.props.activeItem || TabName.OVERVIEW;
     const {poster, cover, title, genre, year, id, isFavorite} = this.props.film;
+    this.props.onCommentsMount(id);
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -60,8 +61,8 @@ class Film extends React.PureComponent {
                   <Tabs onItemClick={this.props.onItemClick} activeItem={activeItem} />
                 </nav>
 
-                {activeItem === TabName.OVERVIEW && <Overview {...this.props.film} />}
-                {activeItem === TabName.DETAILS && <Details film={this.props.film} />}
+                {activeItem === TabName.OVERVIEW && <Overview />}
+                {activeItem === TabName.DETAILS && <Details />}
                 {activeItem === TabName.REVIEWS && <Reviews />}
 
               </div>

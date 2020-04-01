@@ -3,7 +3,6 @@ import {CardCount} from "../../const/common";
 
 const initialState = {
   genre: `All genres`,
-  activeFilm: null,
   shownCardsStack: CardCount.INITIAL,
   isActivePlayer: false,
   isPagePreloader: true,
@@ -31,10 +30,6 @@ const ActionCreator = {
   getFilms: (films) => ({
     type: ActionType.GET_FILMS,
     payload: films
-  }),
-  setActiveFilm: (film) => ({
-    type: ActionType.SET_ACTIVE_FILM,
-    payload: film
   }),
   addCardsStack: () => ({
     type: ActionType.ADD_CARDS_STACK
@@ -66,10 +61,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_GENRE:
       return extend(state, {
         genre: action.payload
-      });
-    case ActionType.SET_ACTIVE_FILM:
-      return extend(state, {
-        activeFilm: action.payload
       });
     case ActionType.ADD_CARDS_STACK:
       return extend(state, {

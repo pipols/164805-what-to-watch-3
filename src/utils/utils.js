@@ -1,5 +1,6 @@
 import {mapGenresToFilter} from "../const/genres";
 import {mapKeys, camelCase} from 'lodash';
+import Swal from "sweetalert2";
 
 export const objectKeysToCamelCase = (obj) => mapKeys(obj, (v, k) => camelCase(k));
 
@@ -65,3 +66,11 @@ export const getFilmRating = (rating) => {
 export const getTime = (num) => `${Math.trunc(num / 60)}h ${num % 60}m`; //
 
 export const getGenreByFilter = (filter) => getKeyToMap(mapGenresToFilter, filter);
+
+export const errorPopup = (response) => {
+  return Swal.fire({
+    icon: `error`,
+    title: `Oops... ${response.status}`,
+    text: response.data.error
+  });
+};

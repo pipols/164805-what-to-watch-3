@@ -16,8 +16,8 @@ const onResponse = (response) => {
   switch (response.status) {
     case Error.UNAUTHORIZED:
       return store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
-    case Error.BAD_REQUEST:
-      return store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.BAD_REQUEST));
+    // case Error.BAD_REQUEST:
+    //   return store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.BAD_REQUEST));
   }
 
   return Swal.fire({

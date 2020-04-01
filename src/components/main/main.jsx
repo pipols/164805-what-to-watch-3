@@ -12,14 +12,14 @@ import Header from "../header/header.jsx";
 import {ClassName} from "../../const/common";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
-const Main = ({promoMovieData, isShowButton, films, onFilmIdSet}) => {
-  const {title, genre, year, backgroundImage, posterImage, id, isFavorite} = promoMovieData;
+const Main = ({film, isShowButton, films, onFilmIdSet}) => {
+  const {title, genre, year, poster, id, isFavorite, cover} = film;
   onFilmIdSet(id);
 
   return (<React.Fragment>
     <section className="movie-card">
       <div className="movie-card__bg">
-        <img src={backgroundImage} alt={title} />
+        <img src={poster} alt={title} />
       </div>
 
       <h1 className="visually-hidden">WTW</h1>
@@ -29,7 +29,7 @@ const Main = ({promoMovieData, isShowButton, films, onFilmIdSet}) => {
       <div className="movie-card__wrap">
         <div className="movie-card__info">
           <div className="movie-card__poster">
-            <img src={posterImage} alt={title} width="218" height="327"/>
+            <img src={cover} alt={title} width="218" height="327"/>
           </div>
 
           <div className="movie-card__desc">
@@ -63,14 +63,24 @@ const Main = ({promoMovieData, isShowButton, films, onFilmIdSet}) => {
 };
 
 Main.propTypes = {
-  promoMovieData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+  film: PropTypes.shape({
     title: PropTypes.string.isRequired,
+    cover: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
+    poster: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    votes: PropTypes.number.isRequired,
+    producer: PropTypes.string.isRequired,
+    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    duration: PropTypes.number.isRequired,
     genre: PropTypes.string.isRequired,
     year: PropTypes.number.isRequired,
-    backgroundImage: PropTypes.string.isRequired,
-    posterImage: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
+    videoLink: PropTypes.string.isRequired,
+    preview: PropTypes.string.isRequired,
   }),
   isShowButton: PropTypes.bool.isRequired,
   films: PropTypes.arrayOf(PropTypes.shape({
@@ -93,22 +103,18 @@ Main.propTypes = {
     preview: PropTypes.string.isRequired,
   })),
   onFilmIdSet: PropTypes.func.isRequired,
-  // setActiveFilm: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   isShowButton: getIsShowButtonSelector(state),
   films: getShownFilmsSelector(state),
-  promoMovieData: getPromoMovie(state),
+  film: getPromoMovie(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFilmIdSet(id) {
     dispatch(ActionCreator.setId(parseInt(id, 10)));
   }
-  // setActiveFilm(film) {
-  //   dispatch(ActionCreator.setActiveFilm(film));
-  // },
 });
 
 export {Main};
