@@ -22,6 +22,12 @@ class AddReview extends React.PureComponent {
     };
   }
 
+  componentDidUpdate() {
+    if (this.state.isTextareaValid) {
+      this.formRef.reset();
+    }
+  }
+
   handleSubmit(evt) {
     evt.preventDefault();
 
@@ -35,7 +41,7 @@ class AddReview extends React.PureComponent {
     );
   }
 
-  component() {
+  getComponent() {
     const {title, poster, cover, id} = this.props.film;
 
     return (
@@ -115,7 +121,7 @@ class AddReview extends React.PureComponent {
 
   render() {
     return this.props.film
-      ? this.component()
+      ? this.getComponent()
       : <Preloader />;
   }
 }
