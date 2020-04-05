@@ -8,40 +8,28 @@ import Preloader from "../preloader/preloader.jsx";
 import {DataOperation} from "../../reducer/data/data";
 import {getReviewFormStatus} from "../../reducer/state/selector";
 import {ActionCreator} from "../../reducer/state/state";
+import withReviewForm from "../../hocs/with-review-form/with-review-form.jsx";
+
+const NUMBER_STARS = 5;
 
 class AddReview extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    this.formRef = React.createRef();
-    this.textareaRef = React.createRef();
-
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      isTextareaValid: false
-    };
-  }
-
-  componentDidUpdate() {
-    if (this.state.isTextareaValid) {
-      this.formRef.reset();
-    }
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-
-    const formData = new FormData(this.formRef.current);
     this.props.onReviewSubmit(
         this.props.film.id,
         {
-          rating: formData.get(`rating`),
-          comment: formData.get(`review-text`)
+          rating: this.props.rating,
+          comment: this.props.reviewText
         }
     );
   }
 
-  getComponent() {
+  component() {
     const {title, poster, cover, id} = this.props.film;
 
     return (
@@ -72,11 +60,13 @@ class AddReview extends React.PureComponent {
         </div>
 
         <div className="add-review">
-          <form action="#" ref={this.formRef} onSubmit={this.handleSubmit} className="add-review__form" >
+          <form action="#"
+            onSubmit={this.handleSubmit}
+            className="add-review__form" >
             <div className="rating">
               <div className="rating__stars">
 
-                {new Array(5).fill(``).map((_, i) => {
+                {new Array(NUMBER_STARS).fill(``).map((_, i) => {
                   const index = i + 1;
                   return (
                     <React.Fragment key={index}>
@@ -86,6 +76,7 @@ class AddReview extends React.PureComponent {
                         type="radio" name="rating"
                         defaultValue={index}
                         defaultChecked={!i}
+                        onChange={this.props.onFieldChange}
                       />
                       <label className="rating__label" htmlFor={`star-${index}`}>Rating {index}</label>
                     </React.Fragment>
@@ -97,18 +88,21 @@ class AddReview extends React.PureComponent {
             <div className="add-review__text">
               <textarea
                 className="add-review__textarea"
-                ref={this.textareaRef}
-                name="review-text"
+                name="reviewText"
                 id="review-text"
                 placeholder="Review text"
                 minLength={50}
                 maxLength={400}
                 required
-                disabled={false} >
+                disabled={false}
+                onChange={this.props.onFieldChange} >
 
               </textarea>
               <div className="add-review__submit">
-                <button className="add-review__btn" type="submit" disabled={this.props.isFormDisabled} >Post</button>
+                <button
+                  className="add-review__btn"
+                  type="submit"
+                  disabled={this.props.isFormDisabled } >Post</button>
               </div>
 
             </div>
@@ -121,7 +115,7 @@ class AddReview extends React.PureComponent {
 
   render() {
     return this.props.film
-      ? this.getComponent()
+      ? this.component()
       : <Preloader />;
   }
 }
@@ -147,7 +141,11 @@ AddReview.propTypes = {
     preview: PropTypes.string.isRequired,
   }),
   onReviewSubmit: PropTypes.func.isRequired,
-  isFormDisabled: PropTypes.bool.isRequired
+  onFieldChange: PropTypes.func.isRequired,
+  isFormDisabled: PropTypes.bool.isRequired,
+  isTextareaValid: PropTypes.bool.isRequired,
+  rating: PropTypes.string.isRequired,
+  reviewText: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
@@ -163,4 +161,4 @@ const mapDispatchoProps = (dispatch) => ({
 });
 
 export {AddReview};
-export default connect(mapStateToProps, mapDispatchoProps)(AddReview);
+export default connect(mapStateToProps, mapDispatchoProps)(withReviewForm(AddReview));
