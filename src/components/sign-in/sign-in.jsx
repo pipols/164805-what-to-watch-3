@@ -1,12 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Operation} from "../../reducer/user/user";
 import PropTypes from "prop-types";
 import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import {ClassName} from "../../const/common";
 import {getUserStatus} from "../../reducer/user/selector";
 import {Redirect} from "react-router-dom";
+import {Operation} from "../../reducer/user/user";
+import withSignIn from "../../hocs/with-sign-in/with-sign-in.jsx";
 // import history from "../../history";
 import {AuthorizationStatus} from "../../const/common";
 
@@ -14,30 +15,13 @@ class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFieldChange = this.handleFieldChange.bind(this);
-
-    this.emailInput = React.createRef();
-    this.passwordInput = React.createRef();
-
-    this.state = {
-      email: null,
-      isEmailValid: true
-    };
-  }
-
-  handleFieldChange(evt) {
-    this.setState(
-        {
-          email: evt.target.value,
-          isEmailValid: this.emailInput.current.validity.valid
-        });
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.onLogin({
-      login: this.emailInput.current.value,
-      password: this.passwordInput.current.value
+      login: this.props.email,
+      password: this.props.password
     });
   }
 
@@ -52,7 +36,7 @@ class SignIn extends React.PureComponent {
         <div className="sign-in user-page__content">
           <form action="#" onSubmit={this.handleSubmit} className="sign-in__form">
 
-            {this.state.isEmailValid
+            {this.props.isEmailValid
               || <div className="sign-in__message">
                 <p>Please enter a valid email address</p>
               </div>}
@@ -63,11 +47,13 @@ class SignIn extends React.PureComponent {
               </div>}
 
             <div className="sign-in__fields">
-              <div className={`sign-in__field ${this.state.isEmailValid ? `` : `sign-in__field--error`} `}>
+              <div className={`sign-in__field ${this.props.isEmailValid ? `` : `sign-in__field--error`} `}>
                 <input
                   className="sign-in__input"
-                  ref={this.emailInput}
-                  onChange={this.handleFieldChange}
+                  onChange={(evt) => {
+                    this.props.onFieldChange(evt);
+                    this.props.onEmailValidity(evt);
+                  }}
                   type="email"
                   placeholder="Email address"
                   name="user-email"
@@ -78,7 +64,13 @@ class SignIn extends React.PureComponent {
                 </label>
               </div>
               <div className="sign-in__field">
-                <input className="sign-in__input" ref={this.passwordInput} type="password" placeholder="Password" name="user-password" id="user-password"/>
+                <input
+                  className="sign-in__input"
+                  onChange={this.props.onFieldChange}
+                  type="password"
+                  placeholder="Password"
+                  name="user-password"
+                  id="user-password"/>
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
@@ -98,7 +90,12 @@ class SignIn extends React.PureComponent {
 
 SignIn.propTypes = {
   onLogin: PropTypes.func.isRequired,
-  authorizationStatus: PropTypes.string.isRequired
+  onFieldChange: PropTypes.func.isRequired,
+  onEmailValidity: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  isEmailValid: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -112,4 +109,4 @@ const mapDispatchoProps = (dispatch) => ({
 });
 
 export {SignIn};
-export default connect(mapStateToProps, mapDispatchoProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchoProps)(withSignIn(SignIn));
