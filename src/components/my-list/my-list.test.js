@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {VideoPlayer} from "./video-player.jsx";
+import {MyList} from "./my-list.jsx";
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -35,19 +35,15 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
-it(`<VideoPlayer /> renders correctly`, () => {
+it(`<MyList /> renders correctly`, () => {
+
   const tree = renderer
-  .create(<VideoPlayer
-    isPlay={true}
-    onTimeUpdate={() => {}}
-    setDuration={() => {}}
-    progress={100}
-    duration={`100`}
-    onPlayClick={() => {}}
-    onFullscreenClick={() => {}}
-    forwardedRef={() => {}}
-    film={film}
-  />)
+  .create(
+      <MyList
+        films={[film, film]}
+        onLoadFavoriteFilms={() => {}}
+      />
+  )
   .toJSON();
 
   expect(tree).toMatchSnapshot();

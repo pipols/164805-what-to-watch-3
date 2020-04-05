@@ -18,15 +18,11 @@ import Header from "../header/header.jsx";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 import Preloader from "../preloader/preloader.jsx";
 
-class Film extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
-  component() {
-    const activeItem = this.props.activeItem || TabName.OVERVIEW;
-    const {poster, cover, title, genre, year, id, isFavorite} = this.props.film;
-    this.props.onCommentsMount(id);
+const Film = (props) => {
+  const component = () => {
+    const activeItem = props.activeItem || TabName.OVERVIEW;
+    const {poster, cover, title, genre, year, id, isFavorite} = props.film;
+    props.onCommentsMount(id);
     return (
       <React.Fragment>
         <section className="movie-card movie-card--full">
@@ -58,7 +54,7 @@ class Film extends React.PureComponent {
               </div>
               <div className="movie-card__desc">
                 <nav className="movie-nav movie-card__nav">
-                  <Tabs onItemClick={this.props.onItemClick} activeItem={activeItem} />
+                  <Tabs onItemClick={props.onItemClick} activeItem={activeItem} />
                 </nav>
 
                 {activeItem === TabName.OVERVIEW && <Overview />}
@@ -75,21 +71,19 @@ class Film extends React.PureComponent {
             More like this
             </h2>
             <MoviesList films={
-              getfilmsByGenre(this.props.films, this.props.currentGenre)
+              getfilmsByGenre(props.films, props.currentGenre)
             .slice(0, CardCount.SIMILAR)
             } />
           </section>
           <Footer />
         </div>
       </React.Fragment>);
-  }
+  };
 
-  render() {
-    return this.props.film
-      ? this.component()
-      : <Preloader />;
-  }
-}
+  return props.film
+    ? component()
+    : <Preloader />;
+};
 
 Film.propTypes = {
   film: PropTypes.shape({

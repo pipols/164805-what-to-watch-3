@@ -1,6 +1,6 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {VideoPlayer} from "./video-player.jsx";
+import {shallow} from "enzyme";
+import {Main} from "./main.jsx";
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -35,20 +35,20 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
-it(`<VideoPlayer /> renders correctly`, () => {
-  const tree = renderer
-  .create(<VideoPlayer
-    isPlay={true}
-    onTimeUpdate={() => {}}
-    setDuration={() => {}}
-    progress={100}
-    duration={`100`}
-    onPlayClick={() => {}}
-    onFullscreenClick={() => {}}
-    forwardedRef={() => {}}
-    film={film}
-  />)
-  .toJSON();
+const onFilmIdSet = jest.fn();
 
-  expect(tree).toMatchSnapshot();
+describe(`<Main />`, () => {
+  shallow(
+      <Main
+        promoMovieData={film}
+        isShowButton={true}
+        films={[film, film]}
+        onFilmIdSet={onFilmIdSet}
+        film={film} />
+  );
+
+  it(`onFilmIdSet вернет film.id`, () => {
+    expect(onFilmIdSet).toHaveBeenCalledTimes(1);
+    expect(onFilmIdSet.mock.calls[0][0]).toBe(film.id);
+  });
 });

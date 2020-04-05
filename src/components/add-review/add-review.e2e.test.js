@@ -1,6 +1,7 @@
 import React from "react";
-import renderer from "react-test-renderer";
-import {VideoPlayer} from "./video-player.jsx";
+import {shallow} from "enzyme";
+import {AddReview} from "./add-review.jsx";
+
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -35,20 +36,27 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
-it(`<VideoPlayer /> renders correctly`, () => {
-  const tree = renderer
-  .create(<VideoPlayer
-    isPlay={true}
-    onTimeUpdate={() => {}}
-    setDuration={() => {}}
-    progress={100}
-    duration={`100`}
-    onPlayClick={() => {}}
-    onFullscreenClick={() => {}}
-    forwardedRef={() => {}}
-    film={film}
-  />)
-  .toJSON();
+const onReviewSubmit = jest.fn();
+const onFieldChange = jest.fn();
 
-  expect(tree).toMatchSnapshot();
+describe(`<AddReview />`, () => {
+
+  const wrapper = shallow(
+      <AddReview
+        film={film}
+        onReviewSubmit={onReviewSubmit}
+        onFieldChange={onFieldChange}
+        isFormDisabled={false}
+        isTextareaValid={true}
+        rating={`1`}
+        reviewText={`comment`} />
+  );
+  const form = wrapper.find(`form`);
+
+  it(`submit`, () => {
+    form.simulate(`submit`, {preventDefault() {}});
+    expect(onReviewSubmit).toHaveBeenCalledTimes(1);
+    expect(onReviewSubmit.mock.calls[0][0]).toBe(film.id, {rating: 1, comment: `comment`});
+  });
+
 });

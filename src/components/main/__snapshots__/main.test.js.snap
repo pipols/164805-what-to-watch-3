@@ -138,22 +138,28 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/1"
+            onClick={[Function]}
           >
-            <img
-              alt="The Grand Budapest Hotel"
-              height="175"
-              src="bg-the-grand-budapest-hotel.jpg"
-              width="280"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <img
+                alt="The Grand Budapest Hotel"
+                height="175"
+                src="bg-the-grand-budapest-hotel.jpg"
+                width="280"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/1"
+              onClick={[Function]}
             >
               The Grand Budapest Hotel
             </a>
@@ -165,22 +171,28 @@ Array [
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
-          <div
-            className="small-movie-card__image"
+          <a
+            href="/film/1"
+            onClick={[Function]}
           >
-            <img
-              alt="The Grand Budapest Hotel"
-              height="175"
-              src="bg-the-grand-budapest-hotel.jpg"
-              width="280"
-            />
-          </div>
+            <div
+              className="small-movie-card__image"
+            >
+              <img
+                alt="The Grand Budapest Hotel"
+                height="175"
+                src="bg-the-grand-budapest-hotel.jpg"
+                width="280"
+              />
+            </div>
+          </a>
           <h3
             className="small-movie-card__title"
           >
             <a
               className="small-movie-card__link"
-              href="movie-page.html"
+              href="/film/1"
+              onClick={[Function]}
             >
               The Grand Budapest Hotel
             </a>

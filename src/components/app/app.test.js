@@ -6,6 +6,8 @@ import {App} from "./app.jsx";
 import NameSpace from "../../reducer/name-space";
 import {Router} from "react-router-dom";
 import history from "../../history";
+import {AuthorizationStatus} from "../../const/common";
+
 
 const mockStore = configureStore([]);
 
@@ -34,7 +36,7 @@ it(`<App /> renders correctly`, () => {
           <App
             isPagePreloader={false}
             onFilmIdSet={() => {}}
-            onLoadFavoriteFilms={() => {}} />
+            authorizationStatus={AuthorizationStatus.NO_AUTH} />
         </Router>
       </Provider>)
   .toJSON();

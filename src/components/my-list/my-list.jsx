@@ -7,21 +7,29 @@ import MoviesList from "../movies-list/movies-list.jsx";
 import {connect} from "react-redux";
 import {getFavoriteFilms} from "../../reducer/data/selector";
 import Preloader from "../preloader/preloader.jsx";
+import {DataOperation} from "../../reducer/data/data";
 
-const MyList = ({films}) => {
-  return films
-    ? <div className="user-page">
-      <Header className={ClassName.HEADER_USER_PAGE} />
+class MyList extends React.PureComponent {
+  componentDidMount() {
+    this.props.onLoadFavoriteFilms();
+  }
 
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <MoviesList films={films} />
-      </section>
+  render() {
+    return this.props.films
+      ? <div className="user-page">
+        <Header className={ClassName.HEADER_USER_PAGE} />
 
-      <Footer />
-    </div>
-    : <Preloader />;
-};
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
+          <MoviesList films={this.props.films} />
+        </section>
+
+        <Footer />
+      </div>
+
+      : <Preloader />;
+  }
+}
 
 MyList.propTypes = {
   films: PropTypes.arrayOf(PropTypes.shape({
@@ -50,5 +58,11 @@ const mapStateToProps = (state) => ({
   films: getFavoriteFilms(state)
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoadFavoriteFilms() {
+    dispatch(DataOperation.loadFavoriteFilms());
+  }
+});
+
 export {MyList};
-export default connect(mapStateToProps)(React.memo(MyList));
+export default connect(mapStateToProps, mapDispatchToProps)(MyList);

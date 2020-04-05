@@ -20,7 +20,7 @@ const VideoPlayer = (props) => {
         poster={film.previewImage}>
       </video>
 
-      <button onClick={() => history.goBack()} type="button" className="player__exit">Exit</button>
+      <button onClick={() => history.push(`/film/${film.id}`)} type="button" className="player__exit">Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">

@@ -12,55 +12,62 @@ import Header from "../header/header.jsx";
 import {ClassName} from "../../const/common";
 import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
 
-const Main = ({film, isShowButton, films, onFilmIdSet}) => {
-  const {title, genre, year, poster, id, isFavorite, cover} = film;
-  onFilmIdSet(id);
+class Main extends React.PureComponent {
+  componentDidMount() {
+    const id = this.props.film.id;
+    this.props.onFilmIdSet(id);
+  }
 
-  return (<React.Fragment>
-    <section className="movie-card">
-      <div className="movie-card__bg">
-        <img src={poster} alt={title} />
-      </div>
+  render() {
+    const {film, isShowButton, films} = this.props;
+    const {title, genre, year, poster, id, isFavorite, cover} = film;
 
-      <h1 className="visually-hidden">WTW</h1>
+    return (<React.Fragment>
+      <section className="movie-card">
+        <div className="movie-card__bg">
+          <img src={poster} alt={title} />
+        </div>
 
-      <Header className={ClassName.HEADER_MOVIE_CARD} />
+        <h1 className="visually-hidden">WTW</h1>
 
-      <div className="movie-card__wrap">
-        <div className="movie-card__info">
-          <div className="movie-card__poster">
-            <img src={cover} alt={title} width="218" height="327"/>
-          </div>
+        <Header className={ClassName.HEADER_MOVIE_CARD} />
 
-          <div className="movie-card__desc">
-            <h2 className="movie-card__title">{title}</h2>
-            <p className="movie-card__meta">
-              <span className="movie-card__genre">{genre}</span>
-              <span className="movie-card__year">{year}</span>
-            </p>
+        <div className="movie-card__wrap">
+          <div className="movie-card__info">
+            <div className="movie-card__poster">
+              <img src={cover} alt={title} width="218" height="327"/>
+            </div>
 
-            <MovieCardButtons isMainPage filmId={id} isFavorite={isFavorite} />
+            <div className="movie-card__desc">
+              <h2 className="movie-card__title">{title}</h2>
+              <p className="movie-card__meta">
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{year}</span>
+              </p>
 
+              <MovieCardButtons isMainPage filmId={id} isFavorite={isFavorite} />
+
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <div className="page-content">
-      <section className="catalog">
-        <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-        <GenresList/>
-
-        <MoviesList films={films} />
-        {isShowButton && <ButtonShowMore/>}
       </section>
 
-      <Footer />
+      <div className="page-content">
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-    </div>
-  </React.Fragment>);
-};
+          <GenresList />
+
+          <MoviesList films={films} />
+          {isShowButton && <ButtonShowMore />}
+        </section>
+
+        <Footer />
+
+      </div>
+    </React.Fragment>);
+  }
+}
 
 Main.propTypes = {
   film: PropTypes.shape({

@@ -1,15 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {AddReview} from "./add-review.jsx";
-import configureStore from "redux-mock-store";
-import NameSpace from "../../reducer/name-space";
-import {Provider} from "react-redux";
 import {Router} from "react-router-dom";
 import history from "../../history";
-import {AuthorizationStatus} from "../../const/common";
-
-
-const mockStore = configureStore([]);
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -46,31 +39,20 @@ const film = {
 
 jest.mock(`../header/header.jsx`, () => `Header`);
 
-
-const store = mockStore({
-  [NameSpace.STATE]: {
-    id: 1
-  },
-  [NameSpace.DATA]: {
-    films: [film]
-  },
-  [NameSpace.USER]: {
-    authorizationStatus: AuthorizationStatus.AUTH
-  }
-});
-
 it(`<AddReview /> renders correctly`, () => {
   const tree = renderer
   .create(
-      <Provider store={store} >
-        <Router history={history} >
-          <AddReview
-            film={film}
-            onReviewSubmit={() => {}}
-            isFormDisabled={true}
-          />
-        </Router>
-      </Provider>
+      <Router history={history} >
+        <AddReview
+          film={film}
+          onReviewSubmit={() => {}}
+          onFieldChange={() => {}}
+          isFormDisabled={true}
+          isTextareaValid={true}
+          rating={`2`}
+          reviewText={`comment`}
+        />
+      </Router>
   ).toJSON();
 
   expect(tree).toMatchSnapshot();

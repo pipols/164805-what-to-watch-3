@@ -12,11 +12,12 @@ import {ActionCreator} from "../../reducer/state/state";
 import Preloader from "../preloader/preloader.jsx";
 import AddReview from "../add-review/add-review.jsx";
 import MyList from "../my-list/my-list.jsx";
-import {DataOperation} from "../../reducer/data/data";
 import PrivateRoute from "../private-route/private-route.jsx";
+import {getUserStatus} from "../../reducer/user/selector.js";
+import {AuthorizationStatus} from "../../const/common";
 
 
-const App = ({isPagePreloader, onFilmIdSet, onLoadFavoriteFilms}) => {
+const App = ({isPagePreloader, onFilmIdSet, authorizationStatus}) => {
   const renderMainPage = () => isPagePreloader ? <Preloader /> : <Main />;
 
   return (
@@ -43,12 +44,15 @@ const App = ({isPagePreloader, onFilmIdSet, onLoadFavoriteFilms}) => {
           return <AddReview />;
         }}/>
 
-        <Route path="/login">
-          <SignIn />
-        </Route>
+        <Route path="/login" exact render={() => {
+          return (
+            authorizationStatus === AuthorizationStatus.NO_AUTH
+              ? <SignIn />
+              : renderMainPage()
+          );
+        }} />
 
         <PrivateRoute path="/mylist" exact render={() => {
-          onLoadFavoriteFilms();
           return <MyList />;
         }} />
 
@@ -60,19 +64,17 @@ const App = ({isPagePreloader, onFilmIdSet, onLoadFavoriteFilms}) => {
 App.propTypes = {
   isPagePreloader: PropTypes.bool.isRequired,
   onFilmIdSet: PropTypes.func.isRequired,
-  onLoadFavoriteFilms: PropTypes.func.isRequired
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isPagePreloader: getPreloaderStatus(state),
+  authorizationStatus: getUserStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onFilmIdSet(id) {
     dispatch(ActionCreator.setId(parseInt(id, 10)));
-  },
-  onLoadFavoriteFilms() {
-    dispatch(DataOperation.loadFavoriteFilms());
   }
 });
 

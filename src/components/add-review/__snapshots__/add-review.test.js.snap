@@ -81,6 +81,7 @@ exports[`<AddReview /> renders correctly 1`] = `
             defaultValue={1}
             id="star-1"
             name="rating"
+            onChange={[Function]}
             type="radio"
           />
           <label
@@ -96,6 +97,7 @@ exports[`<AddReview /> renders correctly 1`] = `
             defaultValue={2}
             id="star-2"
             name="rating"
+            onChange={[Function]}
             type="radio"
           />
           <label
@@ -111,6 +113,7 @@ exports[`<AddReview /> renders correctly 1`] = `
             defaultValue={3}
             id="star-3"
             name="rating"
+            onChange={[Function]}
             type="radio"
           />
           <label
@@ -126,6 +129,7 @@ exports[`<AddReview /> renders correctly 1`] = `
             defaultValue={4}
             id="star-4"
             name="rating"
+            onChange={[Function]}
             type="radio"
           />
           <label
@@ -141,6 +145,7 @@ exports[`<AddReview /> renders correctly 1`] = `
             defaultValue={5}
             id="star-5"
             name="rating"
+            onChange={[Function]}
             type="radio"
           />
           <label
@@ -161,7 +166,8 @@ exports[`<AddReview /> renders correctly 1`] = `
           id="review-text"
           maxLength={400}
           minLength={50}
-          name="review-text"
+          name="reviewText"
+          onChange={[Function]}
           placeholder="Review text"
           required={true}
         />

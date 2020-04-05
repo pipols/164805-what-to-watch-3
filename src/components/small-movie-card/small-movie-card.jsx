@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state";
-import history from "../../history";
+import {Link} from "react-router-dom";
 
 const DELAY = 1000;
 let timerId;
@@ -26,14 +26,16 @@ const SmallMovieCard = ({film, setActiveGenre, onItemClick, isPlay}) => {
       onMouseLeave={() => clearTimer(onItemClick)}
       onClick={() => setActiveGenre(film)}
     >
-      <div className="small-movie-card__image">
-        {isPlay
-          ? <video src={preview} autoPlay muted width="280" height="175"/>
-          : <img src={poster} alt={title} width="280" height="175"/>}
-      </div>
+      <Link to={`/film/${film.id}`}>
+        <div className="small-movie-card__image">
+          {isPlay
+            ? <video src={preview} autoPlay muted width="280" height="175"/>
+            : <img src={poster} alt={title} width="280" height="175"/>}
+        </div>
+      </Link>
 
       <h3 className="small-movie-card__title" >
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <Link className="small-movie-card__link" to={`/film/${film.id}`}>{title}</Link>
       </h3>
     </article>
   );
@@ -67,7 +69,6 @@ SmallMovieCard.propTypes = {
 const mapDispatchToProps = (dispatch) => ({
   setActiveGenre(film) {
     dispatch(ActionCreator.setGenre(film.genre));
-    history.push(`/film/${film.id}`);
   }
 });
 

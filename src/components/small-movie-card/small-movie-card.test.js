@@ -1,6 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import {SmallMovieCard} from "./small-movie-card.jsx";
+import {Router} from "react-router-dom";
+import history from "../../history";
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -40,12 +42,14 @@ describe(`<SmallMovieCard />`, () => {
   it(`рендер с video`, () => {
     const tree = renderer
     .create(
-        <SmallMovieCard
-          film={film}
-          setActiveGenre={() => {}}
-          onItemClick={() => {}}
-          isPlay={true}
-        />
+        <Router history={history}>
+          <SmallMovieCard
+            film={film}
+            setActiveGenre={() => {}}
+            onItemClick={() => {}}
+            isPlay={true}
+          />
+        </Router>
     )
     .toJSON();
 
@@ -55,12 +59,14 @@ describe(`<SmallMovieCard />`, () => {
   it(`рендер с img`, () => {
     const tree = renderer
     .create(
-        <SmallMovieCard
-          film={film}
-          setActiveGenre={() => {}}
-          onItemClick={() => {}}
-          isPlay={false}
-        />
+        <Router history={history}>
+          <SmallMovieCard
+            film={film}
+            setActiveGenre={() => {}}
+            onItemClick={() => {}}
+            isPlay={false}
+          />
+        </Router>
     )
     .toJSON();
 

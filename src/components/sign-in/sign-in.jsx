@@ -70,7 +70,8 @@ class SignIn extends React.PureComponent {
                   type="password"
                   placeholder="Password"
                   name="user-password"
-                  id="user-password"/>
+                  id="user-password"
+                  required />
                 <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
               </div>
             </div>
