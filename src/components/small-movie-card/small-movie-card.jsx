@@ -24,7 +24,10 @@ const SmallMovieCard = ({film, setActiveGenre, onItemClick, isPlay}) => {
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => setTimer(film, onItemClick)}
       onMouseLeave={() => clearTimer(onItemClick)}
-      onClick={() => setActiveGenre(film)}
+      onClick={() => {
+        setActiveGenre(film);
+        clearTimer(onItemClick);
+      }}
     >
       <Link to={`/film/${film.id}`}>
         <div className="small-movie-card__image">
