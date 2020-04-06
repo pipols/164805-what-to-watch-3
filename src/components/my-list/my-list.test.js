@@ -35,6 +35,10 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
+jest.mock(`../movies-list/movies-list.jsx`, () => `MoviesList`);
+jest.mock(`../header/header.jsx`, () => `Header`);
+jest.mock(`../footer/footer.jsx`, () => `Footer`);
+
 it(`<MyList /> renders correctly`, () => {
 
   const tree = renderer

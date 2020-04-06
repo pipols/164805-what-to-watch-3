@@ -4,6 +4,7 @@ import {ActionCreator as ActionCreatorState} from "../state/state";
 import history from "../../history";
 import NameSpace from "../name-space";
 import {errorPopup} from "../../utils/utils";
+
 const initialState = {
   films: [],
   promoMovie: {},

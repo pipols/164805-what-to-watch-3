@@ -8,7 +8,7 @@ const withVideoPlayer = (Component) => (
 
       this.state = {
         isPlay: false,
-        duration: 0,
+        duration: `0`,
         progress: 0
       };
       this.video = React.createRef();

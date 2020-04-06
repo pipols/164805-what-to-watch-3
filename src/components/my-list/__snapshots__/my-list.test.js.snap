@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MyList /> renders correctly 1`] = `
+<div
+  className="user-page"
+>
+  <Header
+    className="user-page__head"
+  />
+  <section
+    className="catalog"
+  >
+    <h2
+      className="catalog__title visually-hidden"
+    >
+      Catalog
+    </h2>
+    <MoviesList
+      films={
+        Array [
+          Object {
+            "actors": Array [
+              "Bill Murray",
+              "Edward Norton",
+              "Jude Law",
+              "Willem Dafoe",
+              "Saoirse Ronan",
+              "Tony Revoloru",
+              "Tilda Swinton",
+              "Tom Wilkinson",
+              "Owen Wilkinson",
+              "Adrien Brody",
+              "Ralph Fiennes",
+              "Jeff Goldblum",
+            ],
+            "backgroundColor": "#fff",
+            "cover": "the-grand-budapest-hotel-poster.jpg",
+            "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H.",
+            "duration": 120,
+            "genre": "Drama",
+            "id": 1,
+            "isFavorite": true,
+            "poster": "bg-the-grand-budapest-hotel.jpg",
+            "preview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "previewImage": "the-grand-budapest-hotel-poster.jpg",
+            "producer": "Wes Andreson",
+            "rating": 8.9,
+            "title": "The Grand Budapest Hotel",
+            "videoLink": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "votes": 240,
+            "year": 2014,
+          },
+          Object {
+            "actors": Array [
+              "Bill Murray",
+              "Edward Norton",
+              "Jude Law",
+              "Willem Dafoe",
+              "Saoirse Ronan",
+              "Tony Revoloru",
+              "Tilda Swinton",
+              "Tom Wilkinson",
+              "Owen Wilkinson",
+              "Adrien Brody",
+              "Ralph Fiennes",
+              "Jeff Goldblum",
+            ],
+            "backgroundColor": "#fff",
+            "cover": "the-grand-budapest-hotel-poster.jpg",
+            "description": "In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H.",
+            "duration": 120,
+            "genre": "Drama",
+            "id": 1,
+            "isFavorite": true,
+            "poster": "bg-the-grand-budapest-hotel.jpg",
+            "preview": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "previewImage": "the-grand-budapest-hotel-poster.jpg",
+            "producer": "Wes Andreson",
+            "rating": 8.9,
+            "title": "The Grand Budapest Hotel",
+            "videoLink": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm",
+            "votes": 240,
+            "year": 2014,
+          },
+        ]
+      }
+    />
+  </section>
+  <Footer />
+</div>
+`;
