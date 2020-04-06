@@ -9,107 +9,81 @@ import Footer from "../footer/footer.jsx";
 import Tabs from "../tabs/tabs.jsx";
 import {TabName} from "../../const/common";
 import {getfilmsByGenre} from "../../utils/utils";
-import {CardCount} from "../../const/common";
-import {ActionCreator} from "../../reducer/state/state";
+import {CardCount, ClassName} from "../../const/common";
 import {getFilms} from "../../reducer/data/selector";
-import {getGenre} from "../../reducer/state/selector";
+import {getGenre, getFilm} from "../../reducer/state/selector";
 import {DataOperation} from "../../reducer/data/data";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import Header from "../header/header.jsx";
+import MovieCardButtons from "../movie-card-buttons/movie-card-buttons.jsx";
+import Preloader from "../preloader/preloader.jsx";
 
-class Film extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const Film = (props) => {
+  const component = () => {
+    const activeItem = props.activeItem || TabName.OVERVIEW;
+    const {poster, cover, title, genre, year, id, isFavorite} = props.film;
+    props.onCommentsMount(id);
+    return (
+      <React.Fragment>
+        <section className="movie-card movie-card--full">
+          <div className="movie-card__hero">
+            <div className="movie-card__bg">
+              <img src={poster} alt={title}/>
+            </div>
+            <h1 className="visually-hidden">WTW</h1>
 
-  componentDidMount() {
-    const id = this.props.film.id;
-    this.props.onCommentsMount(id);
-  }
+            <Header className={ClassName.HEADER_MOVIE_CARD} />
 
-  componentDidUpdate(prevProps) {
-    const newId = prevProps.film.id;
-    const prevId = this.props.film.id;
+            <div className="movie-card__wrap">
+              <div className="movie-card__desc">
+                <h2 className="movie-card__title">{title}</h2>
+                <p className="movie-card__meta">
+                  <span className="movie-card__genre">{genre}</span>
+                  <span className="movie-card__year">{year}</span>
+                </p>
 
-    if (prevId !== newId) {
-      this.props.onCommentsMount(newId);
-    }
-  }
+                <MovieCardButtons filmId={id} isFavorite={isFavorite} />
 
-  render() {
-    const {poster, cover, title, genre, year} = this.props.film;
-    const activeItem = this.props.activeItem || TabName.OVERVIEW;
-
-    return (<React.Fragment>
-      <section className="movie-card movie-card--full">
-        <div className="movie-card__hero">
-          <div className="movie-card__bg">
-            <img src={poster} alt={title}/>
-          </div>
-          <h1 className="visually-hidden">WTW</h1>
-
-          <Header />
-
-          <div className="movie-card__wrap">
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
-              </p>
-              <div className="movie-card__buttons">
-                <button onClick={this.props.onPlayClick} className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width={19} height={19}>
-                    <use xlinkHref="#play-s"/>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add"/>
-                  </svg>
-                  <span>My list</span>
-                </button>
-                <a href="add-review.html" className="btn movie-card__button">
-                  Add review
-                </a>
               </div>
             </div>
           </div>
-        </div>
-        <div className="movie-card__wrap movie-card__translate-top">
-          <div className="movie-card__info">
-            <div className="movie-card__poster movie-card__poster--big">
-              <img src={cover} alt={title + `poster`} width={218} height={327}/>
-            </div>
-            <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <Tabs onItemClick={this.props.onItemClick} activeItem={activeItem} />
-              </nav>
+          <div className="movie-card__wrap movie-card__translate-top">
+            <div className="movie-card__info">
+              <div className="movie-card__poster movie-card__poster--big">
+                <img src={cover} alt={title + `poster`} width={218} height={327}/>
+              </div>
+              <div className="movie-card__desc">
+                <nav className="movie-nav movie-card__nav">
+                  <Tabs onItemClick={props.onItemClick} activeItem={activeItem} />
+                </nav>
 
-              {activeItem === TabName.OVERVIEW && <Overview {...this.props.film} />}
-              {activeItem === TabName.DETAILS && <Details film={this.props.film} />}
-              {activeItem === TabName.REVIEWS && <Reviews />}
+                {activeItem === TabName.OVERVIEW && <Overview />}
+                {activeItem === TabName.DETAILS && <Details />}
+                {activeItem === TabName.REVIEWS && <Reviews />}
 
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-      <div className="page-content">
-        <section className="catalog catalog--like-this">
-          <h2 className="catalog__title">
-            More like this
-          </h2>
-          <MoviesList films={
-            getfilmsByGenre(this.props.films, this.props.currentGenre)
-            .slice(0, CardCount.SIMILAR)
-          } />
         </section>
-        <Footer />
-      </div>
-    </React.Fragment>);
-  }
-}
+        <div className="page-content">
+          <section className="catalog catalog--like-this">
+            <h2 className="catalog__title">
+            More like this
+            </h2>
+            <MoviesList films={
+              getfilmsByGenre(props.films, props.currentGenre)
+            .slice(0, CardCount.SIMILAR)
+            } />
+          </section>
+          <Footer />
+        </div>
+      </React.Fragment>);
+  };
+
+  return props.film
+    ? component()
+    : <Preloader />;
+};
 
 Film.propTypes = {
   film: PropTypes.shape({
@@ -151,7 +125,6 @@ Film.propTypes = {
     preview: PropTypes.string.isRequired,
   })),
   currentGenre: PropTypes.string.isRequired,
-  onPlayClick: PropTypes.func.isRequired,
   onCommentsMount: PropTypes.func.isRequired,
   onItemClick: PropTypes.func.isRequired,
   activeItem: PropTypes.string,
@@ -159,13 +132,11 @@ Film.propTypes = {
 
 const mapStateToProps = (state) => ({
   films: getFilms(state),
-  currentGenre: getGenre(state)
+  currentGenre: getGenre(state),
+  film: getFilm(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onPlayClick() {
-    dispatch(ActionCreator.setActivePlayer(true));
-  },
   onCommentsMount(id) {
     dispatch(DataOperation.loadComments(id));
   },

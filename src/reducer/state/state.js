@@ -3,10 +3,11 @@ import {CardCount} from "../../const/common";
 
 const initialState = {
   genre: `All genres`,
-  activeFilm: null,
   shownCardsStack: CardCount.INITIAL,
   isActivePlayer: false,
   isPagePreloader: true,
+  id: null,
+  isFormDisabled: false
 };
 
 const ActionType = {
@@ -17,6 +18,8 @@ const ActionType = {
   SET_ACTIVE_PLAYER: `SET_ACTIVE_PLAYER`,
   RESET_STACK: `RESET_STACK`,
   PAGE_PRELOADER: `PAGE_PRELOADER`,
+  SET_ID: `SET_ID`,
+  SET_FORM_DISABLED_STATUS: `SET_FORM_DISABLED_STATUS`
 };
 
 const ActionCreator = {
@@ -27,10 +30,6 @@ const ActionCreator = {
   getFilms: (films) => ({
     type: ActionType.GET_FILMS,
     payload: films
-  }),
-  setActiveFilm: (film) => ({
-    type: ActionType.SET_ACTIVE_FILM,
-    payload: film
   }),
   addCardsStack: () => ({
     type: ActionType.ADD_CARDS_STACK
@@ -46,6 +45,14 @@ const ActionCreator = {
     type: ActionType.PAGE_PRELOADER,
     payload: bool
   }),
+  setId: (id) => ({
+    type: ActionType.SET_ID,
+    payload: id
+  }),
+  setFormDisabledStatus: (bool) => ({
+    type: ActionType.SET_FORM_DISABLED_STATUS,
+    payload: bool
+  })
 };
 
 //
@@ -54,10 +61,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_GENRE:
       return extend(state, {
         genre: action.payload
-      });
-    case ActionType.SET_ACTIVE_FILM:
-      return extend(state, {
-        activeFilm: action.payload
       });
     case ActionType.ADD_CARDS_STACK:
       return extend(state, {
@@ -74,6 +77,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.PAGE_PRELOADER:
       return extend(state, {
         isPagePreloader: action.payload
+      });
+    case ActionType.SET_ID:
+      return extend(state, {
+        id: action.payload
+      });
+    case ActionType.SET_FORM_DISABLED_STATUS:
+      return extend(state, {
+        isFormDisabled: action.payload
       });
   }
 

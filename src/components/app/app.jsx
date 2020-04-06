@@ -2,66 +2,81 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
+import SignIn from "../sign-in/sign-in.jsx";
 import {connect} from "react-redux";
-// import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
-import {getActiveFilm, getIsActivePlayer, getPreloaderStatus} from "../../reducer/state/selector";
+import {getPreloaderStatus} from "../../reducer/state/selector";
+import history from "../../history";
+import {ActionCreator} from "../../reducer/state/state";
+import Preloader from "../preloader/preloader.jsx";
+import AddReview from "../add-review/add-review.jsx";
+import MyList from "../my-list/my-list.jsx";
+import PrivateRoute from "../private-route/private-route.jsx";
+import {getUserStatus} from "../../reducer/user/selector.js";
+import {AuthorizationStatus} from "../../const/common";
 
-const App = ({activeFilm, isActivePlayer, isPagePreloader}) => {
 
-  // const renderApp = () => (
-  //   <BrowserRouter>
-  //     <Switch>
-  //       <Route exact path="/">
-  //         <Main promoMovieData={promoMovieData} />
-  //       </Route>
-  //       <Route path="/film">
-  //         <Film film={activeFilm} />
-  //       </Route>
-  //     </Switch>
-  //   </BrowserRouter>);
-  //
-  if (isPagePreloader) {
-    return <p style={{fontSize: `40px`}}>Loading...</p>;
-  } else if (isActivePlayer) {
-    return <VideoPlayer />;
-  } else if (activeFilm) {
-    return <Film film={activeFilm} />;
-  } else {
-    return <Main />;
-  }
+const App = ({isPagePreloader, onFilmIdSet, authorizationStatus}) => {
+  const renderMainPage = () => isPagePreloader ? <Preloader /> : <Main />;
 
+  return (
+    <Router history={history}>
+
+      <Switch>
+
+        <Route exact path="/" >
+          {renderMainPage()}
+        </Route>
+
+        <Route path="/film/:id?" exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <Film />;
+        }}/>
+
+        <Route path="/player/:id?" exact render={({match}) => {
+          onFilmIdSet(match.params.id);
+          return <VideoPlayer />;
+        }}/>
+
+        <PrivateRoute path="/films/:id/review" exact render={(match) => {
+          onFilmIdSet(match.params.id);
+          return <AddReview />;
+        }}/>
+
+        <Route path="/login" exact render={() => {
+          return (
+            authorizationStatus === AuthorizationStatus.NO_AUTH
+              ? <SignIn />
+              : renderMainPage()
+          );
+        }} />
+
+        <PrivateRoute path="/mylist" exact render={() => {
+          return <MyList />;
+        }} />
+
+      </Switch>
+    </Router>
+  );
 };
 
 App.propTypes = {
-  activeFilm: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    cover: PropTypes.string.isRequired,
-    previewImage: PropTypes.string.isRequired,
-    poster: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    votes: PropTypes.number.isRequired,
-    producer: PropTypes.string.isRequired,
-    actors: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    duration: PropTypes.number.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-    videoLink: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }),
-  isActivePlayer: PropTypes.bool.isRequired,
   isPagePreloader: PropTypes.bool.isRequired,
+  onFilmIdSet: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeFilm: getActiveFilm(state),
-  isActivePlayer: getIsActivePlayer(state),
   isPagePreloader: getPreloaderStatus(state),
+  authorizationStatus: getUserStatus(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onFilmIdSet(id) {
+    dispatch(ActionCreator.setId(parseInt(id, 10)));
+  }
 });
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(App));

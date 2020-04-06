@@ -31,4 +31,4 @@ Tabs.propTypes = {
   activeItem: PropTypes.string.isRequired
 };
 
-export default Tabs;
+export default React.memo(Tabs);

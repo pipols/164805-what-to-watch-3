@@ -7,22 +7,28 @@ exports[`<SmallMovieCard /> рендер с img 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    href="/film/1"
+    onClick={[Function]}
   >
-    <img
-      alt="The Grand Budapest Hotel"
-      height="175"
-      src="bg-the-grand-budapest-hotel.jpg"
-      width="280"
-    />
-  </div>
+    <div
+      className="small-movie-card__image"
+    >
+      <img
+        alt="The Grand Budapest Hotel"
+        height="175"
+        src="bg-the-grand-budapest-hotel.jpg"
+        width="280"
+      />
+    </div>
+  </a>
   <h3
     className="small-movie-card__title"
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/1"
+      onClick={[Function]}
     >
       The Grand Budapest Hotel
     </a>
@@ -37,23 +43,29 @@ exports[`<SmallMovieCard /> рендер с video 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
-    className="small-movie-card__image"
+  <a
+    href="/film/1"
+    onClick={[Function]}
   >
-    <video
-      autoPlay={true}
-      height="175"
-      muted={true}
-      src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
-      width="280"
-    />
-  </div>
+    <div
+      className="small-movie-card__image"
+    >
+      <video
+        autoPlay={true}
+        height="175"
+        muted={true}
+        src="https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm"
+        width="280"
+      />
+    </div>
+  </a>
   <h3
     className="small-movie-card__title"
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
+      href="/film/1"
+      onClick={[Function]}
     >
       The Grand Budapest Hotel
     </a>

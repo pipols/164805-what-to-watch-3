@@ -5,6 +5,7 @@ import {ActionCreator} from "../../reducer/state/state";
 import {getGenreByFilter} from "../../utils/utils";
 import withActiveItem from "../../hocs/with-active-item/with-active-item.jsx";
 import {getFiltersSelector} from "../../reducer/state/selector";
+// import {Link} from "react-router-dom";
 
 const SELECTED_GENRE_CLASS = `catalog__genres-item--active`;
 const DEFAULT_FILTER = `All genres`;
@@ -23,7 +24,6 @@ const GenresList = ({onFilterClick, filters, onItemClick, activeItem}) => {
         <li key={filter} className={`catalog__genres-item ${activeFilter === filter ? SELECTED_GENRE_CLASS : ``}`}>
           <a
             onClick={(evt) => handlerLinkClick(evt, filter)}
-            href="#"
             className="catalog__genres-link">{filter}
           </a>
         </li>
@@ -51,4 +51,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {GenresList};
-export default connect(mapStateToProps, mapDispatchToProps)(withActiveItem(GenresList));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(withActiveItem(GenresList)));

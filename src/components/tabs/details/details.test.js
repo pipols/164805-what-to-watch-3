@@ -1,6 +1,13 @@
 import React from "react";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 import renderer from "react-test-renderer";
-import Details from "./details.jsx";
+import NameSpace from "../../../reducer/name-space";
+import {Router} from "react-router-dom";
+import history from "../../../history";
+import {Details} from "./details.jsx";
+
+const mockStore = configureStore([]);
 
 const film = {
   title: `The Grand Budapest Hotel`,
@@ -35,7 +42,23 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
+const store = mockStore({
+  [NameSpace.DATA]: {
+    films: [film],
+  },
+  [NameSpace.STATE]: {
+    id: 1
+  }
+});
+
 it(`<Details /> renders correctly`, () => {
-  const tree = renderer.create(<Details film={film} />).toJSON();
+  const tree = renderer
+  .create(
+      <Provider store={store}>
+        <Router history={history} >
+          <Details film={film} />
+        </Router>
+      </Provider>)
+  .toJSON();
   expect(tree).toMatchSnapshot();
 });

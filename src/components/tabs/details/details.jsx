@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {getFilm} from "../../../reducer/state/selector";
+import {getTime} from "../../../utils/utils";
 
 const structure = (data) => [[
   {
@@ -14,7 +17,7 @@ const structure = (data) => [[
 [
   {
     name: `Run time`,
-    value: data.duration
+    value: getTime(data.duration)
   },
   {
     name: `Genre`,
@@ -69,4 +72,9 @@ Details.propTypes = {
   }),
 };
 
-export default Details;
+const mapStateToProps = (state) => ({
+  film: getFilm(state)
+});
+
+export {Details};
+export default connect(mapStateToProps)(React.memo(Details));

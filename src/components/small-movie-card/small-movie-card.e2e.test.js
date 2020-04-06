@@ -35,7 +35,7 @@ const film = {
   preview: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
 };
 
-const setActiveFilm = jest.fn();
+const setActiveGenre = jest.fn();
 const onItemClick = jest.fn();
 
 describe(`<SmallMovieCard />`, () => {
@@ -43,7 +43,7 @@ describe(`<SmallMovieCard />`, () => {
   const wrapper = shallow(
       <SmallMovieCard
         film={film}
-        setActiveFilm={setActiveFilm}
+        setActiveGenre={setActiveGenre}
         onItemClick={onItemClick}
         isPlay={true}
       />
@@ -65,8 +65,8 @@ describe(`<SmallMovieCard />`, () => {
 
   it(`клик на карточку, возвращает обьект с фильмом`, () => {
     wrapper.simulate(`click`);
-    expect(setActiveFilm).toHaveBeenCalledTimes(1);
-    expect(setActiveFilm.mock.calls[0][0]).toMatchObject(film);
+    expect(setActiveGenre).toHaveBeenCalledTimes(1);
+    expect(setActiveGenre.mock.calls[0][0]).toMatchObject(film);
   });
 
   it(`пропс isPlay=(true) отоброжает VideoPlayer вместо img`, () => {

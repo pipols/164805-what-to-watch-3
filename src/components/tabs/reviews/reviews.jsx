@@ -7,7 +7,10 @@ import {getComments} from "../../../reducer/data/selector";
 const Reviews = ({reviews}) => {
   return <div className="movie-card__reviews movie-card__row">
     <div className="movie-card__reviews-col">
-      {reviews.map((review) => <Review key={review.id} review={review} />)}
+      {reviews.map((review, i) => i % 2 ? null : <Review key={review.id} review={review} />)}
+    </div>
+    <div className="movie-card__reviews-col">
+      {reviews.map((review, i) => i % 2 ? <Review key={review.id} review={review} /> : null)}
     </div>
   </div>;
 };
@@ -30,4 +33,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {Reviews};
-export default connect(mapStateToProps)(Reviews);
+export default connect(mapStateToProps)(React.memo(Reviews));

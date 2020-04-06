@@ -6,10 +6,17 @@ import {getFilms} from "../data/selector";
 const NAME_SPACE = NameSpace.STATE;
 
 export const getGenre = (state) => state[NAME_SPACE].genre;
-export const getActiveFilm = (state) => state[NAME_SPACE].activeFilm;
 export const getIsActivePlayer = (state) => state[NAME_SPACE].isActivePlayer;
 export const getShownCardsStack = (state) => state[NAME_SPACE].shownCardsStack;
 export const getPreloaderStatus = (state) => state[NAME_SPACE].isPagePreloader;
+export const getReviewFormStatus = (state) => state[NAME_SPACE].isFormDisabled;
+
+export const getId = (state) => state[NAME_SPACE].id;
+export const getFilm = createSelector(
+    getFilms,
+    getId,
+    (films, id) => films.find((film) => film.id === id)
+);
 
 export const getFiltersSelector = createSelector(
     getFilms,

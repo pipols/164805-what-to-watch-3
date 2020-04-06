@@ -40,6 +40,10 @@ exports[`<Reviews /> renders correctly 1`] = `
         3.4
       </div>
     </div>
+  </div>
+  <div
+    className="movie-card__reviews-col"
+  >
     <div
       className="review"
     >

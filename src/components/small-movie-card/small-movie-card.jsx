@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/state/state";
+import {Link} from "react-router-dom";
 
 const DELAY = 1000;
 let timerId;
@@ -15,7 +16,7 @@ const clearTimer = (cb) => {
   cb(null);
 };
 
-const SmallMovieCard = ({film, setActiveFilm, onItemClick, isPlay}) => {
+const SmallMovieCard = ({film, setActiveGenre, onItemClick, isPlay}) => {
   const {title, poster, preview} = film;
 
   return (
@@ -23,16 +24,18 @@ const SmallMovieCard = ({film, setActiveFilm, onItemClick, isPlay}) => {
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => setTimer(film, onItemClick)}
       onMouseLeave={() => clearTimer(onItemClick)}
-      onClick={() => setActiveFilm(film)}
+      onClick={() => setActiveGenre(film)}
     >
-      <div className="small-movie-card__image">
-        {isPlay
-          ? <video src={preview} autoPlay muted width="280" height="175"/>
-          : <img src={poster} alt={title} width="280" height="175"/>}
-      </div>
+      <Link to={`/film/${film.id}`}>
+        <div className="small-movie-card__image">
+          {isPlay
+            ? <video src={preview} autoPlay muted width="280" height="175"/>
+            : <img src={poster} alt={title} width="280" height="175"/>}
+        </div>
+      </Link>
 
       <h3 className="small-movie-card__title" >
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <Link className="small-movie-card__link" to={`/film/${film.id}`}>{title}</Link>
       </h3>
     </article>
   );
@@ -58,17 +61,16 @@ SmallMovieCard.propTypes = {
     videoLink: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
-  setActiveFilm: PropTypes.func.isRequired,
+  setActiveGenre: PropTypes.func.isRequired,
   isPlay: PropTypes.bool.isRequired,
   onItemClick: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  setActiveFilm(film) {
-    dispatch(ActionCreator.setActiveFilm(film));
+  setActiveGenre(film) {
     dispatch(ActionCreator.setGenre(film.genre));
   }
 });
 
 export {SmallMovieCard};
-export default connect(null, mapDispatchToProps)(SmallMovieCard);
+export default connect(null, mapDispatchToProps)(React.memo(SmallMovieCard));

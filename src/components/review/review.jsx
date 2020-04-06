@@ -31,4 +31,4 @@ Review.propTypes = {
     date: PropTypes.string.isRequired
   })};
 
-export default Review;
+export default React.memo(Review);

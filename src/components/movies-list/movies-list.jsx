@@ -58,4 +58,4 @@ MoviesList.propTypes = {
 };
 
 export {MoviesList};
-export default withActiveItem(MoviesList);
+export default withActiveItem(React.memo(MoviesList));

@@ -41,9 +41,8 @@ it(`<VideoPlayer /> renders correctly`, () => {
     isPlay={true}
     onTimeUpdate={() => {}}
     setDuration={() => {}}
-    onExitClick={() => {}}
     progress={100}
-    duration={100}
+    duration={`100`}
     onPlayClick={() => {}}
     onFullscreenClick={() => {}}
     forwardedRef={() => {}}
