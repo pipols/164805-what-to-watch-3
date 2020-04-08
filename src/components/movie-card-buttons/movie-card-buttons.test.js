@@ -13,6 +13,7 @@ it(`<MovieCardButtons />`, () => {
           isFavorite={true}
           isMainPage={true}
           onPostFavorite={() => {}}
+          isUserAuth={true}
         />
       </Router>
   )

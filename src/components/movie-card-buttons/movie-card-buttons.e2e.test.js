@@ -11,6 +11,7 @@ describe(`<MovieCardButtons />`, () => {
         isFavorite={true}
         isMainPage={true}
         onPostFavorite={onPostFavorite}
+        isUserAuth={true}
       />
   );
 

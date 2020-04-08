@@ -4,7 +4,7 @@ import Main from "../main/main.jsx";
 import Film from "../film/film.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import {connect} from "react-redux";
-import {Router, Route, Switch} from "react-router-dom";
+import {Router, Route, Switch, Link} from "react-router-dom";
 import VideoPlayer from "../video-player/video-player.jsx";
 import {getPreloaderStatus} from "../../reducer/state/selector";
 import history from "../../history";
@@ -55,7 +55,18 @@ const App = ({isPagePreloader, onFilmIdSet, authorizationStatus}) => {
         <PrivateRoute path="/mylist" exact render={() => {
           return <MyList />;
         }} />
-
+        <Route
+          render={() => (
+            <React.Fragment>
+              <h1>
+                404.
+                <br />
+                <small>Page not found</small>
+              </h1>
+              <Link to="/">Go to main page</Link>
+            </React.Fragment>
+          )}
+        />
       </Switch>
     </Router>
   );

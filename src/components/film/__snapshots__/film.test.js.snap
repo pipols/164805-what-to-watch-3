@@ -72,24 +72,6 @@ Array [
               </span>
             </a>
             <a
-              className="btn btn--list movie-card__button"
-              onClick={[Function]}
-              type="button"
-            >
-              <svg
-                height={14}
-                viewBox="0 0 18 14"
-                width={18}
-              >
-                <use
-                  xlinkHref="#in-list"
-                />
-              </svg>
-              <span>
-                My list
-              </span>
-            </a>
-            <a
               className="btn movie-card__button"
               href="/films/1/review"
               onClick={[Function]}

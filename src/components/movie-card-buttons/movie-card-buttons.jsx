@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {DataOperation} from "../../reducer/data/data";
+import {getIsUserAuth} from "../../reducer/user/selector";
 
-const MovieCardButtons = ({filmId, isFavorite, isMainPage, onPostFavorite}) => (
+const MovieCardButtons = ({filmId, isFavorite, isMainPage, onPostFavorite, isUserAuth}) => (
   <div className="movie-card__buttons">
 
     <Link to={`/player/${filmId}`} className="btn btn--play movie-card__button" type="button">
@@ -14,20 +15,21 @@ const MovieCardButtons = ({filmId, isFavorite, isMainPage, onPostFavorite}) => (
       <span>Play</span>
     </Link>
 
-    <a onClick={() => onPostFavorite(filmId, isFavorite)} className="btn btn--list movie-card__button" type="button">
+    {isUserAuth
+      && <a onClick={() => onPostFavorite(filmId, isFavorite)} className="btn btn--list movie-card__button" type="button">
 
-      {isFavorite
+        {isFavorite
         && <svg viewBox="0 0 18 14" width={18} height={14}>
           <use xlinkHref="#in-list"></use>
         </svg>}
 
-      {isFavorite
+        {isFavorite
         || <svg viewBox="0 0 19 20" width={19} height={20}>
           <use xlinkHref="#add"/>
         </svg>}
 
-      <span>My list</span>
-    </a>
+        <span>My list</span>
+      </a>}
 
     {isMainPage || <Link to={`/films/${filmId}/review`} className="btn movie-card__button">
       Add review
@@ -40,14 +42,19 @@ MovieCardButtons.propTypes = {
   filmId: PropTypes.number.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   isMainPage: PropTypes.bool,
-  onPostFavorite: PropTypes.func.isRequired
+  onPostFavorite: PropTypes.func.isRequired,
+  isUserAuth: PropTypes.bool.isRequired,
 };
 
-const mapDispatchoProps = (dispatch) => ({
+const mapStateToProps = (state) => ({
+  isUserAuth: getIsUserAuth(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
   onPostFavorite(id, status) {
     dispatch(DataOperation.postFavorite(id, +!status));
   }
 });
 
 export {MovieCardButtons};
-export default connect(null, mapDispatchoProps)(React.memo(MovieCardButtons));
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(MovieCardButtons));

@@ -6,6 +6,7 @@ import history from "../../history";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
+import {AuthorizationStatus} from "../../const/common";
 
 const mockStore = configureStore([]);
 
@@ -48,6 +49,9 @@ jest.mock(`../header/header.jsx`, () => `Header`);
 const store = mockStore({
   [NameSpace.STATE]: {
     id: 1
+  },
+  [NameSpace.USER]: {
+    authorizationStatus: AuthorizationStatus.NO_AUTH,
   }
 });
 

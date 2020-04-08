@@ -3,7 +3,6 @@ import {adapterFilms, adapterFilm} from "../../utils/adapter";
 import {ActionCreator as ActionCreatorState} from "../state/state";
 import history from "../../history";
 import NameSpace from "../name-space";
-import {errorPopup} from "../../utils/utils";
 
 const initialState = {
   films: [],
@@ -96,7 +95,10 @@ const DataOperation = {
           dispatch(ActionCreator.mergePromoFilm(film));
         }
         dispatch(ActionCreator.mergeFilm(film));
-      }).catch(({response}) => errorPopup(response));
+      })
+      .catch(() => {
+        history.push(`/login`);
+      });
   },
   loadFavoriteFilms: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)

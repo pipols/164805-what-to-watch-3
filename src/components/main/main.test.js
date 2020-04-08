@@ -6,6 +6,7 @@ import {Main} from "./main.jsx";
 import NameSpace from "../../reducer/name-space";
 import {Router} from "react-router-dom";
 import history from "../../history";
+import {AuthorizationStatus} from "../../const/common";
 
 const mockStore = configureStore([]);
 
@@ -58,6 +59,9 @@ it(`<Main /> renders correctly`, () => {
       shownCardsStack: 8,
       isActivePlayer: false,
       id: 1
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
     }
   });
 

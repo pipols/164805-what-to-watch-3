@@ -5,10 +5,10 @@ import Header from "../header/header.jsx";
 import Footer from "../footer/footer.jsx";
 import {ClassName} from "../../const/common";
 import {getUserStatus} from "../../reducer/user/selector";
-import {Redirect} from "react-router-dom";
+// import {Redirect} from "react-router-dom";
 import {Operation} from "../../reducer/user/user";
 import withSignIn from "../../hocs/with-sign-in/with-sign-in.jsx";
-// import history from "../../history";
+import history from "../../history";
 import {AuthorizationStatus} from "../../const/common";
 
 class SignIn extends React.PureComponent {
@@ -27,8 +27,8 @@ class SignIn extends React.PureComponent {
 
   render() {
     return this.props.authorizationStatus === AuthorizationStatus.AUTH
-      ? <Redirect to="/" />
-      // ? history.goBack()
+      // ? <Redirect to="/" />
+      ? history.goBack()
       : <div className="user-page">
 
         <Header className={ClassName.HEADER_USER_PAGE} />

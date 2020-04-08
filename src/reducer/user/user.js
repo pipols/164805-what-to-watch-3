@@ -46,9 +46,6 @@ const Operation = {
     return api.get(`/login`)
       .then(() => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      })
-      .catch((err) => {
-        throw err;
       });
   },
 
@@ -60,6 +57,9 @@ const Operation = {
       .then(({data}) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUserData(objectKeysToCamelCase(data)));
+      })
+      .catch((err) => {
+        throw err;
       });
   },
 };

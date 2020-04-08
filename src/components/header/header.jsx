@@ -30,7 +30,7 @@ const Header = ({authorizationStatus, className, user, children}) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   user: PropTypes.shape({
     id: PropTypes.number,
     email: PropTypes.string,
